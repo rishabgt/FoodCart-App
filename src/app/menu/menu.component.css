@@ -1,0 +1,57 @@
+.image-box {
+  position: relative;
+  width: auto;
+  height: 500px;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.image-box .content {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1;
+  width: 100%;
+  height: 100%;
+  padding-left: 220px;
+  padding-top: 80px;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .image-box .content {
+    width: 100%;
+    height: 100%;
+    padding-left: 50px;
+    padding-top: 80px;
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .image-box .content {
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+    padding-top: 50px;
+    font-size: 18px;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.add-button {
+  background: transparent;
+  border: none;
+  float: right;
+  font-size: 22px;
+}
