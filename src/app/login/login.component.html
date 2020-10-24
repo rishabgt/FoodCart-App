@@ -1,0 +1,18 @@
+    <div class="food-bg1 p-5">
+    <div class="containerw-50">
+        <h3 class="text-light">Login for your appetite!</h3>
+        <form [formGroup]="form">
+            <div class="form-group">
+                <label for="exampleInputEmail1" class="text-light">Username</label>
+                <input type="email" formControlName="username" class="form-control w-50" id="exampleInputEmail1"
+                    aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-light">Username is same as your email ID.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1" class="text-light">Password</label>
+                <input type="password" formControlName="password" class="form-control w-50" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
