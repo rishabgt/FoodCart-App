@@ -1,3 +1,4 @@
+import { Orders } from './../models/orders';
 import { Restaurants } from './../models/restaurants';
 import { Foods } from './../models/foods';
 import { Location } from '@angular/common';
@@ -14,6 +15,7 @@ export class MenuComponent implements OnInit {
   foods: Foods[];
   restaurants: Restaurants[];
   currentRestaurant: Restaurants;
+  order: Orders;
   rid: number;
   searching: boolean;
 
@@ -50,5 +52,17 @@ export class MenuComponent implements OnInit {
 
   getImgUrl() {
     return "url('" + this.currentRestaurant.image + "')";
+  }
+
+  addItemToCart(item) {
+    let order = {
+      quantity: 1,
+      fid: item.id,
+      uid: 1,
+      price: item.price,
+    };
+    this.service.addItemToCart(order).subscribe(() => {
+      console.log('Addedd to cart');
+    });
   }
 }

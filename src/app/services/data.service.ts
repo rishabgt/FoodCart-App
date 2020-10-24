@@ -20,4 +20,11 @@ export class DataService {
   getFoodsByRid(rid: number) {
     return this.http.get(this.url + 'getFoodsByRid.php?rid=' + rid);
   }
+
+  addItemToCart(resource) {
+    return this.http.post(
+      this.url + 'insertItemToCart.php',
+      JSON.stringify(resource)
+    );
+  }
 }
