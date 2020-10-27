@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   foods: Foods[];
   restaurants: Restaurants[];
   currentRestaurant: Restaurants;
-  order: Orders;
+  // order: Orders;
   rid: number;
   searching: boolean;
 
