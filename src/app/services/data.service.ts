@@ -27,4 +27,23 @@ export class DataService {
       JSON.stringify(resource)
     );
   }
+
+  getOrderByUid(uid: number) {
+    return this.http.get(this.url + 'getOrderByUid.php?uid=' + uid);
+  }
+
+  getFoodById(id: number) {
+    return this.http.get(this.url + 'getFoodById.php?id=' + id);
+  }
+
+  updateQuantity(resource) {
+    return this.http.post(
+      this.url + 'updateQuantity.php',
+      JSON.stringify(resource)
+    );
+  }
+
+  deleteOrder(id: number) {
+    return this.http.get(this.url + 'deleteOrder.php?id=' + id);
+  }
 }
