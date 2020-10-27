@@ -6,8 +6,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataService {
   private url = 'https://foodcart11.000webhostapp.com/';
+  private username: string;
 
   constructor(private http: HttpClient) {}
+
+  getUserName() {
+    return this.username;
+  }
+
+  setUserName(str: string) {
+    this.username = str;
+  }
+
+  getUserByUsername(username: string) {
+    return this.http.get(
+      this.url + 'getUserByUsername.php?username=' + username
+    );
+  }
 
   getRestaurants() {
     return this.http.get(this.url + 'index.php');

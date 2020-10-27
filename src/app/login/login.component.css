@@ -1,7 +1,6 @@
-
-.food-bg1{
-    background-image: url('../../assets/chad-montano-eeqbbemH9-c-unsplash.jpg');
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
+.food-bg1 {
+  background-image: url("../../assets/chad-montano-eeqbbemH9-c-unsplash.jpg");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
 }
