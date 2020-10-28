@@ -125,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "foodcart"
+  "defaultProject": "foodcart",
+  "cli": {
+    "analytics": "32c44938-83b6-4148-ab80-c9e3a5625ac4"
+  }
 }
