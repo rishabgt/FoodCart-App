@@ -43,6 +43,10 @@ export class DataService {
     );
   }
 
+  insertUser(user){
+    return this.http.post(this.url+'insertUser.php',JSON.stringify(user));
+  }
+
   getOrderByUid(uid: number) {
     return this.http.get(this.url + 'getOrderByUid.php?uid=' + uid);
   }

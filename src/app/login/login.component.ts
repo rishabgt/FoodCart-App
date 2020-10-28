@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   valid: boolean;
   validLoading: boolean;
   credentials: any;
-
+  user:any;
   constructor(private _dataService: DataService, private router: Router) {
     this.valid = true;
     this.validLoading = false;
@@ -23,6 +23,26 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
+  signupForm = new FormGroup({
+    usernameSignUp : new FormControl('',Validators.required),
+    passwordSignUp : new FormControl('',Validators.required),
+    firstname : new FormControl('',Validators.required),
+    lastname : new FormControl('',Validators.required)
+  });
+
+  get usernameSignUp(){
+    return this.signupForm.get('usernameSignUp');
+  }
+  get passwordSignUp(){
+    return this.signupForm.get('passwordSignUp');
+  }
+  get firstname(){
+    return this.signupForm.get('firstname');
+  }
+  get lastname(){
+    return this.signupForm.get('lastname');
+  }
+
   get username() {
     return this.form.get('username').value;
   }
@@ -31,8 +51,20 @@ export class LoginComponent implements OnInit {
     return this.form.get('password').value;
   }
 
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    
+  }
+  create(){
+    this.user = {
+      "firstname":this.firstname.value,
+      "lastname":this.lastname.value,
+      "username":this.usernameSignUp.value,
+      "password":this.passwordSignUp.value
+    };
+    this._dataService.insertUser(this.user).subscribe(()=>{
+      alert("Sign up successful!!");
+    });
+  }
   onSubmit() {
     this.validLoading = true;
 

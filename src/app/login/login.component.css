@@ -1,6 +1,12 @@
 .food-bg1 {
-  background-image: url("../../assets/chad-montano-eeqbbemH9-c-unsplash.jpg");
+  background-image: url("../../assets/plantbased-diet.jpg");
   background-position: center;
   background-size: cover;
   height: 100vh;
+}
+
+.bg-solid{
+  background-image: url("../../assets/color-concrete-wall-background_1323-259.jpg");
+  background-position: center;
+  background-size: cover;
 }
