@@ -91,7 +91,7 @@ export class BilladdressComponent implements OnInit {
           Validators.required, 
           Validators.minLength(6),
           Validators.maxLength(6), 
-          Validators.pattern('^[1-9]*$')
+          Validators.pattern('^[0-9]*$')
         ]
       ],
       landmark : ['', 
