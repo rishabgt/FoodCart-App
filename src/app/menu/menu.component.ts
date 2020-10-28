@@ -1,4 +1,4 @@
-import { Orders } from './../models/orders';
+import { Users } from './../models/users';
 import { Restaurants } from './../models/restaurants';
 import { Foods } from './../models/foods';
 import { Location } from '@angular/common';
@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
   currentRestaurant: Restaurants;
   rid: number;
   searching: boolean;
+  user: Users;
 
   constructor(
     private service: DataService,
@@ -27,8 +28,13 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUser();
     this.getFoods();
     this.getRestaurant();
+  }
+
+  getUser() {
+    this.user = this.service.getUser();
   }
 
   getFoods() {
@@ -60,8 +66,15 @@ export class MenuComponent implements OnInit {
       uid: 1,
       price: item.price,
     };
-    this.service.addItemToCart(order).subscribe(() => {
-      console.log('Addedd to cart');
-    });
+    this.service.addItemToCart(order).subscribe(
+      () => {
+        // console.log('Addedd to cart');
+        alert('Item added to cart');
+      },
+      (error: any) => {
+        // console.log(error);
+        alert('Item already in cart.');
+      }
+    );
   }
 }

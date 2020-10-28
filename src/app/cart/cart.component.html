@@ -1,7 +1,14 @@
 <app-navbar></app-navbar>
 
 <div class="container mb-5">
-  <div class="row">
+  <div *ngIf="isEmpty === true" class="text-center my-5 py-5">
+    <p class="h3">Cart is empty!!!</p>
+    <p class="h4 mb-3">Add items to the cart.</p>
+    <a routerLink="/restaurants" type="button" class="btn btn-outline-info"
+      >Go to Restaurants</a
+    >
+  </div>
+  <div *ngIf="isEmpty === false" class="row">
     <div class="col-lg-8 py-4">
       <div class="card">
         <div class="card-body">

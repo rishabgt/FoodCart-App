@@ -1,3 +1,4 @@
+import { Users } from './../models/users';
 import { Restaurants } from './../models/restaurants';
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class RestaurantsComponent implements OnInit {
   searchName: string;
   isFound: boolean;
   searchIsOn: boolean;
+  user: Users;
 
   constructor(
     private service: DataService,
@@ -30,7 +32,13 @@ export class RestaurantsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUser();
     this.getRestaurants();
+  }
+
+  getUser() {
+    this.user = this.service.getUser();
+    console.log(this.user);
   }
 
   getRestaurants() {
@@ -45,7 +53,11 @@ export class RestaurantsComponent implements OnInit {
 
     let found;
     from(this.restaurants)
-      .pipe(find((item) => item.name === this.searchName))
+      .pipe(
+        find(
+          (item) => item.name.toLowerCase() === this.searchName.toLowerCase()
+        )
+      )
       .subscribe((data) => {
         found = data;
       });
@@ -58,7 +70,9 @@ export class RestaurantsComponent implements OnInit {
     } else {
       from(this.restaurants)
         .pipe(
-          filter((item) => item.name === this.searchName),
+          filter(
+            (item) => item.name.toLowerCase() === this.searchName.toLowerCase()
+          ),
           toArray()
         )
         .subscribe((data) => {

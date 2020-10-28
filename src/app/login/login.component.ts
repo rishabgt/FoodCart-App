@@ -1,3 +1,4 @@
+import { Users } from './../models/users';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -11,8 +12,9 @@ import { DataService } from '../services/data.service';
 export class LoginComponent implements OnInit {
   valid: boolean;
   validLoading: boolean;
-  credentials: any;
+  credentials: Users;
   user: any;
+
   constructor(private _dataService: DataService, private router: Router) {
     this.valid = true;
     this.validLoading = false;
@@ -52,6 +54,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
   create() {
     this.user = {
       firstname: this.firstname.value,
@@ -63,6 +66,7 @@ export class LoginComponent implements OnInit {
       alert('Sign up successful!!');
     });
   }
+
   onSubmit() {
     this.validLoading = true;
 
@@ -72,11 +76,11 @@ export class LoginComponent implements OnInit {
       if (this.credentials == undefined) {
         this.valid = false;
         this.validLoading = false;
-      } else if (this.credentials['password'] != this.password) {
+      } else if (this.credentials.password != this.password) {
         this.valid = false;
         this.validLoading = false;
       } else {
-        this._dataService.setUserName(this.credentials['username']);
+        this._dataService.setUser(this.credentials);
         // console.log(this._dataService.getUserName());
         this.router.navigate(['/home']);
       }

@@ -1,10 +1,10 @@
+import { Users } from './../models/users';
 import { Foods } from './../models/foods';
 import { Location } from '@angular/common';
 import { Orders } from './../models/orders';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-cart',
@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   searching: boolean;
   orderTotal: number;
   isEmpty: boolean;
+  user: Users;
 
   constructor(
     private service: DataService,
@@ -33,16 +34,27 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUser();
     this.getOrders();
   }
 
+  getUser() {
+    this.user = this.service.getUser();
+    console.log(this.user);
+  }
+
   getOrders() {
-    this.service.getOrderByUid(1).subscribe((data) => {
+    this.service.getOrderByUid(this.user.id).subscribe((data) => {
       this.orders = data as Orders[];
-      this.orders.forEach((item) => {
-        this.getFoodById(item.fid);
-      });
-      this.calculateOrderTotal();
+      if (this.orders.length === 0) {
+        this.isEmpty = true;
+        this.searching = false;
+      } else {
+        this.orders.forEach((item) => {
+          this.getFoodById(item.fid);
+        });
+        this.calculateOrderTotal();
+      }
     });
   }
 

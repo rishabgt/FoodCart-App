@@ -1,3 +1,4 @@
+import { Users } from './../models/users';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -6,16 +7,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DataService {
   private url = 'https://foodcart11.000webhostapp.com/';
-  private username: string;
+  private user: Users;
 
   constructor(private http: HttpClient) {}
 
-  getUserName() {
-    return this.username;
+  getUser() {
+    return this.user;
   }
 
-  setUserName(str: string) {
-    this.username = str;
+  setUser(resource) {
+    this.user = resource;
   }
 
   getUserByUsername(username: string) {
@@ -43,8 +44,8 @@ export class DataService {
     );
   }
 
-  insertUser(user){
-    return this.http.post(this.url+'insertUser.php',JSON.stringify(user));
+  insertUser(user) {
+    return this.http.post(this.url + 'insertUser.php', JSON.stringify(user));
   }
 
   getOrderByUid(uid: number) {

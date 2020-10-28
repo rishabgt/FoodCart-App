@@ -1,3 +1,5 @@
+import { DataService } from './../services/data.service';
+import { Users } from './../models/users';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
@@ -33,6 +35,7 @@ import { Router } from '@angular/router';
   ],
 })
 export class BilladdressComponent implements OnInit {
+  user: Users;
   billForm: FormGroup;
   // The current state of text
   buttonTextState = 'shown';
@@ -41,73 +44,70 @@ export class BilladdressComponent implements OnInit {
   // The text shown when the transition is finished
   transitionButtonText = 'Check Out';
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {}
+  constructor(
+    private service: DataService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.getUSer();
+
     this.billForm = this.formBuilder.group({
-      firstName : ['',
-       [
-         Validators.required, 
-         Validators.minLength(5), 
-         Validators.maxLength(20),
-         Validators.pattern('^[a-zA-Z ]*$')
-        ]
-      ],
-      lastName : ['', 
-        [
-          Validators.required, 
-          Validators.minLength(5), 
-          Validators.maxLength(20),
-          Validators.pattern('^[a-zA-Z ]*$')
-        ]
-      ],
-      buildingNo : ['', 
+      firstName: [
+        '',
         [
           Validators.required,
-          Validators.maxLength(30)
-        ]
+          Validators.minLength(5),
+          Validators.maxLength(20),
+          Validators.pattern('^[a-zA-Z ]*$'),
+        ],
       ],
-      streetName : ['', 
-        [
-          Validators.required, 
-          Validators.maxLength(30)
-        ]
-      ],
-      city : ['', 
-        [
-          Validators.required, 
-          Validators.maxLength(25)
-        ]
-      ],
-      state : ['', 
+      lastName: [
+        '',
         [
           Validators.required,
-          Validators.minLength(2), 
+          Validators.minLength(5),
           Validators.maxLength(20),
-        ]
+          Validators.pattern('^[a-zA-Z ]*$'),
+        ],
       ],
-      zipCode : ['', 
+      buildingNo: ['', [Validators.required, Validators.maxLength(30)]],
+      streetName: ['', [Validators.required, Validators.maxLength(30)]],
+      city: ['', [Validators.required, Validators.maxLength(25)]],
+      state: [
+        '',
         [
-          Validators.required, 
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+        ],
+      ],
+      zipCode: [
+        '',
+        [
+          Validators.required,
           Validators.minLength(6),
-          Validators.maxLength(6), 
-          Validators.pattern('^[0-9]*$')
-        ]
+          Validators.maxLength(6),
+          Validators.pattern('^[0-9]*$'),
+        ],
       ],
-      landmark : ['', 
-        [
-          Validators.required
-        ]
-      ],
-      phoneNo : ['', 
+      landmark: ['', [Validators.required]],
+      phoneNo: [
+        '',
         [
           Validators.required,
           Validators.maxLength(10),
-          Validators.minLength(10), 
-          Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")
-        ]
-      ]
+          Validators.minLength(10),
+          Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'),
+        ],
+      ],
     });
+  }
+
+  getUSer() {
+    this.user = this.service.getUser();
+    console.log(this.user);
   }
 
   buttonTextTransitioned(event) {

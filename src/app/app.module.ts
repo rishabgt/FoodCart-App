@@ -1,3 +1,5 @@
+import { MenuModule } from './menu/menu.module';
+import { RestaurantsModule } from './restaurants/restaurants.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LastpageComponent } from './lastpage/lastpage.component';
 import { BilladdressComponent } from './billaddress/billaddress.component';
@@ -15,7 +17,6 @@ import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    RestaurantsModule,
+    MenuModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent],
