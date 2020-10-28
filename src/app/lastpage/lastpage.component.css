@@ -15,3 +15,27 @@
     color: black;
     font-weight: lighter;
 }
+@media only screen and (max-width: 768px) {
+     .text {
+      font-size: 14px;
+      text-align: center;
+    }
+    .login-button a {
+      position: absolute;
+      top: 55%;
+      left: 48%;
+    }
+  }
+  
+  @media only screen and (max-width: 560px) {
+    .text {
+      font-size: 13px;
+      text-align: center;
+    }
+    .login-button a {
+      position: absolute;
+      top: 55%;
+      left: 48%;
+    
+    }
+  }
