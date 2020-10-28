@@ -6,9 +6,12 @@ import { RestaurantsComponent } from './restaurants.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from '../services/data.service';
+import { CarouselComponent } from './carousel/carousel.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [RestaurantsComponent],
+  declarations: [RestaurantsComponent, CarouselComponent, NavbarComponent, FooterComponent],
   imports: [
     CommonModule,
     RestaurantsRoutingModule,

@@ -6,9 +6,11 @@ import { MenuRoutingModule } from './menu-routing.module';
 import { MenuComponent } from './menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [MenuComponent],
+  declarations: [MenuComponent, NavbarComponent, FooterComponent],
   imports: [
     CommonModule,
     MenuRoutingModule,

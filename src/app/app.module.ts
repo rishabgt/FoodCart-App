@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
     BilladdressComponent,
     LastpageComponent,
     FooterComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
