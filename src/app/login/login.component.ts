@@ -83,6 +83,7 @@ export class LoginComponent implements OnInit {
         this._dataService.setUser(this.credentials);
         // console.log(this._dataService.getUserName());
         this.router.navigate(['/home']);
+        this._dataService.setLogin();
       }
     });
   }

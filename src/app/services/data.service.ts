@@ -8,8 +8,20 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
   private url = 'https://foodcart11.000webhostapp.com/';
   private user: Users;
-
+  private isLogin:boolean = false;
   constructor(private http: HttpClient) {}
+
+  setLogin(){
+    this.isLogin = true;
+  }
+
+  unsetLogin(){
+    this.isLogin = false;
+  }
+
+  getLogin(){
+    return this.isLogin;
+  }
 
   getUser() {
     return this.user;

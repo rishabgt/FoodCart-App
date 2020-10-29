@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { Authguard } from './services/authguard.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserAnimationsModule,
     NgxSpinnerModule,
   ],
-  providers: [DataService],
+  providers: [DataService,Authguard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
