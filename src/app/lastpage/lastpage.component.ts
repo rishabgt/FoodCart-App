@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DataService } from './../services/data.service';
 import { Users } from './../models/users';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,8 @@ export class LastpageComponent implements OnInit {
 
   constructor(
     private service: DataService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private route: Router
   ) {}
 
   ngOnInit(): void {
@@ -29,5 +31,12 @@ export class LastpageComponent implements OnInit {
   getUser() {
     this.user = this.service.getUser();
     console.log(this.user);
+  }
+
+  goBack() {
+    this.service.deleteOrderByUid(this.user.id).subscribe(() => {
+      console.log('Cart cleared.');
+    });
+    this.route.navigate(['/restaurants']);
   }
 }

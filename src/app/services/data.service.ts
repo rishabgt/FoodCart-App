@@ -66,4 +66,8 @@ export class DataService {
   deleteOrder(id: number) {
     return this.http.get(this.url + 'deleteOrder.php?id=' + id);
   }
+
+  deleteOrderByUid(uid: number) {
+    return this.http.get(this.url + 'deleteOrderByUid.php?uid=' + uid);
+  }
 }
