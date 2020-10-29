@@ -1,3 +1,4 @@
+import { Items } from './../models/items';
 import { Router } from '@angular/router';
 import { DataService } from './../services/data.service';
 import { Users } from './../models/users';
@@ -11,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class LastpageComponent implements OnInit {
   user: Users;
+  items: Items[];
 
   constructor(
     private service: DataService,
@@ -26,6 +28,7 @@ export class LastpageComponent implements OnInit {
     }, 4000);
 
     this.getUser();
+    this.getItems();
   }
 
   getUser() {
@@ -33,10 +36,34 @@ export class LastpageComponent implements OnInit {
     console.log(this.user);
   }
 
+  getItems() {
+    this.service.getItemByUid(this.user.id).subscribe((data) => {
+      this.items = data as Items[];
+    });
+  }
+
   goBack() {
-    this.service.deleteOrderByUid(this.user.id).subscribe(() => {
+    var date = new Date();
+    let str = date.toDateString();
+
+    this.items.forEach((item) => {
+      let order = {
+        id: item.id,
+        quantity: item.quantity,
+        fid: item.fid,
+        uid: item.uid,
+        price: item.price,
+        date: str,
+      };
+      this.service.addItemToOrders(order).subscribe(() => {
+        console.log('Item moved to Orders.');
+      });
+    });
+
+    this.service.deleteItemByUid(this.user.id).subscribe(() => {
       console.log('Cart cleared.');
     });
+
     this.route.navigate(['/restaurants']);
   }
 }

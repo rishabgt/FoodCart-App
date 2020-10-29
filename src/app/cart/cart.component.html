@@ -23,7 +23,7 @@
             </div>
           </div>
           <li
-            *ngFor="let order of orders; let i = index"
+            *ngFor="let item of items; let i = index"
             class="list-group-item p-0 m-0"
           >
             <div class="row no-gutters py-3">
@@ -39,20 +39,17 @@
                 <div class="my-4 counter-buttons">
                   <button
                     class="decrease-btn"
-                    [disabled]="order.quantity === 1"
-                    (click)="decreaseQuantity(order)"
+                    [disabled]="item.quantity === 1"
+                    (click)="decreaseQuantity(item)"
                   >
                     -
                   </button>
                   <input
                     class="quantity-btn text-center"
                     [readonly]="true"
-                    [(ngModel)]="order.quantity"
+                    [(ngModel)]="item.quantity"
                   />
-                  <button
-                    class="increase-btn"
-                    (click)="increaseQuantity(order)"
-                  >
+                  <button class="increase-btn" (click)="increaseQuantity(item)">
                     +
                   </button>
                 </div>
@@ -81,7 +78,7 @@
                     type="button"
                     class="h6 delete-btn"
                     id="delete-button"
-                    (click)="deleteOrder(order)"
+                    (click)="deleteItem(item)"
                   >
                     REMOVE
                   </button>

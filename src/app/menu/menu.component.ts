@@ -61,11 +61,15 @@ export class MenuComponent implements OnInit {
   }
 
   addItemToCart(item) {
+    var date = new Date();
+    let str = date.toDateString();
+
     let order = {
       quantity: 1,
       fid: item.id,
       uid: this.user.id,
       price: item.price,
+      date: str,
     };
     this.service.addItemToCart(order).subscribe(
       () => {

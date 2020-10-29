@@ -1,4 +1,4 @@
-export interface Orders {
+export interface Items {
   id?: number;
   quantity: number;
   fid: number;

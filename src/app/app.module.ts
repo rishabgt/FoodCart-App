@@ -37,7 +37,7 @@ import { Authguard } from './services/authguard.service';
     BrowserAnimationsModule,
     NgxSpinnerModule,
   ],
-  providers: [DataService,Authguard],
+  providers: [DataService, Authguard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
