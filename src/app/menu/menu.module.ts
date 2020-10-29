@@ -18,6 +18,7 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [DataService],
 })
 export class MenuModule {}
+
+export { DataService };

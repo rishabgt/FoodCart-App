@@ -1,22 +1,33 @@
+import { DataService } from './../services/data.service';
+import { Users } from './../models/users';
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'lastpage',
   templateUrl: './lastpage.component.html',
-  styleUrls: ['./lastpage.component.css']
+  styleUrls: ['./lastpage.component.css'],
 })
 export class LastpageComponent implements OnInit {
+  user: Users;
 
-  constructor(private spinner: NgxSpinnerService) { }
+  constructor(
+    private service: DataService,
+    private spinner: NgxSpinnerService
+  ) {}
 
   ngOnInit(): void {
-     
     this.spinner.show();
     setTimeout(() => {
       /** spinner ends after 4 seconds */
       this.spinner.hide();
     }, 4000);
+
+    this.getUser();
   }
 
+  getUser() {
+    this.user = this.service.getUser();
+    console.log(this.user);
+  }
 }

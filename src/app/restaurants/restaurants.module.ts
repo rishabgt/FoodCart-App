@@ -11,7 +11,12 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [RestaurantsComponent, CarouselComponent, NavbarComponent, FooterComponent],
+  declarations: [
+    RestaurantsComponent,
+    CarouselComponent,
+    NavbarComponent,
+    FooterComponent,
+  ],
   imports: [
     CommonModule,
     RestaurantsRoutingModule,
@@ -19,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [DataService],
 })
 export class RestaurantsModule {}
+
+export { DataService };

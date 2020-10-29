@@ -35,6 +35,7 @@ export class MenuComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
+    console.log(this.user);
   }
 
   getFoods() {
@@ -63,7 +64,7 @@ export class MenuComponent implements OnInit {
     let order = {
       quantity: 1,
       fid: item.id,
-      uid: 1,
+      uid: this.user.id,
       price: item.price,
     };
     this.service.addItemToCart(order).subscribe(

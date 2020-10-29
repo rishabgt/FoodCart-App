@@ -1,5 +1,3 @@
-import { MenuModule } from './menu/menu.module';
-import { RestaurantsModule } from './restaurants/restaurants.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LastpageComponent } from './lastpage/lastpage.component';
 import { BilladdressComponent } from './billaddress/billaddress.component';
@@ -37,8 +35,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HttpClientModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    RestaurantsModule,
-    MenuModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent],
