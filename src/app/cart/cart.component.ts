@@ -1,7 +1,7 @@
+import { Items } from './../models/items';
 import { Users } from './../models/users';
 import { Foods } from './../models/foods';
 import { Location } from '@angular/common';
-import { Orders } from './../models/orders';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
-  orders: Orders[];
+  items: Items[];
   foods: Foods[];
   food: Foods;
   foodNames = new Array();
@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-    this.getOrders();
+    this.getItems();
   }
 
   getUser() {
@@ -43,14 +43,14 @@ export class CartComponent implements OnInit {
     console.log(this.user);
   }
 
-  getOrders() {
-    this.service.getOrderByUid(this.user.id).subscribe((data) => {
-      this.orders = data as Orders[];
-      if (this.orders.length === 0) {
+  getItems() {
+    this.service.getItemByUid(this.user.id).subscribe((data) => {
+      this.items = data as Items[];
+      if (this.items.length === 0) {
         this.isEmpty = true;
         this.searching = false;
       } else {
-        this.orders.forEach((item) => {
+        this.items.forEach((item) => {
           this.getFoodById(item.fid);
         });
         this.calculateOrderTotal();
@@ -70,7 +70,7 @@ export class CartComponent implements OnInit {
 
   calculateOrderTotal() {
     this.orderTotal = 0;
-    this.orders.forEach((item) => {
+    this.items.forEach((item) => {
       this.orderTotal += item.quantity * item.price;
     });
   }
@@ -83,7 +83,7 @@ export class CartComponent implements OnInit {
 
     this.service.updateQuantity(updatedOrder).subscribe(() => {
       console.log('Order quantity increased');
-      this.getOrders();
+      this.getItems();
     });
   }
 
@@ -95,13 +95,13 @@ export class CartComponent implements OnInit {
 
     this.service.updateQuantity(updatedOrder).subscribe(() => {
       console.log('Order quantity decreased');
-      this.getOrders();
+      this.getItems();
     });
   }
 
-  deleteOrder(item) {
-    this.service.deleteOrder(item.id).subscribe(() => {
-      this.getOrders();
+  deleteItem(item) {
+    this.service.deleteItem(item.id).subscribe(() => {
+      this.getItems();
     });
   }
 

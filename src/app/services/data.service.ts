@@ -8,18 +8,19 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
   private url = 'https://foodcart11.000webhostapp.com/';
   private user: Users;
-  private isLogin:boolean = false;
+  private isLogin: boolean = false;
+  
   constructor(private http: HttpClient) {}
 
-  setLogin(){
+  setLogin() {
     this.isLogin = true;
   }
 
-  unsetLogin(){
+  unsetLogin() {
     this.isLogin = false;
   }
 
-  getLogin(){
+  getLogin() {
     return this.isLogin;
   }
 
@@ -60,8 +61,8 @@ export class DataService {
     return this.http.post(this.url + 'insertUser.php', JSON.stringify(user));
   }
 
-  getOrderByUid(uid: number) {
-    return this.http.get(this.url + 'getOrderByUid.php?uid=' + uid);
+  getItemByUid(uid: number) {
+    return this.http.get(this.url + 'getItemByUid.php?uid=' + uid);
   }
 
   getFoodById(id: number) {
@@ -75,11 +76,18 @@ export class DataService {
     );
   }
 
-  deleteOrder(id: number) {
-    return this.http.get(this.url + 'deleteOrder.php?id=' + id);
+  deleteItem(id: number) {
+    return this.http.get(this.url + 'deleteItem.php?id=' + id);
   }
 
-  deleteOrderByUid(uid: number) {
-    return this.http.get(this.url + 'deleteOrderByUid.php?uid=' + uid);
+  deleteItemByUid(uid: number) {
+    return this.http.get(this.url + 'deleteItemByUid.php?uid=' + uid);
+  }
+
+  addItemToOrders(resource) {
+    return this.http.post(
+      this.url + 'insertItemToOrders.php',
+      JSON.stringify(resource)
+    );
   }
 }
