@@ -4,9 +4,16 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="exampleInputEmail1" class="h5 text-light">Username</label>
-        <input type="email" formControlName="username" class="form-control w-50" id="exampleInputEmail1"
-          aria-describedby="emailHelp" />
-        <small id="emailHelp" class="form-text text-light">Username is same as your email ID.</small>
+        <input
+          type="email"
+          formControlName="username"
+          class="form-control w-50"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+        <small id="emailHelp" class="form-text text-light"
+          >Username is same as your email ID.</small
+        >
       </div>
       <div *ngIf="username.touched">
         <div *ngIf="username.errors.required" class="alert alert-danger w-50">
@@ -14,8 +21,15 @@
         </div>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1" class="h5 text-light">Password</label>
-        <input type="password" formControlName="password" class="form-control w-50" id="exampleInputPassword1" />
+        <label for="exampleInputPassword1" class="h5 text-light"
+          >Password</label
+        >
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control w-50"
+          id="exampleInputPassword1"
+        />
       </div>
       <div *ngIf="password.touched">
         <div *ngIf="password.errors.required" class="alert alert-danger w-50">
@@ -27,22 +41,50 @@
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-    <div *ngIf="validLoading" class="spinner-border mt-3 text-light" role="status">
+    <div
+      *ngIf="validLoading"
+      class="spinner-border mt-3 text-light"
+      role="status"
+    >
       <span class="sr-only">Loading...</span>
     </div>
-    <div class="h5 text-light mt-3">New user? No problem just sign up!<br> It will take less than 2 minutes.</div>
-    <button type="button" class="btn btn-warning mt-3" data-toggle="modal" data-target="#exampleModal">
+    <div class="h5 text-light mt-3">
+      New user? No problem just sign up!<br />
+      It will take less than 2 minutes.
+    </div>
+    <button
+      type="button"
+      class="btn btn-warning mt-3"
+      data-toggle="modal"
+      data-target="#exampleModal"
+    >
       Sign up!
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
-      aria-labelledby="exampleModalLabel" aria-hidden="true" #md>
+    <div
+      class="modal fade"
+      id="exampleModal"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      #md
+    >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-primary" id="exampleModalLabel">Sign up new user</h5>
-            <button type="button" class="close" #closeButton data-dismiss="modal" aria-label="Close">
+            <h5 class="modal-title text-primary" id="exampleModalLabel">
+              Sign up new user
+            </h5>
+            <button
+              type="button"
+              class="close"
+              #closeButton
+              data-dismiss="modal"
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -50,28 +92,57 @@
             <form [formGroup]="signupForm" (ngSubmit)="create(content)">
               <div class="form-group">
                 <label for="fname">First Name</label>
-                <input type="text" formControlName="firstname" id="fname" class="form-control"
-                  [class.is-invalid]="firstname.touched && firstname.invalid">
+                <input
+                  type="text"
+                  formControlName="firstname"
+                  id="fname"
+                  class="form-control"
+                  [class.is-invalid]="firstname.touched && firstname.invalid"
+                />
               </div>
               <div class="form-group">
                 <label for="lname">Last Name</label>
-                <input type="text" formControlName="lastname" id="lname" class="form-control"
-                  [class.is-invalid]="lastname.touched && lastname.invalid">
+                <input
+                  type="text"
+                  formControlName="lastname"
+                  id="lname"
+                  class="form-control"
+                  [class.is-invalid]="lastname.touched && lastname.invalid"
+                />
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Email address</label>
-                <input formControlName="usernameSignUp"
-                  [class.is-invalid]="usernameSignUp.touched && usernameSignUp.invalid" type="email"
-                  class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                <input
+                  formControlName="usernameSignUp"
+                  [class.is-invalid]="
+                    usernameSignUp.touched && usernameSignUp.invalid
+                  "
+                  type="email"
+                  class="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="name@example.com"
+                />
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input formControlName="passwordSignUp"
-                  [class.is-invalid]="passwordSignUp.touched && passwordSignUp.invalid" type="password"
-                  class="form-control" id="exampleInputPassword">
+                <input
+                  formControlName="passwordSignUp"
+                  [class.is-invalid]="
+                    passwordSignUp.touched && passwordSignUp.invalid
+                  "
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword"
+                />
               </div>
               <div>
-                <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Create</button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  [disabled]="signupForm.invalid"
+                >
+                  Create
+                </button>
               </div>
             </form>
           </div>
@@ -82,17 +153,25 @@
     <ng-template #content let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Sucessful Signup!</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="modal.dismiss('Cross click')"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        Thank you for choosing Food Cart
-      </div>
+      <div class="modal-body">Thank you for choosing Food Cart</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Okay</button>
+        <button
+          type="button"
+          class="btn btn-outline-dark"
+          (click)="modal.close('Save click')"
+        >
+          Okay
+        </button>
       </div>
     </ng-template>
   </div>
-
 </div>
