@@ -17,6 +17,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { Authguard } from './services/authguard.service';
 import { OrdersComponent } from './orders/orders.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { OrdersComponent } from './orders/orders.component';
     HttpClientModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    NgbModule,
   ],
   providers: [DataService, Authguard],
   bootstrap: [AppComponent],
