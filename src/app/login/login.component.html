@@ -36,32 +36,39 @@
     </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+      aria-labelledby="exampleModalLabel" aria-hidden="true" #md>
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title text-primary" id="exampleModalLabel">Sign up new user</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button type="button" class="close" #closeButton data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body bg-solid">
-            <form [formGroup]="signupForm" (ngSubmit)="create()">
+            <form [formGroup]="signupForm" (ngSubmit)="create(content)">
               <div class="form-group">
                 <label for="fname">First Name</label>
-                <input type="text" formControlName="firstname" id="fname" class="form-control" [class.is-invalid]="firstname.touched && firstname.invalid">
+                <input type="text" formControlName="firstname" id="fname" class="form-control"
+                  [class.is-invalid]="firstname.touched && firstname.invalid">
               </div>
               <div class="form-group">
                 <label for="lname">Last Name</label>
-                <input type="text" formControlName="lastname" id="lname" class="form-control" [class.is-invalid]="lastname.touched && lastname.invalid">
+                <input type="text" formControlName="lastname" id="lname" class="form-control"
+                  [class.is-invalid]="lastname.touched && lastname.invalid">
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Email address</label>
-                <input formControlName="usernameSignUp" [class.is-invalid]="usernameSignUp.touched && usernameSignUp.invalid" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                <input formControlName="usernameSignUp"
+                  [class.is-invalid]="usernameSignUp.touched && usernameSignUp.invalid" type="email"
+                  class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input formControlName="passwordSignUp" [class.is-invalid]="passwordSignUp.touched && passwordSignUp.invalid" type="password" class="form-control" id="exampleInputPassword">
+                <input formControlName="passwordSignUp"
+                  [class.is-invalid]="passwordSignUp.touched && passwordSignUp.invalid" type="password"
+                  class="form-control" id="exampleInputPassword">
               </div>
               <div>
                 <button type="submit" class="btn btn-primary" [disabled]="signupForm.invalid">Create</button>
@@ -71,7 +78,21 @@
         </div>
       </div>
     </div>
-
+    <!-- Modal -->
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Sucessful Signup!</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Thank you for choosing Food Cart
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Okay</button>
+      </div>
+    </ng-template>
   </div>
 
 </div>
