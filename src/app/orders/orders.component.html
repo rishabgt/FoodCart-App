@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+
+<div class="container my-5 py-5">
+  <div *ngIf="searching === true" class="my-5 py-5">
+    <div class="text-center">
+      <div class="spinner-grow" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="isEmpty === true" class="my-5 py-5 text-center">
+    <p class="h4">No Orders placed yet.</p>
+    <p class="h5">Go ahead & search for many more tongue twisters!!!</p>
+  </div>
+
+  <div class="row">
+    <div *ngFor="let order of orders; let i = index" class="col-lg-4 mb-4">
+      <div class="card">
+        <img src="{{ foodImages[i] }}" class="card-img-top" alt="Food Item" />
+        <div class="card-body">
+          <h5 class="card-title">{{ foodNames[i] }}</h5>
+          <p class="card-text">₹&nbsp;{{ foodPrices[i] }}</p>
+          <p class="card-text text-muted">
+            Quantity:&nbsp;{{ order.quantity }}
+          </p>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Ordered on {{ order.date }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -16,6 +16,7 @@ import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { Authguard } from './services/authguard.service';
+import { OrdersComponent } from './orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { Authguard } from './services/authguard.service';
     LastpageComponent,
     FooterComponent,
     NavbarComponent,
+    OrdersComponent,
   ],
   imports: [
     BrowserModule,

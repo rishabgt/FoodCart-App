@@ -23,4 +23,8 @@ export class NavbarComponent implements OnInit {
     this.firstName = this.user.firstname;
     this.lastName = this.user.lastname;
   }
+
+  logout() {
+    this.service.unsetLogin();
+  }
 }
