@@ -5,8 +5,8 @@
   height: 100vh;
 }
 
-.bg-solid{
-  background-image: url("../../assets/color-concrete-wall-background_1323-259.jpg");
+.bg-solid {
+  /* background-image: url("../../assets/color-concrete-wall-background_1323-259.jpg"); */
   background-position: center;
   background-size: cover;
 }
