@@ -1,58 +1,74 @@
-footer {
-  background-image: url(../../../assets/img/back_1.png);
-  color: black;
-  padding: 20px 80px;
+.page-footer{
+    background-image: url(../../assets/img/back_1.png);
+    color: black;
 }
-.list1 .col {
-  align-items: center;
-  text-align: center;
+.image1, .image2, .image3{
+    text-align: center;
 }
-.list1 a {
-  text-decoration: none;
-  color: black;
+.list1{
+    justify-content: center;
 }
-.list1 h5 {
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 2px;
-  font-weight: 500;
+.list1 a, .contact-details a, .media-icons a{
+    text-decoration: none;
+    color: black;
 }
-.list2 .col {
-  text-align: center;
-  align-items: center;
-  margin: 30px 10px 15px 10px;
-  padding: 0 20px;
+.list1 h5{
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    font-weight: 500;
 }
-.description {
-  text-align: justify;
+.contact-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
-.contact-details a {
-  text-decoration: none;
-  color: black;
+.location, .mobile, .email{
+    font-weight: 490;
+    letter-spacing: 1px;
+} 
+.about-us p{
+    margin-top: 20px;
+    justify-content: center; 
+    align-content: center;
+    text-align: justify;
 }
-.location a {
-  text-align: left;
+.media-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 45px;
+    margin-left: -30px;
 }
-.media-details a {
-  text-decoration: none;
-  color: black;
+.media-icons a{
+   padding: 0 15px;
 }
-.media-icons {
-  padding: 0 20px;
+h4{
+    font-weight: 500;
 }
-.location,
-.mobile,
-.email {
-  padding: 15px 5px 15px 100px;
-  font-weight: 500;
-  letter-spacing: 1px;
-}
-.mobile a,
-.location address,
-.email a {
-  padding-left: 5px;
-}
-.foodcart3 {
-  text-align: center;
-  font-weight: 480;
-}
+@media (max-width: 575.98px) { 
+    .list1 img{
+        max-width: 80%;
+    }
+    .list1 h5{
+        font-size: 12px;
+    }
+    .about-us{
+        display: none;
+    }
+    .contact-details{
+        font-size: 15px;
+    }
+    .media-icons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+ }
+
+
+
