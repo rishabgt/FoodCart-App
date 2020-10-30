@@ -1,8 +1,9 @@
 import { Users } from './../models/users';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
   credentials: Users;
   user: any;
 
-  constructor(private _dataService: DataService, private router: Router) {
+  constructor(private _dataService: DataService, private router: Router,private modalService:NgbModal) {
     this.valid = true;
     this.validLoading = false;
   }
@@ -54,8 +55,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+  @ViewChild('closeButton') closeButton;
 
-  create() {
+  open(content) {
+   this.modalService.open(content);
+  }
+
+  create(content) {
     this.user = {
       firstname: this.firstname.value,
       lastname: this.lastname.value,
@@ -63,8 +69,12 @@ export class LoginComponent implements OnInit {
       password: this.passwordSignUp.value,
     };
     this._dataService.insertUser(this.user).subscribe(() => {
-      alert('Sign up successful!!');
+      this.open(content);
     });
+    
+    this.closeButton.nativeElement.click();
+    this.signupForm.reset();
+    
   }
 
   onSubmit() {
@@ -86,5 +96,6 @@ export class LoginComponent implements OnInit {
         this._dataService.setLogin();
       }
     });
+
   }
 }
