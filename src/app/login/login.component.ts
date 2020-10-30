@@ -16,7 +16,11 @@ export class LoginComponent implements OnInit {
   credentials: Users;
   user: any;
 
-  constructor(private _dataService: DataService, private router: Router,private modalService:NgbModal) {
+  constructor(
+    private _dataService: DataService,
+    private router: Router,
+    private modalService: NgbModal
+  ) {
     this.valid = true;
     this.validLoading = false;
   }
@@ -58,7 +62,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('closeButton') closeButton;
 
   open(content) {
-   this.modalService.open(content);
+    this.modalService.open(content);
   }
 
   create(content) {
@@ -71,10 +75,9 @@ export class LoginComponent implements OnInit {
     this._dataService.insertUser(this.user).subscribe(() => {
       this.open(content);
     });
-    
+
     this.closeButton.nativeElement.click();
     this.signupForm.reset();
-    
   }
 
   onSubmit() {
@@ -96,6 +99,5 @@ export class LoginComponent implements OnInit {
         this._dataService.setLogin();
       }
     });
-
   }
 }
