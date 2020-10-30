@@ -10,3 +10,32 @@
   background-position: center;
   background-size: cover;
 }
+
+.card {
+  margin: 0 auto;
+  float: none;
+  max-width: 50%;
+  background-color: rgba(10, 10, 10, 0.3);
+}
+
+.card-header,
+.card-footer {
+  opacity: 1;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .card {
+    max-width: 75%;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .card {
+    max-width: 100%;
+  }
+}
