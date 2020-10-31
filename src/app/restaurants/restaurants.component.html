@@ -10,7 +10,6 @@
         type="text"
         placeholder="Search restaurants..."
         [(ngModel)]="searchName"
-        (keyup.enter)="search()"
       />
       <div class="symbol">
         <svg class="cloud">
@@ -65,12 +64,8 @@
       </div>
     </div>
 
-    <div *ngIf="isFound === false" class="text-center my-5">
-      <p class="h4">No such restaurants can be found.</p>
-    </div>
-
-    <div *ngIf="isFound === true">
-      <div *ngFor="let restaurant of restaurants">
+    <div>
+      <div *ngFor="let restaurant of restaurants | filterName: searchName">
         <div class="media text-muted pt-3">
           <img src="{{ restaurant.logo }}" alt="Resturant Logo" />
           <p class="media-body pb-4 mb-0 lh-125 border-bottom border-gray">
@@ -85,12 +80,6 @@
           </p>
         </div>
       </div>
-    </div>
-
-    <div *ngIf="searchIsOn === true" class="text-center my-5">
-      <button class="btn btn-outline-success my-2" (click)="back()">
-        Go Back
-      </button>
     </div>
 
     <small class="d-block text-right mt-3">
