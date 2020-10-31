@@ -12,7 +12,6 @@ import { AccountComponent } from './account/account.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'account', component: AccountComponent},
   { path: 'home', component: HomeComponent, canActivate: [Authguard] },
   {
     path: 'restaurants',
@@ -35,6 +34,7 @@ const routes: Routes = [
   },
   { path: 'thanks', component: LastpageComponent, canActivate: [Authguard] },
   { path: 'orders', component: OrdersComponent, canActivate: [Authguard] },
+  { path: 'account', component: AccountComponent, canActivate: [Authguard] },
 ];
 
 @NgModule({
