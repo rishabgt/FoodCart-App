@@ -19,6 +19,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { Authguard } from './services/authguard.service';
 import { OrdersComponent } from './orders/orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     NavbarComponent,
     OrdersComponent,
-    AccountComponent
+    AccountComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
