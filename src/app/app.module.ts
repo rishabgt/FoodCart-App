@@ -1,3 +1,4 @@
+import { AccountComponent } from './account/account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LastpageComponent } from './lastpage/lastpage.component';
 import { BilladdressComponent } from './billaddress/billaddress.component';
@@ -30,6 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FooterComponent,
     NavbarComponent,
     OrdersComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

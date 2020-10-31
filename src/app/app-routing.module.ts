@@ -7,10 +7,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { Authguard } from './services/authguard.service';
+import { AccountComponent } from './account/account.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'account', component: AccountComponent},
   { path: 'home', component: HomeComponent, canActivate: [Authguard] },
   {
     path: 'restaurants',
