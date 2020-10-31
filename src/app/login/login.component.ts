@@ -11,10 +11,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('closeButton') closeButton;
+
   valid: boolean;
   validLoading: boolean;
   credentials: Users;
   user: any;
+  userExists: boolean;
 
   constructor(
     private _dataService: DataService,
@@ -23,7 +26,10 @@ export class LoginComponent implements OnInit {
   ) {
     this.valid = true;
     this.validLoading = false;
+    this.userExists = false;
   }
+
+  ngOnInit(): void {}
 
   form = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -58,9 +64,6 @@ export class LoginComponent implements OnInit {
     return this.form.get('password').value;
   }
 
-  ngOnInit(): void {}
-  @ViewChild('closeButton') closeButton;
-
   open(content) {
     this.modalService.open(content);
   }
@@ -72,9 +75,16 @@ export class LoginComponent implements OnInit {
       username: this.usernameSignUp.value,
       password: this.passwordSignUp.value,
     };
-    this._dataService.insertUser(this.user).subscribe(() => {
-      this.open(content);
-    });
+    this._dataService.insertUser(this.user).subscribe(
+      () => {
+        this.userExists = false;
+        this.open(content);
+      },
+      (error: any) => {
+        this.userExists = true;
+        this.open(content);
+      }
+    );
 
     this.closeButton.nativeElement.click();
     this.signupForm.reset();

@@ -38,6 +38,14 @@ export class DataService {
     );
   }
 
+  getUserById(id: number) {
+    return this.http.get(this.url + 'getUserByID.php?id=' + id);
+  }
+
+  insertUser(user) {
+    return this.http.post(this.url + 'insertUser.php', JSON.stringify(user));
+  }
+
   getRestaurants() {
     return this.http.get(this.url + 'index.php');
   }
@@ -55,10 +63,6 @@ export class DataService {
       this.url + 'insertItemToCart.php',
       JSON.stringify(resource)
     );
-  }
-
-  insertUser(user) {
-    return this.http.post(this.url + 'insertUser.php', JSON.stringify(user));
   }
 
   getItemByUid(uid: number) {

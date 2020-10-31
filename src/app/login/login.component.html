@@ -163,10 +163,24 @@
         </div>
       </div>
     </div>
+
     <!-- Modal -->
     <ng-template #content let-modal>
       <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Sucessful Signup!</h4>
+        <h4
+          *ngIf="userExists === false"
+          class="modal-title"
+          id="modal-basic-title"
+        >
+          Successful Signup!
+        </h4>
+        <h4
+          *ngIf="userExists === true"
+          class="modal-title"
+          id="modal-basic-title"
+        >
+          Couldn't Signup!
+        </h4>
         <button
           type="button"
           class="close"
@@ -176,7 +190,12 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">Thank you for choosing Food Cart</div>
+      <div *ngIf="userExists === false" class="modal-body">
+        Thank you for choosing Food Cart.
+      </div>
+      <div *ngIf="userExists === true" class="modal-body">
+        User already exists.
+      </div>
       <div class="modal-footer">
         <button
           type="button"
