@@ -12,7 +12,10 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('closeButton') closeButton;
+  @ViewChild('load') load;
+  @ViewChild('closeLoad') closeLoad;
 
+  fetching: boolean;
   valid: boolean;
   validLoading: boolean;
   credentials: Users;
@@ -27,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.valid = true;
     this.validLoading = false;
     this.userExists = false;
+    this.fetching = false;
   }
 
   ngOnInit(): void {}
@@ -68,12 +72,9 @@ export class LoginComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  @ViewChild('load') load;
-  @ViewChild('closeLoad') closeLoad;
-  fetching:boolean = false;
   create(content) {
     this.closeButton.nativeElement.click();
-     this.open(this.load);
+    this.open(this.load);
     this.fetching = true;
     this.user = {
       firstname: this.firstname.value,
@@ -96,8 +97,8 @@ export class LoginComponent implements OnInit {
     this.signupForm.reset();
   }
 
-  closeAllModals(){
-    console.log("Yes");
+  closeAllModals() {
+    console.log('Yes');
     this.modalService.dismissAll();
   }
 
