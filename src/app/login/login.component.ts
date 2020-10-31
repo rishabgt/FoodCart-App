@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-login',
@@ -68,7 +68,13 @@ export class LoginComponent implements OnInit {
     this.modalService.open(content);
   }
 
+  @ViewChild('load') load;
+  @ViewChild('closeLoad') closeLoad;
+  fetching:boolean = false;
   create(content) {
+    this.closeButton.nativeElement.click();
+     this.open(this.load);
+    this.fetching = true;
     this.user = {
       firstname: this.firstname.value,
       lastname: this.lastname.value,
@@ -85,9 +91,14 @@ export class LoginComponent implements OnInit {
         this.open(content);
       }
     );
-
+    this.fetching = false;
     this.closeButton.nativeElement.click();
     this.signupForm.reset();
+  }
+
+  closeAllModals(){
+    console.log("Yes");
+    this.modalService.dismissAll();
   }
 
   onSubmit() {
