@@ -149,6 +149,18 @@
                   id="exampleInputPassword"
                 />
               </div>
+              <div class="form-group">
+                <label for="exampleInputPassword2">Confirm Password</label>
+                <input
+                  formControlName="confirmPasswordSignUp"
+                  [class.is-invalid]="
+                    passwordSignUp.touched && passwordSignUp.invalid
+                  "
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPasswor2"
+                />
+              </div>
               <div>
                 <button
                   type="submit"

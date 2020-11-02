@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
     passwordSignUp: new FormControl('', Validators.required),
     firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
+    confirmPasswordSignUp:new FormControl('',Validators.required)
   });
 
   get usernameSignUp() {
