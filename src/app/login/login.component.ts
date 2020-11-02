@@ -72,6 +72,10 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.form.get('password').value;
   }
+  
+  formReset(){
+     this.signupForm.reset();
+  }
 
   open(content) {
     this.modalService.open(content);
