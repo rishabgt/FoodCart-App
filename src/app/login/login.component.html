@@ -154,7 +154,8 @@
                 <input
                   formControlName="confirmPasswordSignUp"
                   [class.is-invalid]="
-                    passwordSignUp.touched && passwordSignUp.invalid
+                    confirmPasswordSignUp.touched &&
+                    signupForm.errors?.confirmPassword
                   "
                   type="password"
                   class="form-control"

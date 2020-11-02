@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmPassword } from '../validators/custom.validator';
 
 @Component({
   selector: 'app-login',
@@ -46,13 +47,16 @@ export class LoginComponent implements OnInit {
     firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
     confirmPasswordSignUp:new FormControl('',Validators.required)
-  });
+  },ConfirmPassword.confirmPassword);
 
   get usernameSignUp() {
     return this.signupForm.get('usernameSignUp');
   }
   get passwordSignUp() {
     return this.signupForm.get('passwordSignUp');
+  }
+  get confirmPasswordSignUp() {
+    return this.signupForm.get('confirmPasswordSignUp');
   }
   get firstname() {
     return this.signupForm.get('firstname');
