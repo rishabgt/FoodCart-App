@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal For Signing Up-->
     <div
       class="modal fade"
       id="exampleModal"
@@ -149,6 +149,12 @@
                   class="form-control"
                   id="exampleInputPassword"
                 />
+                <div
+                  *ngIf="passwordSignUp.errors?.minlength"
+                  class="alert alert-danger"
+                >
+                  Minimum length required is 8
+                </div>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword2">Confirm Password</label>

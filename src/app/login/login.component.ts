@@ -42,11 +42,11 @@ export class LoginComponent implements OnInit {
   });
 
   signupForm = new FormGroup({
-    usernameSignUp: new FormControl('', Validators.required),
-    passwordSignUp: new FormControl('', Validators.required),
+    usernameSignUp: new FormControl('', [Validators.required,Validators.email]),
+    passwordSignUp: new FormControl('', [Validators.required,Validators.minLength(8)]),
     firstname: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
-    confirmPasswordSignUp:new FormControl('',Validators.required)
+    confirmPasswordSignUp:new FormControl('',[Validators.required])
   },ConfirmPassword.confirmPassword);
 
   get usernameSignUp() {
