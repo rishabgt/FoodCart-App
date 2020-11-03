@@ -1,3 +1,4 @@
+import { ContactUsComponent } from './contact-us/contact-us.component';
 import { OrdersComponent } from './orders/orders.component';
 import { LastpageComponent } from './lastpage/lastpage.component';
 import { BilladdressComponent } from './billaddress/billaddress.component';
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'thanks', component: LastpageComponent, canActivate: [Authguard] },
   { path: 'orders', component: OrdersComponent, canActivate: [Authguard] },
   { path: 'account', component: AccountComponent, canActivate: [Authguard] },
+  { path: 'contact', component: ContactUsComponent, canActivate: [Authguard] },
 ];
 
 @NgModule({

@@ -69,6 +69,15 @@
   font-weight: 500;
 } */
 
+.list2 a {
+  text-decoration: none;
+  color: black;
+}
+
+.list2 a:hover {
+  color: #311b92;
+}
+
 @media only screen and (max-width: 768px) {
   .contact-details p {
     margin-left: auto;
