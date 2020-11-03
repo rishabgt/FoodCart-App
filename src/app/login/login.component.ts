@@ -82,9 +82,9 @@ export class LoginComponent implements OnInit {
   }
 
   create(content) {
-    this.closeButton.nativeElement.click();
     this.open(this.load);
     this.fetching = true;
+    console.log(this.signupForm);
     this.user = {
       firstname: this.firstname.value,
       lastname: this.lastname.value,
@@ -95,6 +95,7 @@ export class LoginComponent implements OnInit {
       () => {
         this.userExists = false;
         this.open(content);
+        console.log(this.user);
       },
       (error: any) => {
         this.userExists = true;
@@ -104,6 +105,7 @@ export class LoginComponent implements OnInit {
     this.fetching = false;
     this.closeButton.nativeElement.click();
     this.signupForm.reset();
+    this.closeButton.nativeElement.click();
   }
 
   closeAllModals() {
