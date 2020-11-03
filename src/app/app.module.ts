@@ -20,6 +20,7 @@ import { Authguard } from './services/authguard.service';
 import { OrdersComponent } from './orders/orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     OrdersComponent,
     AccountComponent,
     DashboardComponent,
+    ContactUsComponent,
   ],
   imports: [
     BrowserModule,
