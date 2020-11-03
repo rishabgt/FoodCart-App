@@ -31,11 +31,6 @@
             f.firstName.errors?.maxlength.requiredLength
           }}] characters.
         </div>
-        <div *ngIf="f.firstName.errors?.minlength" class="invalid-feedback">
-          Please enter a min of [{{
-            f.firstName.errors?.minlength.requiredLength
-          }}] characters.
-        </div>
         <div *ngIf="f.firstName.errors?.pattern" class="invalid-feedback">
           This field accepts only Alphabetical characters and spaces only.
         </div>
@@ -56,11 +51,6 @@
         <div *ngIf="f.lastName.errors?.maxlength" class="invalid-feedback">
           Please enter a max of [{{
             f.lastName.errors?.maxlength.requiredLength
-          }}] characters.
-        </div>
-        <div *ngIf="f.lastName.errors?.minlength" class="invalid-feedback">
-          Please enter a min of [{{
-            f.lastName.errors?.minlength.requiredLength
           }}] characters.
         </div>
         <div *ngIf="f.lastName.errors?.pattern" class="invalid-feedback">

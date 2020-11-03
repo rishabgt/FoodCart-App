@@ -58,8 +58,7 @@ export class BilladdressComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(20),
+          Validators.maxLength(30),
           Validators.pattern('^[a-zA-Z ]*$'),
         ],
       ],
@@ -67,8 +66,7 @@ export class BilladdressComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(5),
-          Validators.maxLength(20),
+          Validators.maxLength(30),
           Validators.pattern('^[a-zA-Z ]*$'),
         ],
       ],
