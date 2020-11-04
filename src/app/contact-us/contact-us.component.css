@@ -17,3 +17,6 @@
 .map{
     margin-top: 25px;
 }
+form span{
+    color: red;
+}
