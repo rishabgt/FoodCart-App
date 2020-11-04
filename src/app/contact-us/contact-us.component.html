@@ -17,15 +17,47 @@
   <div class="row">
     <div class="col-md-8">
       <h4 class="mb-3" style="text-decoration: underline">Feedback</h4>
-      <form class="needs-validation" novalidate>
+      <form
+        [formGroup]="feedbackForm"
+        class="needs-validation"
+        novalidate
+        (ngSubmit)="onSubmit()"
+      >
         <div class="mb-3">
           <label for="name">Name <span>*</span></label>
-          <input type="text" class="form-control bg-light" id="name" />
+          <input
+            type="text"
+            class="form-control bg-light"
+            formControlName="name"
+            id="name"
+            [ngClass]="{
+              'is-invalid': f.name.errors && f.name.touched
+            }"
+            required
+          />
+          <div *ngIf="f.name.errors?.required" class="invalid-feedback">
+            Please enter your Name
+          </div>
+          <div *ngIf="f.name.errors?.pattern" class="invalid-feedback">
+            This field accepts only Alphabetical characters and spaces only.
+          </div>
         </div>
 
         <div class="mb-3">
           <label for="email">Email <span>*</span></label>
-          <input type="email" class="form-control bg-light" id="email" />
+          <input
+            type="email"
+            class="form-control bg-light"
+            formControlName="email"
+            id="email"
+            [ngClass]="{
+              'is-invalid': f.email.errors && f.email.touched
+            }"
+            required
+          />
+          <div *ngIf="f.email.errors?.required" class="invalid-feedback">
+            Please enter your Email Id
+          </div>
         </div>
 
         <div class="mb-3">
@@ -38,8 +70,21 @@
           <textarea
             class="form-control bg-light"
             id="comment"
+            formControlName="message"
             rows="3"
+            [ngClass]="{
+              'is-invalid': f.message.errors && f.message.touched
+            }"
+            required
           ></textarea>
+          <div *ngIf="f.message.errors?.required" class="invalid-feedback">
+            Please enter your Message
+          </div>
+          <div *ngIf="f.message.errors?.maxlength" class="invalid-feedback">
+            Please enter a max of [{{
+              f.message.errors?.maxlength.requiredLength
+            }}] characters.
+          </div>
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
       </form>
