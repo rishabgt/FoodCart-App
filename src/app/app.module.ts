@@ -1,3 +1,4 @@
+import { PasswordComponent } from './password/password.component';
 import { AccountComponent } from './account/account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LastpageComponent } from './lastpage/lastpage.component';
@@ -21,6 +22,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -36,12 +38,14 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     AccountComponent,
     DashboardComponent,
     ContactUsComponent,
+    PasswordComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,

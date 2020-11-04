@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { Authguard } from './services/authguard.service';
 import { AccountComponent } from './account/account.component';
+import { PasswordComponent } from './password/password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'thanks', component: LastpageComponent, canActivate: [Authguard] },
   { path: 'orders', component: OrdersComponent, canActivate: [Authguard] },
   { path: 'account', component: AccountComponent, canActivate: [Authguard] },
+  { path: 'password', component: PasswordComponent, canActivate: [Authguard] },
   { path: 'contact', component: ContactUsComponent, canActivate: [Authguard] },
 ];
 
