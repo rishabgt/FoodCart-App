@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Users } from './../models/users';
 import { DataService } from './../services/data.service';
@@ -14,8 +15,14 @@ export class AccountComponent implements OnInit {
   firstName: string;
   lastName: string;
   userName: string;
+  id: number;
+  password: string;
 
-  constructor(private service: DataService, private fb: FormBuilder) {}
+  constructor(
+    private service: DataService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = this.createForm();
@@ -24,9 +31,11 @@ export class AccountComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
+    this.id = this.user.id;
     this.firstName = this.user.firstname;
     this.lastName = this.user.lastname;
     this.userName = this.user.username;
+    this.password = this.user.password;
   }
 
   createForm(): FormGroup {
@@ -57,5 +66,27 @@ export class AccountComponent implements OnInit {
 
   submit(form) {
     console.log(form);
+
+    let updatedUser = {
+      id: this.id,
+      firstname: this.form.controls['firstname'].value,
+      lastname: this.form.controls['lastname'].value,
+      username: this.form.controls['username'].value,
+    };
+
+    let newUser = {
+      id: this.id,
+      firstname: this.form.controls['firstname'].value,
+      lastname: this.form.controls['lastname'].value,
+      username: this.form.controls['username'].value,
+      password: this.password,
+    };
+
+    this.service.updateUser(updatedUser).subscribe(() => {
+      this.service.setUser(newUser);
+      this.getUser();
+      this.router.navigate(['/restaurants']);
+      alert('User details updated');
+    });
   }
 }

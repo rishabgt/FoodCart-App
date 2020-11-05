@@ -46,6 +46,13 @@ export class DataService {
     return this.http.post(this.url + 'insertUser.php', JSON.stringify(user));
   }
 
+  updateUser(resource) {
+    return this.http.post(
+      this.url + 'updateUser.php',
+      JSON.stringify(resource)
+    );
+  }
+
   getRestaurants() {
     return this.http.get(this.url + 'index.php');
   }
