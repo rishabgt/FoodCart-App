@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../services/data.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmPassword } from '../validators/custom.validator';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _dataService: DataService,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) {
     this.valid = true;
     this.validLoading = false;
@@ -36,18 +38,31 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  showSuccess() {
+    this.toastr.success('Logged in successfully!');
+  }
+
   form = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
 
-  signupForm = new FormGroup({
-    usernameSignUp: new FormControl('', [Validators.required,Validators.email]),
-    passwordSignUp: new FormControl('', [Validators.required,Validators.minLength(8)]),
-    firstname: new FormControl('', Validators.required),
-    lastname: new FormControl('', Validators.required),
-    confirmPasswordSignUp:new FormControl('',[Validators.required])
-  },ConfirmPassword.confirmPassword);
+  signupForm = new FormGroup(
+    {
+      usernameSignUp: new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]),
+      passwordSignUp: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      confirmPasswordSignUp: new FormControl('', [Validators.required]),
+    },
+    ConfirmPassword.confirmPassword
+  );
 
   get usernameSignUp() {
     return this.signupForm.get('usernameSignUp');
@@ -72,9 +87,9 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.form.get('password').value;
   }
-  
-  formReset(){
-     this.signupForm.reset();
+
+  formReset() {
+    this.signupForm.reset();
   }
 
   open(content) {
@@ -130,6 +145,7 @@ export class LoginComponent implements OnInit {
         // console.log(this._dataService.getUserName());
         this.router.navigate(['/home']);
         this._dataService.setLogin();
+        this.showSuccess();
       }
     });
   }

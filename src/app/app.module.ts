@@ -1,6 +1,7 @@
 import { PasswordComponent } from './password/password.component';
 import { AccountComponent } from './account/account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { LastpageComponent } from './lastpage/lastpage.component';
 import { BilladdressComponent } from './billaddress/billaddress.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -38,7 +39,7 @@ import { CommonModule } from '@angular/common';
     AccountComponent,
     DashboardComponent,
     ContactUsComponent,
-    PasswordComponent
+    PasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +51,12 @@ import { CommonModule } from '@angular/common';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     NgbModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      progressBar: true,
+      progressAnimation: 'increasing',
+      preventDuplicates: true,
+    }),
   ],
   providers: [DataService, Authguard],
   bootstrap: [AppComponent],
