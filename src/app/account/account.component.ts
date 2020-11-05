@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Users } from './../models/users';
@@ -21,7 +22,8 @@ export class AccountComponent implements OnInit {
   constructor(
     private service: DataService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -82,11 +84,15 @@ export class AccountComponent implements OnInit {
       password: this.password,
     };
 
-    this.service.updateUser(updatedUser).subscribe(() => {
-      this.service.setUser(newUser);
-      this.getUser();
-      this.router.navigate(['/restaurants']);
-      alert('User details updated');
-    });
+    this.service.updateUser(updatedUser).subscribe(
+      () => {
+        this.service.setUser(newUser);
+        this.router.navigate(['/restaurants']);
+        this.toastr.success('User details updated!');
+      },
+      (error: any) => {
+        this.toastr.error("Couldn't updated user details!");
+      }
+    );
   }
 }
