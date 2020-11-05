@@ -12,13 +12,21 @@ import { CustomValidators } from './custom-validators';
 })
 export class PasswordComponent implements OnInit {
   form: FormGroup;
-  router: Router;
   user: Users;
+  id: number;
   firstName: string;
   lastName: string;
   userName: string;
+  password: string;
+  isMatching: boolean;
 
-  constructor(private service: DataService, private fb: FormBuilder) {}
+  constructor(
+    private service: DataService,
+    private fb: FormBuilder,
+    private router: Router
+  ) {
+    this.isMatching = true;
+  }
 
   ngOnInit(): void {
     this.getUser();
@@ -27,9 +35,11 @@ export class PasswordComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
+    this.id = this.user.id;
     this.firstName = this.user.firstname;
     this.lastName = this.user.lastname;
     this.userName = this.user.username;
+    this.password = this.user.password;
   }
 
   createForm(): FormGroup {
@@ -73,6 +83,31 @@ export class PasswordComponent implements OnInit {
 
   submit(form) {
     console.log(form);
-    // this.router.navigateByUrl('/home');
+
+    if (this.form.controls['oldpassword'].value !== this.password) {
+      this.isMatching = false;
+    } else {
+      this.isMatching = true;
+
+      let updatedPassword = {
+        id: this.id,
+        password: this.form.controls['confirmPassword'].value,
+      };
+
+      let newUser = {
+        id: this.id,
+        firstname: this.firstName,
+        lastname: this.lastName,
+        username: this.userName,
+        password: this.form.controls['confirmPassword'].value,
+      };
+
+      this.service.updatePassword(updatedPassword).subscribe(() => {
+        this.service.setUser(newUser);
+        this.getUser();
+        alert('Password has been updated.');
+        this.router.navigate(['/restaurants']);
+      });
+    }
   }
 }

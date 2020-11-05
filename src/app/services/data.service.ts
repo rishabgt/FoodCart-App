@@ -53,6 +53,13 @@ export class DataService {
     );
   }
 
+  updatePassword(resource) {
+    return this.http.post(
+      this.url + 'updatePassword.php',
+      JSON.stringify(resource)
+    );
+  }
+
   getRestaurants() {
     return this.http.get(this.url + 'index.php');
   }
