@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Items } from './../models/items';
 import { Users } from './../models/users';
 import { Foods } from './../models/foods';
@@ -27,7 +28,8 @@ export class CartComponent implements OnInit {
     private service: DataService,
     private route: ActivatedRoute,
     private location: Location,
-    private routing: Router
+    private routing: Router,
+    private toastr: ToastrService
   ) {
     this.searching = true;
     this.isEmpty = false;
@@ -102,6 +104,7 @@ export class CartComponent implements OnInit {
   deleteItem(item) {
     this.service.deleteItem(item.id).subscribe(() => {
       this.getItems();
+      this.toastr.warning('Item deleted!');
     });
   }
 
