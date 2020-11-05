@@ -38,10 +38,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  showSuccess() {
-    this.toastr.success('Logged in successfully!');
-  }
-
   form = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
@@ -131,22 +127,27 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.validLoading = true;
 
-    this._dataService.getUserByUsername(this.username).subscribe((data) => {
-      this.credentials = data[0];
-      // console.log(this.credentials);
-      if (this.credentials == undefined) {
-        this.valid = false;
-        this.validLoading = false;
-      } else if (this.credentials.password != this.password) {
-        this.valid = false;
-        this.validLoading = false;
-      } else {
-        this._dataService.setUser(this.credentials);
-        // console.log(this._dataService.getUserName());
-        this.router.navigate(['/home']);
-        this._dataService.setLogin();
-        this.showSuccess();
+    this._dataService.getUserByUsername(this.username).subscribe(
+      (data) => {
+        this.credentials = data[0];
+        // console.log(this.credentials);
+        if (this.credentials == undefined) {
+          this.valid = false;
+          this.validLoading = false;
+        } else if (this.credentials.password != this.password) {
+          this.valid = false;
+          this.validLoading = false;
+        } else {
+          this._dataService.setUser(this.credentials);
+          // console.log(this._dataService.getUserName());
+          this.router.navigate(['/home']);
+          this._dataService.setLogin();
+          this.toastr.success('Logged in successfully!' + '👍');
+        }
+      },
+      (error: any) => {
+        this.toastr.error("Couldn't log in!" + '👎');
       }
-    });
+    );
   }
 }
