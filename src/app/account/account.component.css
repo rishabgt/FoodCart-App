@@ -1593,7 +1593,7 @@ a.text-white:focus {
   }
 }
 
-.dropdown {
+/* .dropdown {
   display: inline-block;
 }
 
@@ -1632,7 +1632,7 @@ a.text-white:focus {
 .dropdown-menu a.media:hover .heading,
 .dropdown-menu a.media:hover p {
   color: #172b4d !important;
-}
+} */
 
 .form-control-label {
   font-size: 0.875rem;
@@ -2015,4 +2015,36 @@ p {
 
 .main-row {
   margin: 0 auto;
+}
+
+.form-control.ng-invalid.ng-touched.ng-untouched {
+  border: 2px solid red;
+}
+.text {
+  color: red;
+  font-size: smaller;
+  padding-bottom: 10px;
+}
+
+.is-invalid {
+  border: solid 2px red;
+}
+
+.material-icons {
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: medium;
+  padding-right: 8px;
+  padding-left: 10px;
+}
+@media only screen and (max-width: 768px) {
+  .card {
+    max-width: 75%;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  .card {
+    max-width: 100%;
+  }
 }

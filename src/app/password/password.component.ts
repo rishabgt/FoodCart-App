@@ -1,3 +1,5 @@
+import { Users } from './../models/users';
+import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,63 +8,71 @@ import { CustomValidators } from './custom-validators';
 @Component({
   selector: 'password',
   templateUrl: './password.component.html',
-  styleUrls: ['./password.component.css']
+  styleUrls: ['./password.component.css'],
 })
-export class PasswordComponent {
-  public form: FormGroup;
-  public router: Router;
-  constructor(private fb: FormBuilder) {
+export class PasswordComponent implements OnInit {
+  form: FormGroup;
+  router: Router;
+  user: Users;
+  firstName: string;
+  lastName: string;
+  userName: string;
+
+  constructor(private service: DataService, private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.getUser();
     this.form = this.createForm();
+  }
+
+  getUser() {
+    this.user = this.service.getUser();
+    this.firstName = this.user.firstname;
+    this.lastName = this.user.lastname;
+    this.userName = this.user.username;
   }
 
   createForm(): FormGroup {
     return this.fb.group(
       {
-        oldpassword: [
-          null,
-          Validators.compose([ Validators.required])
-        ],
+        oldpassword: [null, Validators.compose([Validators.required])],
         newpassword: [
           null,
           Validators.compose([
             Validators.required,
             // check whether the entered password has a number
             CustomValidators.patternValidator(/\d/, {
-              hasNumber: true
+              hasNumber: true,
             }),
             // check whether the entered password has upper case letter
             CustomValidators.patternValidator(/[A-Z]/, {
-              hasCapitalCase: true
+              hasCapitalCase: true,
             }),
             // check whether the entered password has a lower case letter
             CustomValidators.patternValidator(/[a-z]/, {
-              hasSmallCase: true
+              hasSmallCase: true,
             }),
             // check whether the entered password has a special character
             CustomValidators.patternValidator(
               /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
               {
-                hasSpecialCharacters: true
+                hasSpecialCharacters: true,
               }
             ),
-            Validators.minLength(8)
-          ])
+            Validators.minLength(8),
+          ]),
         ],
-        confirmPassword: [null, Validators.compose([Validators.required])]
+        confirmPassword: [null, Validators.compose([Validators.required])],
       },
       {
         // check whether our password and confirm password match
-        validator: CustomValidators.passwordMatchValidator
+        validator: CustomValidators.passwordMatchValidator,
       }
     );
   }
 
-  submit() {
-    console.log(this.form.value);
-    this.router.navigateByUrl('/home');
+  submit(form) {
+    console.log(form);
+    // this.router.navigateByUrl('/home');
   }
 }
- 
-
-
-
