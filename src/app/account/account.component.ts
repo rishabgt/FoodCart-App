@@ -88,10 +88,12 @@ export class AccountComponent implements OnInit {
       () => {
         this.service.setUser(newUser);
         this.router.navigate(['/restaurants']);
-        this.toastr.success('User details updated!');
+        this.toastr.success('User details updated!' + '😃');
+        this.form.reset();
       },
       (error: any) => {
-        this.toastr.error("Couldn't updated user details!");
+        this.toastr.error("Couldn't updated user details!" + '😞');
+        this.form.reset();
       }
     );
   }
