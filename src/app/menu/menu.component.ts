@@ -13,23 +13,24 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
+  @ViewChild('content') content;
+
   foods: Foods[];
   restaurants: Restaurants[];
   currentRestaurant: Restaurants;
   rid: number;
   searching: boolean;
   user: Users;
-  itemExists:boolean;
+  itemExists: boolean;
+
   constructor(
     private service: DataService,
     private route: ActivatedRoute,
     private location: Location,
-    private modalService:NgbModal
+    private modalService: NgbModal
   ) {
     this.searching = true;
   }
-
-  @ViewChild('content') content;
 
   ngOnInit(): void {
     this.getUser();
@@ -64,7 +65,7 @@ export class MenuComponent implements OnInit {
     return "url('" + this.currentRestaurant.image + "')";
   }
 
-  open(content){
+  open(content) {
     this.modalService.open(content);
   }
 
