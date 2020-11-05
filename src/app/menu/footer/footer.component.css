@@ -84,7 +84,7 @@
   }
 }
 
-@media only screen and (max-width: 560px) {
+@media only screen and (max-width: 576px) {
   .list1 img {
     max-width: 80%;
   }

@@ -1,3 +1,25 @@
+.carousel-item:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
 img {
-  max-height: 650px !important;
+  height: 670px;
+}
+
+@media only screen and (max-width: 768px) {
+  img {
+    height: 600px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  img {
+    height: 350px;
+  }
 }

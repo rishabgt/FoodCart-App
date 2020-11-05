@@ -34,7 +34,7 @@ a {
   }
 }
 
-@media only screen and (max-width: 560px) {
+@media only screen and (max-width: 576px) {
   .card {
     max-width: 100%;
   }
