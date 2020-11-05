@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Users } from './../models/users';
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +24,8 @@ export class PasswordComponent implements OnInit {
   constructor(
     private service: DataService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.isMatching = true;
   }
@@ -102,12 +104,18 @@ export class PasswordComponent implements OnInit {
         password: this.form.controls['confirmPassword'].value,
       };
 
-      this.service.updatePassword(updatedPassword).subscribe(() => {
-        this.service.setUser(newUser);
-        this.getUser();
-        alert('Password has been updated.');
-        this.router.navigate(['/restaurants']);
-      });
+      this.service.updatePassword(updatedPassword).subscribe(
+        () => {
+          this.service.setUser(newUser);
+          this.router.navigate(['/password']);
+          this.toastr.success('Password changed!' + '😃');
+          this.form.reset();
+        },
+        (error: any) => {
+          this.toastr.error("Couldn't change password!" + '😞');
+          this.form.reset();
+        }
+      );
     }
   }
 }
