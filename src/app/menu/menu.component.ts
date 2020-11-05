@@ -2,9 +2,10 @@ import { Users } from './../models/users';
 import { Restaurants } from './../models/restaurants';
 import { Foods } from './../models/foods';
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-menu',
@@ -18,14 +19,17 @@ export class MenuComponent implements OnInit {
   rid: number;
   searching: boolean;
   user: Users;
-
+  itemExists:boolean;
   constructor(
     private service: DataService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private modalService:NgbModal
   ) {
     this.searching = true;
   }
+
+  @ViewChild('content') content;
 
   ngOnInit(): void {
     this.getUser();
@@ -60,6 +64,14 @@ export class MenuComponent implements OnInit {
     return "url('" + this.currentRestaurant.image + "')";
   }
 
+  open(content){
+    this.modalService.open(content);
+  }
+
+  closeAllModals() {
+    this.modalService.dismissAll();
+  }
+
   addItemToCart(item) {
     var date = new Date();
     let str = date.toDateString();
@@ -74,11 +86,13 @@ export class MenuComponent implements OnInit {
     this.service.addItemToCart(order).subscribe(
       () => {
         // console.log('Addedd to cart');
-        alert('Item added to cart');
+        this.itemExists = false;
+        this.open(this.content);
       },
       (error: any) => {
         // console.log(error);
-        alert('Item already in cart.');
+        this.itemExists = true;
+        this.open(this.content);
       }
     );
   }
