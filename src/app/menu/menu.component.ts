@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Users } from './../models/users';
 import { Restaurants } from './../models/restaurants';
 import { Foods } from './../models/foods';
@@ -5,7 +6,6 @@ import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../services/data.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-menu',
@@ -13,21 +13,18 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent implements OnInit {
-  @ViewChild('content') content;
-
   foods: Foods[];
   restaurants: Restaurants[];
   currentRestaurant: Restaurants;
   rid: number;
   searching: boolean;
   user: Users;
-  itemExists: boolean;
 
   constructor(
     private service: DataService,
     private route: ActivatedRoute,
     private location: Location,
-    private modalService: NgbModal
+    private toastr: ToastrService
   ) {
     this.searching = true;
   }
@@ -65,14 +62,6 @@ export class MenuComponent implements OnInit {
     return "url('" + this.currentRestaurant.image + "')";
   }
 
-  open(content) {
-    this.modalService.open(content);
-  }
-
-  closeAllModals() {
-    this.modalService.dismissAll();
-  }
-
   addItemToCart(item) {
     var date = new Date();
     let str = date.toDateString();
@@ -87,13 +76,11 @@ export class MenuComponent implements OnInit {
     this.service.addItemToCart(order).subscribe(
       () => {
         // console.log('Addedd to cart');
-        this.itemExists = false;
-        this.open(this.content);
+        this.toastr.success('Item added to cart!');
       },
       (error: any) => {
         // console.log(error);
-        this.itemExists = true;
-        this.open(this.content);
+        this.toastr.error('Item already added to cart!');
       }
     );
   }

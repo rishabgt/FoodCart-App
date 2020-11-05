@@ -79,38 +79,4 @@
   </div>
 </div>
 
-<!-- Modal -->
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 *ngIf="itemExists === false" class="modal-title" id="modal-basic-title">
-      Successful
-    </h4>
-    <h4 *ngIf="itemExists === true" class="modal-title" id="modal-basic-title">
-      Unsuccessful
-    </h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      data-dismiss="modal"
-      (click)="closeAllModals()"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div *ngIf="itemExists === false" class="modal-body">Item added to cart</div>
-  <div *ngIf="itemExists === true" class="modal-body">Item already exists</div>
-  <div class="modal-footer">
-    <button
-      #closeLoad
-      type="button"
-      class="btn btn-outline-dark"
-      data-dismiss="modal"
-      (click)="closeAllModals()"
-    >
-      Okay
-    </button>
-  </div>
-</ng-template>
-
 <app-footer></app-footer>
