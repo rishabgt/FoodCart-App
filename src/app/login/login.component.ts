@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit {
   credentials: Users;
   user: any;
   userExists: boolean;
+  passwordField: boolean;
+  passwordSignUpField: boolean;
+  confirmPasswordSignUpField: boolean;
 
   constructor(
     private _dataService: DataService,
@@ -122,6 +125,18 @@ export class LoginComponent implements OnInit {
   closeAllModals() {
     console.log('Yes');
     this.modalService.dismissAll();
+  }
+
+  togglePasswordField() {
+    this.passwordField = !this.passwordField;
+  }
+
+  togglePasswordSignUpField() {
+    this.passwordSignUpField = !this.passwordSignUpField;
+  }
+
+  toggleConfirmPasswordSignUpField() {
+    this.confirmPasswordSignUpField = !this.confirmPasswordSignUpField;
   }
 
   onSubmit() {

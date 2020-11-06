@@ -93,9 +93,11 @@ export class PasswordComponent implements OnInit {
   togglenewPasswordField() {
     this.newPasswordField = !this.newPasswordField;
   }
+
   toggleconfirmPasswordField() {
     this.confirmPasswordField = !this.confirmPasswordField;
   }
+
   submit(form) {
     console.log(form);
 
