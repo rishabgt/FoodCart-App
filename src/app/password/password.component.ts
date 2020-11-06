@@ -20,6 +20,9 @@ export class PasswordComponent implements OnInit {
   userName: string;
   password: string;
   isMatching: boolean;
+  oldPasswordField: boolean;
+  newPasswordField: boolean;
+  confirmPasswordField: boolean;
 
   constructor(
     private service: DataService,
@@ -83,6 +86,16 @@ export class PasswordComponent implements OnInit {
     );
   }
 
+  toggleoldPasswordField() {
+    this.oldPasswordField = !this.oldPasswordField;
+  }
+
+  togglenewPasswordField() {
+    this.newPasswordField = !this.newPasswordField;
+  }
+  toggleconfirmPasswordField() {
+    this.confirmPasswordField = !this.confirmPasswordField;
+  }
   submit(form) {
     console.log(form);
 
