@@ -136,6 +136,6 @@ export class BilladdressComponent implements OnInit {
 
   onSubmit() {
     console.log(this.billForm.value);
-    this.router.navigateByUrl('/thanks');
+    this.router.navigateByUrl('/payment');
   }
 }

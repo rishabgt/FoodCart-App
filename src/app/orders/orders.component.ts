@@ -44,6 +44,7 @@ export class OrdersComponent implements OnInit {
   getOrders() {
     this.service.getOrdersByUid(this.user.id).subscribe((data) => {
       this.orders = data as Orders[];
+      this.orders.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
       if (this.orders.length === 0) {
         this.isEmpty = true;
         this.searching = false;

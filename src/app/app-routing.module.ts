@@ -1,3 +1,4 @@
+import { PaymentComponent } from './payment/payment.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { OrdersComponent } from './orders/orders.component';
 import { LastpageComponent } from './lastpage/lastpage.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'account', component: AccountComponent, canActivate: [Authguard] },
   { path: 'password', component: PasswordComponent, canActivate: [Authguard] },
   { path: 'contact', component: ContactUsComponent, canActivate: [Authguard] },
+  { path: 'payment', component: PaymentComponent, canActivate: [Authguard] },
 ];
 
 @NgModule({
