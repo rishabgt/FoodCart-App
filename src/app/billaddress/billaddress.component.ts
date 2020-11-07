@@ -4,13 +4,6 @@ import { DataService } from './../services/data.service';
 import { Users } from './../models/users';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,6 +15,7 @@ export class BilladdressComponent implements OnInit {
   user: Users;
   addresses: Address[];
   isSearching: boolean;
+  isEmpty: boolean;
   firstName: string;
   id: number;
 
@@ -32,6 +26,7 @@ export class BilladdressComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.isSearching = true;
+    this.isEmpty = false;
   }
 
   ngOnInit(): void {
@@ -47,6 +42,11 @@ export class BilladdressComponent implements OnInit {
   getAddresses() {
     this.service.getAddressByUid(this.user.id).subscribe((data) => {
       this.addresses = data as Address[];
+      if (this.addresses.length === 0) {
+        this.isEmpty = true;
+      } else {
+        this.isEmpty = false;
+      }
       this.isSearching = false;
     });
   }

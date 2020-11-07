@@ -11,7 +11,17 @@
     </div>
     <div class="card-body">
       <ul class="list-group list-group-flush">
-        <li *ngIf="isSearching === true" class="list-group-item">
+        <li *ngIf="isEmpty === true" class="list-group-item">
+          <p class="h5">No addresses added yet.&nbsp;😞</p>
+          <p class="h6">
+            Go to 👉&nbsp;<a routerLink="/myaddress" class="h5">Addresses</a
+            >&nbsp;to save your billing address.&nbsp;😃
+          </p>
+        </li>
+        <li
+          *ngIf="isSearching === true && isEmpty === false"
+          class="list-group-item"
+        >
           <div class="text-center py-5">
             <div class="spinner-border" role="status">
               <span class="sr-only">Loading...</span>
