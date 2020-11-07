@@ -69,8 +69,14 @@
                 *ngIf="f.creditOwner.errors?.required"
                 class="invalid-feedback"
               >
-                Please enter the name as in the credit card
+               This field cannot be empty
               </div>
+              <div
+              *ngIf="f.creditOwner.errors?.pattern"
+              class="invalid-feedback"
+            >
+              Please enter credit card owner name as in the card
+            </div>
             </div>
             <div class="form-group">
               <label for="cardNumber"><h6>Card number</h6></label>
@@ -98,8 +104,14 @@
                   *ngIf="f.creditNumber.errors?.required"
                   class="invalid-feedback"
                 >
-                  Please enter valid credit card number
+                  This field cannot be empty
                 </div>
+                <div
+              *ngIf="f.creditNumber.errors?.pattern"
+              class="invalid-feedback"
+            >
+              Please enter credit card number as in the card
+            </div>
               </div>
             </div>
             <div class="row">
@@ -107,7 +119,7 @@
                 <div class="form-group">
                   <label
                     ><span class="hidden-xs"
-                      ><h6>Expiration Date</h6></span
+                      ><h6>Expiration Month & Year</h6></span
                     ></label
                   >
                   <div class="input-group">
@@ -127,8 +139,14 @@
                       *ngIf="f.expirationMonth.errors?.required"
                       class="invalid-feedback"
                     >
-                      Please enter expiration month of credit card
+                      This filed cannot be empty
                     </div>
+                    <!-- <div
+              *ngIf="f.expirationMonth.errors?.pattern"
+              class="invalid-feedback"
+            >
+              Please enter the expiration month as in the card 
+            </div> -->
                     <input
                       type="number"
                       placeholder="YY"
@@ -145,8 +163,14 @@
                       *ngIf="f.expirationYear.errors?.required"
                       class="invalid-feedback"
                     >
-                      Please enter expiration year of credit card
+                      This field cannot be empty
                     </div>
+                    <div
+              *ngIf="f.expirationYear.errors?.pattern"
+              class="invalid-feedback"
+            >
+              Please enter the expiration year as in the card 
+            </div>
                   </div>
                 </div>
               </div>
@@ -167,8 +191,14 @@
                     }"
                   />
                   <div *ngIf="f.cvv.errors?.required" class="invalid-feedback">
-                    Please enter valid cvv number
+                    This field cannot be empty
                   </div>
+                <!--   <div
+                  *ngIf="f.cvv.errors?.pattern"
+                  class="invalid-feedback"
+                >
+                  Please enter the cvv as in the card 
+                </div> -->
                 </div>
               </div>
             </div>

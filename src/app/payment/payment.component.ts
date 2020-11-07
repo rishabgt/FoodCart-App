@@ -25,10 +25,22 @@ export class PaymentComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern('^[a-zA-Z ]*$')],
       ],
-      creditNumber: ['', [Validators.required]],
-      expirationMonth: ['', [Validators.required]],
-      expirationYear: ['', [Validators.required]],
-      cvv: ['', [Validators.required]],
+      creditNumber: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]{12}(?:[0-9]{4})?$')],
+      ],
+      expirationMonth: [
+        '',
+        [Validators.required, /* Validators.pattern('^(0[1-9] | 1[0-2])$') */],
+      ],
+      expirationYear: [
+        '',
+        [Validators.required, Validators.pattern('^([0-9]{2})$')],
+      ],
+      cvv: [
+        '',
+        [Validators.required, /* Validators.pattern('^[0-9]{3, 4}$') */],
+      ],
     });
   }
 
