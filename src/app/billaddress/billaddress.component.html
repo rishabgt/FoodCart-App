@@ -161,28 +161,19 @@
         <div *ngIf="f.zipCode.errors?.required" class="invalid-feedback">
           Please enter the Zip Code
         </div>
-        <div
-          *ngIf="f.zipCode.errors?.pattern"
-          class="invalid-feedback"
-        >
-          Please enter only valid  Zip Code
+        <div *ngIf="f.zipCode.errors?.pattern" class="invalid-feedback">
+          Please enter only valid Zip Code
         </div>
-        <div
-          *ngIf="
-            f.zipCode.errors?.maxlength
-          "
-          class="invalid-feedback"
-        >
-          Please enter only valid [{{ f.zipCode.errors?.maxlength.requiredLength }}] digited Zip Code
+        <div *ngIf="f.zipCode.errors?.maxlength" class="invalid-feedback">
+          Please enter only valid [{{
+            f.zipCode.errors?.maxlength.requiredLength
+          }}] digited Zip Code
         </div>
-        <div
-        *ngIf="
-          f.zipCode.errors?.minlength
-        "
-        class="invalid-feedback"
-      >
-        Please enter only valid [{{ f.zipCode.errors?.minlength.requiredLength }}] digited Zip Code
-      </div>
+        <div *ngIf="f.zipCode.errors?.minlength" class="invalid-feedback">
+          Please enter only valid [{{
+            f.zipCode.errors?.minlength.requiredLength
+          }}] digited Zip Code
+        </div>
       </div>
       <div class="col-md-6 mb-3">
         <input

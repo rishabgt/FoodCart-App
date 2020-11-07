@@ -127,4 +127,11 @@ export class DataService {
   deleteAddressById(id: number) {
     return this.http.get(this.url + 'deleteAddress.php?id=' + id);
   }
+
+  updateAddres(resource) {
+    return this.http.post(
+      this.url + 'updateAddress.php',
+      JSON.stringify(resource)
+    );
+  }
 }
