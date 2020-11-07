@@ -24,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CommonModule } from '@angular/common';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CommonModule } from '@angular/common';
     DashboardComponent,
     ContactUsComponent,
     PasswordComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
