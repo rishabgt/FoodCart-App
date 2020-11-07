@@ -119,4 +119,8 @@ export class DataService {
       JSON.stringify(resource)
     );
   }
+
+  getAddressByUid(uid: number) {
+    return this.http.get(this.url + 'getAddressByUid.php?uid=' + uid);
+  }
 }

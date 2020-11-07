@@ -25,6 +25,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CommonModule } from '@angular/common';
 import { PaymentComponent } from './payment/payment.component';
+import { AddressComponent } from './address/address.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { PaymentComponent } from './payment/payment.component';
     ContactUsComponent,
     PasswordComponent,
     PaymentComponent,
+    AddressComponent,
   ],
   imports: [
     BrowserModule,

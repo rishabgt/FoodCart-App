@@ -1,3 +1,4 @@
+import { AddressComponent } from './address/address.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { OrdersComponent } from './orders/orders.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'password', component: PasswordComponent, canActivate: [Authguard] },
   { path: 'contact', component: ContactUsComponent, canActivate: [Authguard] },
   { path: 'payment', component: PaymentComponent, canActivate: [Authguard] },
+  { path: 'myaddress', component: AddressComponent, canActivate: [Authguard] },
 ];
 
 @NgModule({
