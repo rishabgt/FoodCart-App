@@ -40,13 +40,14 @@ export class AddressComponent implements OnInit {
   user: Users;
   addresses: Address[];
   isSearching: boolean;
-  editMode: boolean;
+  editMode = new Array();
   firstName: string;
   id: number;
   enableAdd: boolean;
   isVisible: boolean;
   billForm: FormGroup;
   addressForm: FormGroup;
+  index: number;
   // The current state of text
   buttonTextState = 'shown';
   // The text currently being show
@@ -61,7 +62,6 @@ export class AddressComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.isSearching = true;
-    this.editMode = false;
     this.enableAdd = false;
     this.isVisible = true;
   }
@@ -187,8 +187,9 @@ export class AddressComponent implements OnInit {
     // this.router.navigate(['/address']);
   }
 
-  edit(itemId) {
-    this.editMode = true;
+  edit(itemId, ind) {
+    this.editMode[ind] = true;
+    this.index = ind;
     this.id = itemId;
   }
 
@@ -265,6 +266,10 @@ export class AddressComponent implements OnInit {
     this.enableAdd = false;
   }
 
+  cancelEdit(ind) {
+    this.editMode[ind] = false;
+  }
+
   onSubmit() {
     console.log(this.billForm.value);
 
@@ -284,7 +289,7 @@ export class AddressComponent implements OnInit {
     this.service.updateAddres(address).subscribe(
       () => {
         this.toastr.success('Address updated!');
-        this.editMode = false;
+        this.editMode[this.index] = false;
         this.getAddresses();
       },
       (error: any) => {

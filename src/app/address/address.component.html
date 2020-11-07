@@ -395,17 +395,17 @@
                       </form>
                     </div>
                   </li>
-                  <li *ngFor="let address of addresses" class="list-group-item">
-                    <div
-                      *ngIf="isSearching === true && editMode === false"
-                      class="text-center"
-                    >
+                  <li
+                    *ngFor="let address of addresses; let i = index"
+                    class="list-group-item"
+                  >
+                    <div *ngIf="isSearching === true" class="text-center">
                       <div class="spinner-border" role="status">
                         <span class="sr-only">Loading...</span>
                       </div>
                     </div>
 
-                    <div *ngIf="isSearching === false && editMode === false">
+                    <div *ngIf="isSearching === false && !editMode[i]">
                       <div class="h3">
                         {{ address.firstname }}&nbsp;{{ address.lastname }}
 
@@ -422,7 +422,9 @@
                             class="dropdown-menu dropdown-menu-right"
                             aria-labelledby="dropdownMenuButton"
                           >
-                            <a class="dropdown-item" (click)="edit(address.id)"
+                            <a
+                              class="dropdown-item"
+                              (click)="edit(address.id, i)"
                               >Edit</a
                             >
                             <a class="dropdown-item" (click)="remove(address)"
@@ -443,7 +445,7 @@
                       <p class="h4">{{ address.phone }}</p>
                     </div>
 
-                    <div *ngIf="isSearching === false && editMode === true">
+                    <div *ngIf="isSearching === false && editMode[i]">
                       <form
                         [formGroup]="billForm"
                         #billingForm="ngForm"
@@ -776,6 +778,12 @@
                               >
                                 {{ buttonText }}
                               </div>
+                            </button>
+                            <button
+                              class="btn btn-lg btn-outline-warning ml-2"
+                              (click)="cancelEdit(i)"
+                            >
+                              Cancel
                             </button>
                           </div>
                         </div>

@@ -1,3 +1,4 @@
+import { Address } from './../models/address';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from './../services/data.service';
 import { Users } from './../models/users';
@@ -37,23 +38,36 @@ import { Router } from '@angular/router';
 })
 export class BilladdressComponent implements OnInit {
   user: Users;
+  addresses: Address[];
+  isSearching: boolean;
+  editMode = new Array();
+  firstName: string;
+  id: number;
+  index: number;
+  enableAdd: boolean;
+  isVisible: boolean;
   billForm: FormGroup;
   // The current state of text
   buttonTextState = 'shown';
   // The text currently being show
-  buttonText = 'Check Out';
+  buttonText = 'Save';
   // The text shown when the transition is finished
-  transitionButtonText = 'Check Out';
+  transitionButtonText = 'Save';
 
   constructor(
     private service: DataService,
     private formBuilder: FormBuilder,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.isSearching = true;
+    this.enableAdd = false;
+    this.isVisible = true;
+  }
 
   ngOnInit(): void {
     this.getUser();
+    this.getAddresses();
 
     this.billForm = this.formBuilder.group({
       firstName: [
@@ -107,7 +121,31 @@ export class BilladdressComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
-    console.log(this.user);
+    this.firstName = this.user.firstname;
+  }
+
+  getAddresses() {
+    this.service.getAddressByUid(this.user.id).subscribe((data) => {
+      this.addresses = data as Address[];
+      this.isSearching = false;
+    });
+  }
+
+  address() {
+    this.router.navigate(['/myaddress']);
+  }
+
+  edit(itemId, ind) {
+    this.editMode[ind] = true;
+    this.index = ind;
+    this.id = itemId;
+  }
+
+  remove(item) {
+    this.service.deleteAddressById(item.id).subscribe(() => {
+      this.toastr.warning('Address deleted!');
+      this.getAddresses();
+    });
   }
 
   buttonTextTransitioned(event) {
@@ -118,17 +156,17 @@ export class BilladdressComponent implements OnInit {
   onCheckOut() {
     // Removing the First transition
     this.buttonTextState = 'transitioning';
-    this.transitionButtonText = 'Checking Out...';
+    this.transitionButtonText = 'Saving...';
 
     setTimeout(() => {
       this.buttonTextState = 'transitioning';
-      this.transitionButtonText = 'Successfully Checked out';
+      this.transitionButtonText = 'Successfully Saved';
     }, 1800);
 
     // Reset button text
     setTimeout(() => {
       this.buttonTextState = 'transitioning';
-      this.transitionButtonText = 'Check Out';
+      this.transitionButtonText = 'Save';
     }, 3600);
   }
 
@@ -140,6 +178,7 @@ export class BilladdressComponent implements OnInit {
     console.log(this.billForm.value);
 
     let address = {
+      id: this.id,
       firstname: this.billForm.controls['firstName'].value,
       lastname: this.billForm.controls['lastName'].value,
       building: this.billForm.controls['buildingNo'].value,
@@ -149,19 +188,25 @@ export class BilladdressComponent implements OnInit {
       zip: this.billForm.controls['zipCode'].value,
       landmark: this.billForm.controls['landmark'].value,
       phone: this.billForm.controls['phoneNo'].value,
-      uid: this.user.id,
     };
 
-    this.service.insertAddress(address).subscribe(
+    this.service.updateAddres(address).subscribe(
       () => {
-        this.toastr.success('Address saved!' + '😃');
-        console.log('Address inserted');
-        this.router.navigateByUrl('/payment');
+        this.toastr.success('Address updated!');
+        this.editMode[this.index] = false;
+        this.getAddresses();
       },
       (error: any) => {
-        this.toastr.error("Couldn't save address!" + '😞');
-        console.log(error);
+        this.toastr.error("Couldn't update address!");
       }
     );
+  }
+
+  proceed() {
+    this.router.navigate(['/thanks']);
+  }
+
+  cancelEdit(ind) {
+    this.editMode[ind] = false;
   }
 }

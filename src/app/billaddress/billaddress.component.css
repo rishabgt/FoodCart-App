@@ -1,36 +1,51 @@
-.main{
-    border: 1px solid lightgray;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 50px;
+.main {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 50px;
 }
-h3{
-    padding: 10px;
+h3 {
+  padding: 10px;
 }
-.button{
-    margin-top: 20px;
-    margin-bottom: 10px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+.button {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 button.sbmt-btn {
-    border-radius: 10px;
-    border: 1px solid lightgray ;
-    cursor: pointer;
-    width: 200px;
-    background-image: linear-gradient(to right, rgba(255,153,0,0.8),rgba(255,153,0,1));
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
-  }
-  
-  div.sbmt-btn-txt {
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-  }
-  
-  button {
-    outline: 0;
-  }
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+  width: 200px;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 153, 0, 0.8),
+    rgba(255, 153, 0, 1)
+  );
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
 
+div.sbmt-btn-txt {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+}
+
+button {
+  outline: 0;
+}
+
+.dropdown-toggle:after {
+  content: none;
+}
+
+.dropdown i:hover {
+  cursor: pointer;
+}
+
+.dropdown-menu a:hover {
+  cursor: pointer;
+}
