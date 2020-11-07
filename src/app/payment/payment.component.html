@@ -69,14 +69,14 @@
                 *ngIf="f.creditOwner.errors?.required"
                 class="invalid-feedback"
               >
-               This field cannot be empty
+                This field cannot be empty
               </div>
               <div
-              *ngIf="f.creditOwner.errors?.pattern"
-              class="invalid-feedback"
-            >
-              Please enter credit card owner name as in the card
-            </div>
+                *ngIf="f.creditOwner.errors?.pattern"
+                class="invalid-feedback"
+              >
+                Please enter credit card owner name as in the card
+              </div>
             </div>
             <div class="form-group">
               <label for="cardNumber"><h6>Card number</h6></label>
@@ -107,11 +107,11 @@
                   This field cannot be empty
                 </div>
                 <div
-              *ngIf="f.creditNumber.errors?.pattern"
-              class="invalid-feedback"
-            >
-              Please enter credit card number as in the card
-            </div>
+                  *ngIf="f.creditNumber.errors?.pattern"
+                  class="invalid-feedback"
+                >
+                  Please enter credit card number as in the card
+                </div>
               </div>
             </div>
             <div class="row">
@@ -166,11 +166,11 @@
                       This field cannot be empty
                     </div>
                     <div
-              *ngIf="f.expirationYear.errors?.pattern"
-              class="invalid-feedback"
-            >
-              Please enter the expiration year as in the card 
-            </div>
+                      *ngIf="f.expirationYear.errors?.pattern"
+                      class="invalid-feedback"
+                    >
+                      Please enter the expiration year as in the card
+                    </div>
                   </div>
                 </div>
               </div>
@@ -193,7 +193,7 @@
                   <div *ngIf="f.cvv.errors?.required" class="invalid-feedback">
                     This field cannot be empty
                   </div>
-                <!--   <div
+                  <!--   <div
                   *ngIf="f.cvv.errors?.pattern"
                   class="invalid-feedback"
                 >
