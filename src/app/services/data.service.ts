@@ -1,3 +1,4 @@
+import { Address } from './../models/address';
 import { Users } from './../models/users';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -9,6 +10,7 @@ export class DataService {
   private url = 'https://foodcart11.000webhostapp.com/';
   private user: Users;
   private isLogin: boolean = false;
+  private address: Address;
 
   constructor(private http: HttpClient) {}
 
@@ -133,5 +135,13 @@ export class DataService {
       this.url + 'updateAddress.php',
       JSON.stringify(resource)
     );
+  }
+
+  setAddress(resource) {
+    this.address = resource;
+  }
+
+  getAddress() {
+    return this.address;
   }
 }

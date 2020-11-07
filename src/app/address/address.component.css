@@ -1593,8 +1593,8 @@ a.text-white:focus {
   }
 }
 
-.dropdown-toggle:after {
-  content: none;
+.dropdown-toggle::after {
+  display: none;
 }
 
 .dropdown i:hover {

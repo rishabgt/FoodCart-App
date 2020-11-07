@@ -1,3 +1,5 @@
+import { ToastrService } from 'ngx-toastr';
+import { Address } from './../models/address';
 import { Items } from './../models/items';
 import { Router } from '@angular/router';
 import { DataService } from './../services/data.service';
@@ -13,11 +15,13 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class LastpageComponent implements OnInit {
   user: Users;
   items: Items[];
+  address: Address;
 
   constructor(
     private service: DataService,
     private spinner: NgxSpinnerService,
-    private route: Router
+    private route: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -28,12 +32,17 @@ export class LastpageComponent implements OnInit {
     }, 4000);
 
     this.getUser();
+    this.getAddress();
     this.getItems();
   }
 
   getUser() {
     this.user = this.service.getUser();
-    console.log(this.user);
+    // console.log(this.user);
+  }
+
+  getAddress() {
+    this.address = this.service.getAddress();
   }
 
   getItems() {
@@ -54,10 +63,17 @@ export class LastpageComponent implements OnInit {
         uid: item.uid,
         price: item.price,
         date: str,
+        aid: this.address.id,
       };
-      this.service.addItemToOrders(order).subscribe(() => {
-        console.log('Item moved to Orders.');
-      });
+      this.service.addItemToOrders(order).subscribe(
+        () => {
+          this.toastr.success('View details in Orders.');
+          console.log('Item moved to Orders.');
+        },
+        (error: any) => {
+          this.toastr.error("Couldn't place order!");
+        }
+      );
     });
 
     this.service.deleteItemByUid(this.user.id).subscribe(() => {

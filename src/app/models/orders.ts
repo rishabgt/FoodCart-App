@@ -5,4 +5,5 @@ export interface Orders {
   uid: number;
   price: number;
   date: string;
+  aid: number;
 }

@@ -49,3 +49,9 @@ button {
 .dropdown-menu a:hover {
   cursor: pointer;
 }
+
+.user-address:hover {
+  background-color: #fbc02d;
+  color: white;
+  cursor: pointer;
+}
