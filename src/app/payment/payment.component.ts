@@ -1,3 +1,5 @@
+import { DataService } from './../services/data.service';
+import { Users } from './../models/users';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,7 +11,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class PaymentComponent implements OnInit {
   creditForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private route: Router) {}
+  user: Users;
+
+  constructor(
+    private service: DataService,
+    private formBuilder: FormBuilder,
+    private route: Router
+  ) {}
 
   ngOnInit(): void {
     this.creditForm = this.formBuilder.group({
@@ -26,6 +34,10 @@ export class PaymentComponent implements OnInit {
 
   get f() {
     return this.creditForm.controls;
+  }
+
+  getUser() {
+    this.user = this.service.getUser();
   }
 
   proceedPayment() {

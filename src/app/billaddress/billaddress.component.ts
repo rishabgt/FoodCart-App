@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from './../services/data.service';
 import { Users } from './../models/users';
 import { Component, OnInit } from '@angular/core';
@@ -47,11 +48,12 @@ export class BilladdressComponent implements OnInit {
   constructor(
     private service: DataService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.getUSer();
+    this.getUser();
 
     this.billForm = this.formBuilder.group({
       firstName: [
@@ -103,7 +105,7 @@ export class BilladdressComponent implements OnInit {
     });
   }
 
-  getUSer() {
+  getUser() {
     this.user = this.service.getUser();
     console.log(this.user);
   }
@@ -136,6 +138,30 @@ export class BilladdressComponent implements OnInit {
 
   onSubmit() {
     console.log(this.billForm.value);
-    this.router.navigateByUrl('/payment');
+
+    let address = {
+      firstname: this.billForm.controls['firstName'].value,
+      lastname: this.billForm.controls['lastName'].value,
+      building: this.billForm.controls['buildingNo'].value,
+      street: this.billForm.controls['streetName'].value,
+      city: this.billForm.controls['city'].value,
+      state: this.billForm.controls['state'].value,
+      zip: this.billForm.controls['zipCode'].value,
+      landmark: this.billForm.controls['landmark'].value,
+      phone: this.billForm.controls['phoneNo'].value,
+      uid: this.user.id,
+    };
+
+    this.service.insertAddress(address).subscribe(
+      () => {
+        this.toastr.success('Address saved!' + '😃');
+        console.log('Address inserted');
+        this.router.navigateByUrl('/payment');
+      },
+      (error: any) => {
+        this.toastr.error("Couldn't save address!" + '😞');
+        console.log(error);
+      }
+    );
   }
 }

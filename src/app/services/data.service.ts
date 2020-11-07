@@ -112,4 +112,11 @@ export class DataService {
   getOrdersByUid(uid: number) {
     return this.http.get(this.url + 'getOrdersByUid.php?uid=' + uid);
   }
+
+  insertAddress(resource) {
+    return this.http.post(
+      this.url + 'insertAddress.php',
+      JSON.stringify(resource)
+    );
+  }
 }
