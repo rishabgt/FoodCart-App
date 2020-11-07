@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Users } from './../models/users';
 import { Address } from './../models/address';
 import { Router } from '@angular/router';
@@ -15,7 +16,11 @@ export class AddressComponent implements OnInit {
   isSearching: boolean;
   firstName: string;
 
-  constructor(private service: DataService, private router: Router) {
+  constructor(
+    private service: DataService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.isSearching = true;
   }
 
@@ -40,5 +45,10 @@ export class AddressComponent implements OnInit {
     this.router.navigate(['/address']);
   }
 
-  remove(item) {}
+  remove(item) {
+    this.service.deleteAddressById(item.id).subscribe(() => {
+      this.toastr.warning('Address deleted!');
+      this.getAddresses();
+    });
+  }
 }

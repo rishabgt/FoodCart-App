@@ -123,4 +123,8 @@ export class DataService {
   getAddressByUid(uid: number) {
     return this.http.get(this.url + 'getAddressByUid.php?uid=' + uid);
   }
+
+  deleteAddressById(id: number) {
+    return this.http.get(this.url + 'deleteAddress.php?id=' + id);
+  }
 }
