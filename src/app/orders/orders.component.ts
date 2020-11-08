@@ -1,3 +1,4 @@
+import { Address } from './../models/address';
 import { Foods } from './../models/foods';
 import { DataService } from './../services/data.service';
 import { Orders } from './../models/orders';
@@ -21,6 +22,16 @@ export class OrdersComponent implements OnInit {
   foodPrices = new Array();
   searching: boolean;
   isEmpty: boolean;
+  addresses: Address[];
+  addFirstName = new Array();
+  addLastName = new Array();
+  addBuilding = new Array();
+  addStreet = new Array();
+  addCity = new Array();
+  addState = new Array();
+  addZip = new Array();
+  addLandmark = new Array();
+  addPhone = new Array();
 
   constructor(
     private service: DataService,
@@ -50,6 +61,7 @@ export class OrdersComponent implements OnInit {
         this.searching = false;
       } else {
         this.orders.forEach((item) => {
+          this.getAddress(item.aid);
           this.getFoodById(item.fid);
         });
       }
@@ -62,6 +74,23 @@ export class OrdersComponent implements OnInit {
       this.foodNames.push(this.foods[0].name);
       this.foodImages.push(this.foods[0].image);
       this.foodPrices.push(this.foods[0].price);
+    });
+  }
+
+  getAddress(aid) {
+    this.service.getAddressById(aid).subscribe((data) => {
+      this.addresses = data as Address[];
+
+      this.addFirstName.push(this.addresses[0].firstname);
+      this.addLastName.push(this.addresses[0].lastname);
+      this.addBuilding.push(this.addresses[0].building);
+      this.addStreet.push(this.addresses[0].street);
+      this.addCity.push(this.addresses[0].city);
+      this.addState.push(this.addresses[0].state);
+      this.addZip.push(this.addresses[0].zip);
+      this.addLandmark.push(this.addresses[0].landmark);
+      this.addPhone.push(this.addresses[0].phone);
+
       this.searching = false;
     });
   }

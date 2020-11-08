@@ -31,11 +31,11 @@
         <li
           *ngFor="let address of addresses"
           class="list-group-item user-address"
-          (click)="selectAddres(address)"
+          (click)="selectAddress(address)"
         >
           <p class="h5">{{ address.firstname }}&nbsp;{{ address.lastname }}</p>
           <p>
-            {{ address.building }},&nbsp;{{ address.street }},&nbsp;{{
+            {{ address.building }},&nbsp;{{
               address.street
             }},&nbsp;Landmark:&nbsp;{{ address.landmark }},&nbsp;{{
               address.city

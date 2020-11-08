@@ -86,12 +86,10 @@ export class PaymentComponent implements OnInit {
         date: str,
         aid: this.address.id,
       };
-
       this.service.addItemToOrders(order).subscribe(
         () => {
-          this.toastr.success('Order placed!' + '😃');
+          this.toastr.success('Order placed!.' + '😃');
           // console.log('Item moved to Orders.');
-          this.route.navigate(['/thanks']);
         },
         (error: any) => {
           this.toastr.error("Couldn't place order!" + '😞');
@@ -103,5 +101,7 @@ export class PaymentComponent implements OnInit {
       this.toastr.success('View details in Orders.');
       // console.log('Cart cleared.');
     });
+
+    this.route.navigate(['/thanks']);
   }
 }

@@ -51,7 +51,7 @@ export class BilladdressComponent implements OnInit {
     });
   }
 
-  selectAddres(item) {
+  selectAddress(item) {
     this.service.setAddress(item);
     this.router.navigate(['/payment']);
   }

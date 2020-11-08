@@ -144,4 +144,8 @@ export class DataService {
   getAddress() {
     return this.address;
   }
+
+  getAddressById(id: number) {
+    return this.http.get(this.url + 'getAddressById.php?id=' + id);
+  }
 }
