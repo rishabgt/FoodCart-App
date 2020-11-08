@@ -78,7 +78,6 @@ export class PaymentComponent implements OnInit {
 
     this.items.forEach((item) => {
       let order = {
-        id: item.id,
         quantity: item.quantity,
         fid: item.fid,
         uid: item.uid,
