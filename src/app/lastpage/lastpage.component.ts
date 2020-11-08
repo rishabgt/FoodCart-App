@@ -32,8 +32,6 @@ export class LastpageComponent implements OnInit {
     }, 4000);
 
     this.getUser();
-    this.getAddress();
-    this.getItems();
   }
 
   getUser() {
@@ -41,45 +39,7 @@ export class LastpageComponent implements OnInit {
     // console.log(this.user);
   }
 
-  getAddress() {
-    this.address = this.service.getAddress();
-  }
-
-  getItems() {
-    this.service.getItemByUid(this.user.id).subscribe((data) => {
-      this.items = data as Items[];
-    });
-  }
-
   goBack() {
-    var date = new Date();
-    let str = date.toDateString();
-
-    this.items.forEach((item) => {
-      let order = {
-        id: item.id,
-        quantity: item.quantity,
-        fid: item.fid,
-        uid: item.uid,
-        price: item.price,
-        date: str,
-        aid: this.address.id,
-      };
-      this.service.addItemToOrders(order).subscribe(
-        () => {
-          this.toastr.success('View details in Orders.');
-          console.log('Item moved to Orders.');
-        },
-        (error: any) => {
-          this.toastr.error("Couldn't place order!");
-        }
-      );
-    });
-
-    this.service.deleteItemByUid(this.user.id).subscribe(() => {
-      console.log('Cart cleared.');
-    });
-
     this.route.navigate(['/restaurants']);
   }
 }

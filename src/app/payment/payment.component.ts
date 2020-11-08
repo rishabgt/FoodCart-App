@@ -1,3 +1,6 @@
+import { Items } from './../models/items';
+import { Address } from './../models/address';
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from './../services/data.service';
 import { Users } from './../models/users';
 import { Router } from '@angular/router';
@@ -12,14 +15,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PaymentComponent implements OnInit {
   creditForm: FormGroup;
   user: Users;
+  items: Items[];
+  address: Address;
 
   constructor(
     private service: DataService,
     private formBuilder: FormBuilder,
-    private route: Router
+    private route: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
+    this.getUser();
+    this.getAddress();
+    this.getItems();
+
     this.creditForm = this.formBuilder.group({
       creditOwner: [
         '',
@@ -31,7 +41,7 @@ export class PaymentComponent implements OnInit {
       ],
       expirationMonth: [
         '',
-        [Validators.required, /* Validators.pattern('^(0[1-9] | 1[0-2])$') */],
+        [Validators.required /* Validators.pattern('^(0[1-9] | 1[0-2])$') */],
       ],
       expirationYear: [
         '',
@@ -39,7 +49,7 @@ export class PaymentComponent implements OnInit {
       ],
       cvv: [
         '',
-        [Validators.required, /* Validators.pattern('^[0-9]{3, 4}$') */],
+        [Validators.required /* Validators.pattern('^[0-9]{3, 4}$') */],
       ],
     });
   }
@@ -52,7 +62,46 @@ export class PaymentComponent implements OnInit {
     this.user = this.service.getUser();
   }
 
+  getAddress() {
+    this.address = this.service.getAddress();
+  }
+
+  getItems() {
+    this.service.getItemByUid(this.user.id).subscribe((data) => {
+      this.items = data as Items[];
+    });
+  }
+
   proceedPayment() {
-    this.route.navigate(['/thanks']);
+    var date = new Date();
+    let str = date.toDateString();
+
+    this.items.forEach((item) => {
+      let order = {
+        id: item.id,
+        quantity: item.quantity,
+        fid: item.fid,
+        uid: item.uid,
+        price: item.price,
+        date: str,
+        aid: this.address.id,
+      };
+
+      this.service.addItemToOrders(order).subscribe(
+        () => {
+          this.toastr.success('Order placed!' + '😃');
+          // console.log('Item moved to Orders.');
+          this.route.navigate(['/thanks']);
+        },
+        (error: any) => {
+          this.toastr.error("Couldn't place order!" + '😞');
+        }
+      );
+    });
+
+    this.service.deleteItemByUid(this.user.id).subscribe(() => {
+      this.toastr.success('View details in Orders.');
+      // console.log('Cart cleared.');
+    });
   }
 }
