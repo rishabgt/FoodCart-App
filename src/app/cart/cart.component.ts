@@ -52,6 +52,8 @@ export class CartComponent implements OnInit {
 
     this.service.getItemByUid(this.user.id).subscribe((data) => {
       this.items = data as Items[];
+      this.items.sort((a, b) => a.id - b.id);
+
       if (this.items.length === 0) {
         this.isEmpty = true;
         this.searching = false;
