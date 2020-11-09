@@ -1,3 +1,4 @@
+import { AboutUsComponent } from './about-us/about-us.component';
 import { PasswordComponent } from './password/password.component';
 import { AccountComponent } from './account/account.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,6 +45,7 @@ import { AddressComponent } from './address/address.component';
     PasswordComponent,
     PaymentComponent,
     AddressComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,
