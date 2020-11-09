@@ -1,3 +1,5 @@
+import { Users } from './../models/users';
+import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about-us.component.css'],
 })
 export class AboutUsComponent implements OnInit {
-  constructor() {}
+  user: Users;
 
-  ngOnInit(): void {}
+  constructor(private service: DataService) {}
+
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  getUser() {
+    this.user = this.service.getUser();
+  }
 
   onSubscribe() {}
 }
