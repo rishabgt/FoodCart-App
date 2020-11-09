@@ -16,9 +16,9 @@ export class CartComponent implements OnInit {
   items: Items[];
   foods: Foods[];
   food: Foods;
-  foodNames = new Array();
-  foodImages = new Array();
-  foodPrices = new Array();
+  foodNames;
+  foodImages;
+  foodPrices;
   searching: boolean;
   orderTotal: number;
   isEmpty: boolean;
@@ -42,10 +42,14 @@ export class CartComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
-    console.log(this.user);
+    // console.log(this.user);
   }
 
   getItems() {
+    this.foodNames = new Array();
+    this.foodImages = new Array();
+    this.foodPrices = new Array();
+
     this.service.getItemByUid(this.user.id).subscribe((data) => {
       this.items = data as Items[];
       if (this.items.length === 0) {
@@ -101,8 +105,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  deleteItem(item) {
-    this.service.deleteItem(item.id).subscribe(() => {
+  deleteItem(itemId) {
+    this.service.deleteItem(itemId).subscribe(() => {
       this.getItems();
       this.toastr.warning('Item deleted!');
     });

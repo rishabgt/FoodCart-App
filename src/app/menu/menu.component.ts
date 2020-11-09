@@ -37,7 +37,7 @@ export class MenuComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
-    console.log(this.user);
+    // console.log(this.user);
   }
 
   getFoods() {

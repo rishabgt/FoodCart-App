@@ -15,18 +15,19 @@
           <h4 class="card-title">My Cart</h4>
         </div>
         <ul class="list-group list-group-flush" id="items-list">
-          <div *ngIf="searching === true">
+          <li *ngIf="searching === true" class="list-group-item p-0 m-0">
             <div class="text-center my-5">
               <div class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
               </div>
             </div>
-          </div>
+          </li>
+
           <li
             *ngFor="let item of items; let i = index"
             class="list-group-item p-0 m-0"
           >
-            <div class="row no-gutters py-3">
+            <div *ngIf="searching === false" class="row no-gutters py-3">
               <div class="col-sm-3 pl-3 m-0">
                 <div class="product-image">
                   <img
@@ -38,14 +39,14 @@
                 </div>
                 <div class="my-4 counter-buttons">
                   <button
-                    class="decrease-btn"
+                    class="decrease-btn mr-2"
                     [disabled]="item.quantity === 1"
                     (click)="decreaseQuantity(item)"
                   >
                     -
                   </button>
                   <input
-                    class="quantity-btn text-center"
+                    class="quantity-btn text-center mr-2"
                     [readonly]="true"
                     [(ngModel)]="item.quantity"
                   />
@@ -55,11 +56,9 @@
                 </div>
               </div>
               <div class="col-sm-5 p-0 m-0">
-                <a
-                  class="h6 mb-0 pb-1 product-name text-ellipsis"
-                  id="product-title"
-                  >{{ foodNames[i] }}</a
-                >
+                <a class="h6 mb-0 pb-1 product-name text-ellipsis">{{
+                  foodNames[i]
+                }}</a>
 
                 <div class="my-3">
                   <span class="h4" id="current-price"
@@ -67,18 +66,10 @@
                   >
                 </div>
                 <div class="mt-3">
-                  <!-- <button
-                    type="button"
-                    class="h6 mr-3 save-btn"
-                    id="save-button"
-                  >
-                    SAVE FOR LATER
-                  </button> -->
                   <button
                     type="button"
                     class="h6 delete-btn"
-                    id="delete-button"
-                    (click)="deleteItem(item)"
+                    (click)="deleteItem(item.id)"
                   >
                     REMOVE
                   </button>
