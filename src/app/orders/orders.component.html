@@ -14,30 +14,37 @@
     <p class="h5">Go ahead & search for many more tongue twisters!!!</p>
   </div>
 
-  <div class="row">
+  <div *ngIf="searching === false" class="row">
     <div *ngFor="let order of orders; let i = index" class="col-md-4 mb-4">
       <div class="card h-100">
         <div class="card-header">
-          <p class="h5">Shipping To:</p>
-          <p class="h6">{{ addFirstName[i] }}&nbsp;{{ addLastName[i] }}</p>
-          <p>
-            {{ addBuilding[i] }},&nbsp;{{
-              addStreet[i]
-            }},&nbsp;Landmark:&nbsp;{{ addLandmark[i] }},&nbsp;{{
-              addCity[i]
-            }}:&nbsp;{{ addZip[i] }},&nbsp;{{ addState[i] }}
+          <p class="h5">Shipped To:</p>
+          <p *ngIf="addresses[i]" class="h6">
+            {{ addresses[i].firstname }}&nbsp;{{ addresses[i].lastname }}
+          </p>
+          <p *ngIf="addresses[i]">
+            {{ addresses[i].building }},&nbsp;{{
+              addresses[i].street
+            }},&nbsp;Landmark:&nbsp;{{ addresses[i].landmark }},&nbsp;{{
+              addresses[i].city
+            }}:&nbsp;{{ addresses[i].zip }},&nbsp;{{ addresses[i].state }}
           </p>
         </div>
-        <img src="{{ foodImages[i] }}" class="card-img-top" alt="Food Item" />
+        <img
+          *ngIf="foods[i]"
+          src="{{ foods[i].image }}"
+          class="card-img-top"
+          alt="Food Item"
+        />
         <div class="card-body">
-          <h5 class="card-title">{{ foodNames[i] }}</h5>
-          <p class="card-text">₹&nbsp;{{ foodPrices[i] }}</p>
+          <h5 *ngIf="foods[i]" class="card-title">{{ foods[i].name }}</h5>
+          <p *ngIf="foods[i]" class="card-text">₹&nbsp;{{ foods[i].price }}</p>
           <p class="card-text text-muted">
             Quantity:&nbsp;{{ order.quantity }}
           </p>
         </div>
         <div class="card-footer">
-          <small class="text-muted">Ordered on {{ order.date }}</small>
+          <small class="text-muted">Ordered on:&nbsp;{{ order.date }}</small>
         </div>
       </div>
     </div>

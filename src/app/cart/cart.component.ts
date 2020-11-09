@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -15,10 +16,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CartComponent implements OnInit {
   items: Items[];
   foods: Foods[];
-  food: Foods;
-  foodNames;
-  foodImages;
-  foodPrices;
+  food: Foods[];
+  fid: any[];
   searching: boolean;
   orderTotal: number;
   isEmpty: boolean;
@@ -46,9 +45,8 @@ export class CartComponent implements OnInit {
   }
 
   getItems() {
-    this.foodNames = new Array();
-    this.foodImages = new Array();
-    this.foodPrices = new Array();
+    this.foods = new Array<Foods>();
+    this.fid = new Array();
 
     this.service.getItemByUid(this.user.id).subscribe((data) => {
       this.items = data as Items[];
@@ -59,20 +57,24 @@ export class CartComponent implements OnInit {
         this.searching = false;
       } else {
         this.items.forEach((item) => {
-          this.getFoodById(item.fid);
+          this.fid.push(item.fid);
         });
+
+        let observables = this.fid.map((foodId) =>
+          this.service.getFoodById(foodId)
+        );
+
+        forkJoin(observables).subscribe((data) => {
+          // console.log(data);
+          data.forEach((el) => {
+            this.foods.push(el[0]);
+            // console.log(this.foods);
+          });
+          this.searching = false;
+        });
+
         this.calculateOrderTotal();
       }
-    });
-  }
-
-  getFoodById(fid) {
-    this.service.getFoodById(fid).subscribe((data) => {
-      this.foods = data as Foods[];
-      this.foodNames.push(this.foods[0].name);
-      this.foodImages.push(this.foods[0].image);
-      this.foodPrices.push(this.foods[0].price);
-      this.searching = false;
     });
   }
 
@@ -90,7 +92,8 @@ export class CartComponent implements OnInit {
     };
 
     this.service.updateQuantity(updatedOrder).subscribe(() => {
-      console.log('Order quantity increased');
+      // console.log('Order quantity increased');
+      this.searching = true;
       this.getItems();
     });
   }
@@ -102,15 +105,17 @@ export class CartComponent implements OnInit {
     };
 
     this.service.updateQuantity(updatedOrder).subscribe(() => {
-      console.log('Order quantity decreased');
+      // console.log('Order quantity decreased');
+      this.searching = true;
       this.getItems();
     });
   }
 
   deleteItem(itemId) {
     this.service.deleteItem(itemId).subscribe(() => {
-      this.getItems();
       this.toastr.warning('Item deleted!');
+      this.searching = true;
+      this.getItems();
     });
   }
 

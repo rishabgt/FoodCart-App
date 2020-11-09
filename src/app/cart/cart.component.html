@@ -22,7 +22,6 @@
               </div>
             </div>
           </li>
-
           <li
             *ngFor="let item of items; let i = index"
             class="list-group-item p-0 m-0"
@@ -31,7 +30,8 @@
               <div class="col-sm-3 pl-3 m-0">
                 <div class="product-image">
                   <img
-                    src="{{ foodImages[i] }}"
+                    *ngIf="foods[i]"
+                    src="{{ foods[i].image }}"
                     alt="Product"
                     width="110px"
                     height="120px"
@@ -56,13 +56,15 @@
                 </div>
               </div>
               <div class="col-sm-5 p-0 m-0">
-                <a class="h6 mb-0 pb-1 product-name text-ellipsis">{{
-                  foodNames[i]
-                }}</a>
+                <a
+                  *ngIf="foods[i]"
+                  class="h6 mb-0 pb-1 product-name text-ellipsis"
+                  >{{ foods[i].name }}</a
+                >
 
                 <div class="my-3">
-                  <span class="h4" id="current-price"
-                    >₹{{ foodPrices[i] }}</span
+                  <span *ngIf="foods[i]" class="h4" id="current-price"
+                    >₹{{ foods[i].price }}</span
                   >
                 </div>
                 <div class="mt-3">

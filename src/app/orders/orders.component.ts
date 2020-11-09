@@ -1,3 +1,4 @@
+import { forkJoin } from 'rxjs';
 import { Address } from './../models/address';
 import { Foods } from './../models/foods';
 import { DataService } from './../services/data.service';
@@ -17,21 +18,12 @@ export class OrdersComponent implements OnInit {
   orders: Orders[];
   foods: Foods[];
   food: Foods;
-  foodNames = new Array();
-  foodImages = new Array();
-  foodPrices = new Array();
   searching: boolean;
   isEmpty: boolean;
+  address: Address;
   addresses: Address[];
-  addFirstName = new Array();
-  addLastName = new Array();
-  addBuilding = new Array();
-  addStreet = new Array();
-  addCity = new Array();
-  addState = new Array();
-  addZip = new Array();
-  addLandmark = new Array();
-  addPhone = new Array();
+  fid: any[];
+  aid: any[];
 
   constructor(
     private service: DataService,
@@ -53,16 +45,46 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders() {
+    this.aid = new Array();
+    this.fid = new Array();
+    this.addresses = new Array<Address>();
+    this.foods = new Array<Foods>();
+
     this.service.getOrdersByUid(this.user.id).subscribe((data) => {
       this.orders = data as Orders[];
       this.orders.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+
       if (this.orders.length === 0) {
         this.isEmpty = true;
         this.searching = false;
       } else {
         this.orders.forEach((item) => {
-          this.getAddress(item.aid);
-          this.getFoodById(item.fid);
+          this.aid.push(item.aid);
+          this.fid.push(item.fid);
+        });
+
+        let addr = this.aid.map((addId) => this.service.getAddressById(addId));
+
+        let observables = this.fid.map((foodId) =>
+          this.service.getFoodById(foodId)
+        );
+
+        forkJoin(addr).subscribe((data) => {
+          // console.log(data);
+          data.forEach((el) => {
+            this.addresses.push(el[0]);
+            // console.log(this.foods);
+          });
+          this.searching = false;
+        });
+
+        forkJoin(observables).subscribe((data) => {
+          // console.log(data);
+          data.forEach((el) => {
+            this.foods.push(el[0]);
+            // console.log(this.foods);
+          });
+          this.searching = false;
         });
       }
     });
@@ -70,27 +92,15 @@ export class OrdersComponent implements OnInit {
 
   getFoodById(fid) {
     this.service.getFoodById(fid).subscribe((data) => {
-      this.foods = data as Foods[];
-      this.foodNames.push(this.foods[0].name);
-      this.foodImages.push(this.foods[0].image);
-      this.foodPrices.push(this.foods[0].price);
+      this.food = data as Foods;
+      this.foods.push(this.food[0]);
     });
   }
 
   getAddress(aid) {
     this.service.getAddressById(aid).subscribe((data) => {
-      this.addresses = data as Address[];
-
-      this.addFirstName.push(this.addresses[0].firstname);
-      this.addLastName.push(this.addresses[0].lastname);
-      this.addBuilding.push(this.addresses[0].building);
-      this.addStreet.push(this.addresses[0].street);
-      this.addCity.push(this.addresses[0].city);
-      this.addState.push(this.addresses[0].state);
-      this.addZip.push(this.addresses[0].zip);
-      this.addLandmark.push(this.addresses[0].landmark);
-      this.addPhone.push(this.addresses[0].phone);
-
+      this.address = data as Address;
+      this.addresses.push(this.address[0]);
       this.searching = false;
     });
   }
