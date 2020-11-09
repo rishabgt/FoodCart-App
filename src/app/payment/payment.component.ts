@@ -41,15 +41,15 @@ export class PaymentComponent implements OnInit {
       ],
       expirationMonth: [
         '',
-        [Validators.required /* Validators.pattern('^(0[1-9] | 1[0-2])$') */],
+        [Validators.required, Validators.pattern('^[0-9]{2}$')],
       ],
       expirationYear: [
         '',
-        [Validators.required, Validators.pattern('^([0-9]{2})$')],
+        [Validators.required, Validators.pattern('^[0-9]{2}$')],
       ],
       cvv: [
         '',
-        [Validators.required /* Validators.pattern('^[0-9]{3, 4}$') */],
+        [Validators.required, Validators.pattern('^([0-9]{3})$')],
       ],
     });
   }
