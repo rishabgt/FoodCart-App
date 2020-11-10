@@ -9,17 +9,19 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
   private url = 'https://foodcart11.000webhostapp.com/';
   private user: Users;
-  private isLogin: boolean = false;
+  private isLogin = JSON.parse(localStorage.getItem('login')) || false;
   private address: Address;
 
   constructor(private http: HttpClient) {}
 
   setLogin() {
     this.isLogin = true;
+    localStorage.setItem('login','true');
   }
 
   unsetLogin() {
     this.isLogin = false;
+    localStorage.removeItem('login');
   }
 
   getLogin() {
@@ -30,8 +32,24 @@ export class DataService {
     return this.user;
   }
 
+  getFirstName(){
+    console.log("Called this method!! ",localStorage.getItem('firstName'));
+    return localStorage.getItem('firstName');
+  }
+
+  getLastName(){
+    return localStorage.getItem('lastName');
+  }
+   
+  getIdLocal(){
+    return parseInt(localStorage.getItem('ID'));
+  } 
+
   setUser(resource) {
     this.user = resource;
+    localStorage.setItem('firstName',resource.firstname);
+    localStorage.setItem('lastName',resource.lastname);
+    localStorage.setItem('ID',resource.id);
   }
 
   getUserByUsername(username: string) {
