@@ -36,7 +36,7 @@ export class AccountComponent implements OnInit {
     this.user = this.service.getUser();
     this.id = this.service.getIdLocal();
     this.firstName = this.service.getFirstName();
-    this.lastName =this.service.getLastName();
+    this.lastName = this.service.getLastName();
     this.userName = this.service.getUserLocal();
     // console.log('username');
     this.password = this.service.getPasswordLocal();

@@ -36,7 +36,7 @@ export class BilladdressComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
-    this.firstName = this.user.firstname;
+    this.firstName = this.service.getFirstName();
   }
 
   getAddresses() {

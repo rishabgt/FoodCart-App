@@ -179,16 +179,18 @@ export class AddressComponent implements OnInit {
   getAddresses() {
     this.aid = new Array();
 
-    this.service.getAddressByUid(this.service.getIdLocal()).subscribe((data) => {
-      this.addresses = data as Address[];
-      this.addresses.sort((a, b) => a.id - b.id);
+    this.service
+      .getAddressByUid(this.service.getIdLocal())
+      .subscribe((data) => {
+        this.addresses = data as Address[];
+        this.addresses.sort((a, b) => a.id - b.id);
 
-      this.addresses.forEach((item) => {
-        this.aid.push(item.id);
+        this.addresses.forEach((item) => {
+          this.aid.push(item.id);
+        });
+
+        this.isSearching = false;
       });
-
-      this.isSearching = false;
-    });
   }
 
   address() {
@@ -337,7 +339,7 @@ export class AddressComponent implements OnInit {
   markCurrent(el) {
     this.isSearching = true;
 
-    this.removeCurrent();
+    // this.removeCurrent();
 
     let observables = this.aid.map((addId) =>
       this.service.getAddressById(addId)
@@ -362,6 +364,8 @@ export class AddressComponent implements OnInit {
         this.service.updateCurrentAddress(newAddr).subscribe(
           () => {
             this.toastr.info('Changed current address!');
+            console.log('Changed current');
+
             this.getAddresses();
           },
           (error: any) => {
