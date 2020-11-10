@@ -34,11 +34,12 @@ export class AccountComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
-    this.id = this.user.id;
-    this.firstName = this.user.firstname;
-    this.lastName = this.user.lastname;
-    this.userName = this.user.username;
-    this.password = this.user.password;
+    this.id = this.service.getIdLocal();
+    this.firstName = this.service.getFirstName();
+    this.lastName =this.service.getLastName();
+    this.userName = this.service.getUserLocal();
+    // console.log('username');
+    this.password = this.service.getPasswordLocal();
   }
 
   createForm(): FormGroup {
@@ -69,9 +70,9 @@ export class AccountComponent implements OnInit {
 
   setValue() {
     this.form.setValue({
-      username: this.user.username,
-      firstname: this.user.firstname,
-      lastname: this.user.lastname,
+      username: this.userName,
+      firstname: this.firstName,
+      lastname: this.lastName,
     });
   }
 

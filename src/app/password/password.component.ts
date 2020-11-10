@@ -39,12 +39,13 @@ export class PasswordComponent implements OnInit {
   }
 
   getUser() {
-    this.user = this.service.getUser();
-    this.id = this.user.id;
-    this.firstName = this.user.firstname;
-    this.lastName = this.user.lastname;
-    this.userName = this.user.username;
-    this.password = this.user.password;
+   this.user = this.service.getUser();
+    this.id = this.service.getIdLocal();
+    this.firstName = this.service.getFirstName();
+    this.lastName =this.service.getLastName();
+    this.userName = this.service.getUserLocal();
+    // console.log('username');
+    this.password = this.service.getPasswordLocal();
   }
 
   createForm(): FormGroup {
