@@ -40,15 +40,17 @@ export class BilladdressComponent implements OnInit {
   }
 
   getAddresses() {
-    this.service.getAddressByUid(this.user.id).subscribe((data) => {
-      this.addresses = data as Address[];
-      if (this.addresses.length === 0) {
-        this.isEmpty = true;
-      } else {
-        this.isEmpty = false;
-      }
-      this.isSearching = false;
-    });
+    this.service
+      .getAddressByUid(this.service.getIdLocal())
+      .subscribe((data) => {
+        this.addresses = data as Address[];
+        if (this.addresses.length === 0) {
+          this.isEmpty = true;
+        } else {
+          this.isEmpty = false;
+        }
+        this.isSearching = false;
+      });
   }
 
   selectAddress(item) {

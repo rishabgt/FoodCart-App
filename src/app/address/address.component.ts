@@ -179,16 +179,18 @@ export class AddressComponent implements OnInit {
   getAddresses() {
     this.aid = new Array();
 
-    this.service.getAddressByUid(this.user.id).subscribe((data) => {
-      this.addresses = data as Address[];
-      this.addresses.sort((a, b) => a.id - b.id);
+    this.service
+      .getAddressByUid(this.service.getIdLocal())
+      .subscribe((data) => {
+        this.addresses = data as Address[];
+        this.addresses.sort((a, b) => a.id - b.id);
 
-      this.addresses.forEach((item) => {
-        this.aid.push(item.id);
+        this.addresses.forEach((item) => {
+          this.aid.push(item.id);
+        });
+
+        this.isSearching = false;
       });
-
-      this.isSearching = false;
-    });
   }
 
   address() {
