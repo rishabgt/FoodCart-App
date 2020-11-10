@@ -175,22 +175,15 @@
                       This field is required!
                     </div>
                     <div
-                      class="text"
-                      [ngClass]="
-                        form.controls['username'].hasError('required') ||
-                        form.controls['username'].hasError('pattern')
-                          ? 'red'
-                          : 'text-success'
-                      "
-                    >
-                      <i class="material-icons">{{
-                        form.controls["username"].hasError("required") ||
-                        form.controls["username"].hasError("pattern")
-                          ? "cancel"
-                          : "check_circle"
-                      }}</i>
-                      Invalid email id!
-                    </div>
+                    class="text"
+                    *ngIf="
+                    form.controls['username'].touched && (
+                    form.controls['username'].hasError('required') ||
+                    form.controls['username'].hasError('pattern') )
+                    "
+                  >
+                     Invalid email id!
+                  </div>
                   </div>
 
                   <div class="form-group">
@@ -208,15 +201,14 @@
                       "
                     />
                     <div
-                      class="text"
-                      [ngClass]="
-                        form.controls['firstname'].hasError('required')
-                          ? 'red'
-                          : 'text-success'
-                      "
-                    >
-                      This field is required!
-                    </div>
+                    class="text"
+                    *ngIf="
+                      form.controls['firstname'].touched &&
+                      form.controls['firstname'].hasError('required')
+                    "
+                  >
+                    This field is required!
+                  </div>
                     <div
                       class="text"
                       [ngClass]="
@@ -251,15 +243,14 @@
                       "
                     />
                     <div
-                      class="text"
-                      [ngClass]="
-                        form.controls['lastname'].hasError('required')
-                          ? 'red'
-                          : 'text-success'
-                      "
-                    >
-                      This field is required!
-                    </div>
+                    class="text"
+                    *ngIf="
+                      form.controls['lastname'].touched &&
+                      form.controls['lastname'].hasError('required')
+                    "
+                  >
+                    This field is required!
+                  </div>
                     <div
                       class="text"
                       [ngClass]="
