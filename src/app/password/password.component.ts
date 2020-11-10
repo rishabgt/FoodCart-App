@@ -56,26 +56,8 @@ export class PasswordComponent implements OnInit {
           null,
           Validators.compose([
             Validators.required,
-            // check whether the entered password has a number
-            CustomValidators.patternValidator(/\d/, {
-              hasNumber: true,
-            }),
-            // check whether the entered password has upper case letter
-            CustomValidators.patternValidator(/[A-Z]/, {
-              hasCapitalCase: true,
-            }),
-            // check whether the entered password has a lower case letter
-            CustomValidators.patternValidator(/[a-z]/, {
-              hasSmallCase: true,
-            }),
-            // check whether the entered password has a special character
-            CustomValidators.patternValidator(
-              /[ !@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/,
-              {
-                hasSpecialCharacters: true,
-              }
-            ),
-            Validators.minLength(8),
+            Validators.pattern(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s)/),
+            Validators.minLength(8)
           ]),
         ],
         confirmPassword: [null, Validators.compose([Validators.required])],
