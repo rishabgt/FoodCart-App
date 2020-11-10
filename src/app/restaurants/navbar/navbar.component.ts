@@ -9,8 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   user: Users;
-  firstName: string;
-  lastName: string;
+  firstName;
+  lastName;
 
   constructor(private service: DataService) {}
 
@@ -20,8 +20,8 @@ export class NavbarComponent implements OnInit {
 
   getUSer() {
     this.user = this.service.getUser();
-    this.firstName = this.user.firstname;
-    this.lastName = this.user.lastname;
+    this.firstName = this.service.getFirstName();
+    this.lastName = this.service.getLastName();
   }
 
   logout() {
