@@ -173,13 +173,13 @@ export class AddressComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
-    this.firstName = this.user.firstname;
+    this.firstName = this.service.getFirstName();
   }
 
   getAddresses() {
     this.aid = new Array();
 
-    this.service.getAddressByUid(this.user.id).subscribe((data) => {
+    this.service.getAddressByUid(this.service.getIdLocal()).subscribe((data) => {
       this.addresses = data as Address[];
       this.addresses.sort((a, b) => a.id - b.id);
 
