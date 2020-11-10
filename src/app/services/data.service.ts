@@ -33,9 +33,10 @@ export class DataService {
   }
 
   getFirstName(){
-    console.log("Called this method!! ",localStorage.getItem('firstName'));
+    // console.log("Called this method!! ",localStorage.getItem('firstName'));
     return localStorage.getItem('firstName');
   }
+
 
   getLastName(){
     return localStorage.getItem('lastName');
@@ -45,11 +46,21 @@ export class DataService {
     return parseInt(localStorage.getItem('ID'));
   } 
 
+  getUserLocal(){
+    return localStorage.getItem('user');
+  }
+
+  getPasswordLocal(){
+    return localStorage.getItem('password');
+  }
+
   setUser(resource) {
     this.user = resource;
     localStorage.setItem('firstName',resource.firstname);
     localStorage.setItem('lastName',resource.lastname);
     localStorage.setItem('ID',resource.id);
+    localStorage.setItem('user',resource.username);
+    localStorage.setItem('password',resource.password);
   }
 
   getUserByUsername(username: string) {
