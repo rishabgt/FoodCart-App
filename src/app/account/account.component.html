@@ -146,7 +146,7 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="user" class="card-body">
+              <div class="card-body">
                 <form [formGroup]="form" (submit)="submit(form)">
                   <h6 class="heading-small text-muted mb-4">
                     User information
@@ -158,7 +158,6 @@
                       formControlName="username"
                       type="email"
                       class="form-control"
-                      [(ngModel)]="user.username"
                       [ngClass]="
                         form.controls['username'].touched &&
                         form.controls['username'].invalid
@@ -201,7 +200,6 @@
                       formControlName="firstname"
                       type="text"
                       class="form-control"
-                      [(ngModel)]="user.firstname"
                       [ngClass]="
                         form.controls['firstname'].touched &&
                         form.controls['firstname'].invalid
@@ -245,7 +243,6 @@
                       formControlName="lastname"
                       type="text"
                       class="form-control"
-                      [(ngModel)]="user.lastname"
                       [ngClass]="
                         form.controls['lastname'].touched &&
                         form.controls['lastname'].invalid

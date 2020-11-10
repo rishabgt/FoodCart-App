@@ -29,6 +29,7 @@ export class AccountComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.createForm();
     this.getUser();
+    this.setValue();
   }
 
   getUser() {
@@ -63,6 +64,14 @@ export class AccountComponent implements OnInit {
           Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"),
         ]),
       ],
+    });
+  }
+
+  setValue() {
+    this.form.setValue({
+      username: this.user.username,
+      firstname: this.user.firstname,
+      lastname: this.user.lastname,
     });
   }
 
