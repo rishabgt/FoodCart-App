@@ -50,7 +50,7 @@ export class OrdersComponent implements OnInit {
     this.addresses = new Array<Address>();
     this.foods = new Array<Foods>();
 
-    this.service.getOrdersByUid(this.user.id).subscribe((data) => {
+    this.service.getOrdersByUid(this.service.getIdLocal()).subscribe((data) => {
       this.orders = data as Orders[];
       this.orders.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
