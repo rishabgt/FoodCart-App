@@ -311,69 +311,50 @@ export class AddressComponent implements OnInit {
     );
   }
 
-  removeCurrent() {
-    let observables = this.aid.map((addId) =>
-      this.service.getAddressById(addId)
-    );
-
-    forkJoin(observables).subscribe((data) => {
-      // console.log(data);
-      data.forEach((elem) => {
-        let addr = {
-          id: elem[0].id,
-          current: 'no',
-        };
-
-        this.service.updateCurrentAddress(addr).subscribe(
-          () => {
-            console.log('Removed current');
-          },
-          (error: any) => {
-            console.log(error);
-          }
-        );
-      });
-    });
-  }
-
   markCurrent(el) {
     this.isSearching = true;
 
-    // this.removeCurrent();
-
     let observables = this.aid.map((addId) =>
       this.service.getAddressById(addId)
     );
 
     forkJoin(observables).subscribe((data) => {
-      let newAddr;
       // console.log(data);
       data.forEach((elem) => {
         if (elem[0].id === el.id) {
-          newAddr = {
-            id: el.id,
+          let addr = {
+            id: elem[0].id,
             current: 'yes',
           };
+
+          this.service.updateCurrentAddress(addr).subscribe(
+            () => {
+              this.toastr.success('Changed current address!' + '😃');
+              // console.log('Changed current');
+            },
+            (error: any) => {
+              this.toastr.error("Couldn't change current address!" + '😞');
+              // console.log(error);
+            }
+          );
         } else {
-          newAddr = {
-            id: el.id,
+          let addr = {
+            id: elem[0].id,
             current: 'no',
           };
+
+          this.service.updateCurrentAddress(addr).subscribe(
+            () => {
+              // console.log('Removed current');
+            },
+            (error: any) => {
+              // console.log(error);
+            }
+          );
         }
-
-        this.service.updateCurrentAddress(newAddr).subscribe(
-          () => {
-            this.toastr.info('Changed current address!');
-            console.log('Changed current');
-
-            this.getAddresses();
-          },
-          (error: any) => {
-            this.toastr.error("Couldn't change current address!");
-            // console.log(error);
-          }
-        );
       });
+
+      this.getAddresses();
     });
   }
 }
