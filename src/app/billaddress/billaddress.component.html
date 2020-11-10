@@ -5,8 +5,8 @@
     <div class="card-header bg-white border-0">
       <div class="row align-items-center">
         <div class="col-8">
-          <h3 class="mb-0">Billing Address</h3>
-          <p class="h6 text-muted">Select your billing address</p>
+          <h3 class="mb-0">Shipping Address</h3>
+          <p class="h6 text-muted">Select your shipping address</p>
         </div>
       </div>
     </div>
@@ -34,7 +34,12 @@
           class="list-group-item user-address"
           (click)="selectAddress(address)"
         >
-          <p class="h5">{{ address.firstname }}&nbsp;{{ address.lastname }}</p>
+          <p class="h5">
+            {{ address.firstname }}&nbsp;{{ address.lastname
+            }}<span class="badge badge-pill badge-secondary ml-3 h5 text-white"
+              >Current</span
+            >
+          </p>
           <p>
             {{ address.building }},&nbsp;{{
               address.street
@@ -43,6 +48,11 @@
             }}:&nbsp;{{ address.zip }},&nbsp;{{ address.state }}
           </p>
           <p class="h6">{{ address.phone }}</p>
+        </li>
+        <li *ngIf="isEmpty === false" class="list-group-item">
+          <button class="btn btn-primary" (click)="goToAddress()">
+            Change Current Address
+          </button>
         </li>
       </ul>
     </div>

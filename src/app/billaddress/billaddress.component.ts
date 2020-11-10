@@ -41,7 +41,7 @@ export class BilladdressComponent implements OnInit {
 
   getAddresses() {
     this.service
-      .getAddressByUid(this.service.getIdLocal())
+      .getAddressByUidAndCurrent(this.service.getIdLocal())
       .subscribe((data) => {
         this.addresses = data as Address[];
         if (this.addresses.length === 0) {
@@ -56,5 +56,9 @@ export class BilladdressComponent implements OnInit {
   selectAddress(item) {
     this.service.setAddress(item);
     this.router.navigate(['/payment']);
+  }
+
+  goToAddress() {
+    this.router.navigate(['/myaddress']);
   }
 }

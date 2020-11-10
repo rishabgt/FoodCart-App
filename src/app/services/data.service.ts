@@ -16,7 +16,7 @@ export class DataService {
 
   setLogin() {
     this.isLogin = true;
-    localStorage.setItem('login','true');
+    localStorage.setItem('login', 'true');
   }
 
   unsetLogin() {
@@ -32,24 +32,24 @@ export class DataService {
     return this.user;
   }
 
-  getFirstName(){
-    console.log("Called this method!! ",localStorage.getItem('firstName'));
+  getFirstName() {
+    console.log('Called this method!! ', localStorage.getItem('firstName'));
     return localStorage.getItem('firstName');
   }
 
-  getLastName(){
+  getLastName() {
     return localStorage.getItem('lastName');
   }
-   
-  getIdLocal(){
+
+  getIdLocal() {
     return parseInt(localStorage.getItem('ID'));
-  } 
+  }
 
   setUser(resource) {
     this.user = resource;
-    localStorage.setItem('firstName',resource.firstname);
-    localStorage.setItem('lastName',resource.lastname);
-    localStorage.setItem('ID',resource.id);
+    localStorage.setItem('firstName', resource.firstname);
+    localStorage.setItem('lastName', resource.lastname);
+    localStorage.setItem('ID', resource.id);
   }
 
   getUserByUsername(username: string) {
@@ -146,6 +146,10 @@ export class DataService {
 
   getAddressByUid(uid: number) {
     return this.http.get(this.url + 'getAddressByUid.php?uid=' + uid);
+  }
+
+  getAddressByUidAndCurrent(uid: number) {
+    return this.http.get(this.url + 'getAddressByUidAndCurrent.php?uid=' + uid);
   }
 
   deleteAddressById(id: number) {
