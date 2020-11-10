@@ -17,6 +17,7 @@ export class PaymentComponent implements OnInit {
   user: Users;
   items: Items[];
   address: Address;
+  userId: number;
 
   constructor(
     private service: DataService,
@@ -47,10 +48,7 @@ export class PaymentComponent implements OnInit {
         '',
         [Validators.required, Validators.pattern('^([0-9]{2})$')],
       ],
-      cvv: [
-        '',
-        [Validators.required, Validators.pattern('^([0-9]{3})$')],
-      ],
+      cvv: ['', [Validators.required, Validators.pattern('^([0-9]{3})$')]],
     });
   }
 
@@ -60,6 +58,7 @@ export class PaymentComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
+    this.userId = this.service.getIdLocal();
   }
 
   getAddress() {
@@ -67,7 +66,7 @@ export class PaymentComponent implements OnInit {
   }
 
   getItems() {
-    this.service.getItemByUid(this.user.id).subscribe((data) => {
+    this.service.getItemByUid(this.userId).subscribe((data) => {
       this.items = data as Items[];
     });
   }
