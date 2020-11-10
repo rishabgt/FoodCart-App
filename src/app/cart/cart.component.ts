@@ -41,14 +41,14 @@ export class CartComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
-    // console.log(this.user);
+    console.log(this.user);
   }
 
   getItems() {
     this.foods = new Array<Foods>();
     this.fid = new Array();
 
-    this.service.getItemByUid(this.user.id).subscribe((data) => {
+    this.service.getItemByUid(this.service.getIdLocal()).subscribe((data) => {
       this.items = data as Items[];
       this.items.sort((a, b) => a.id - b.id);
 
