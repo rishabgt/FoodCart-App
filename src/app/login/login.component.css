@@ -28,6 +28,12 @@ a {
   cursor: pointer;
 }
 
+.fa-eye-slash,
+.fa-eye {
+  cursor: pointer;
+  color:black;
+}
+
 @media only screen and (max-width: 768px) {
   .card {
     max-width: 75%;
