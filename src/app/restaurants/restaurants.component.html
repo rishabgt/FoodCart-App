@@ -3,6 +3,26 @@
 <app-carousel></app-carousel>
 
 <div class="container my-5">
+  <!-- Serach Location -->
+  <div class="mt-5 mb-3">
+    <input
+      list="citiesName"
+      aria-label="resCities"
+      class="form-control"
+      type="text"
+      id="resCities"
+      name="resCities"
+      placeholder="Select a city..."
+      [(ngModel)]="searchCity"
+      (keyup.enter)="setCity()"
+    />
+    <datalist id="citiesName" name="citiesName">
+      <option *ngFor="let city of cities" [ngValue]="city" value="{{ city }}">
+        {{ city }}
+      </option>
+    </datalist>
+  </div>
+
   <!-- Search -->
   <div class="mt-5 mb-3">
     <div class="search">
@@ -40,16 +60,6 @@
         />
       </symbol>
     </svg>
-
-    <!-- <form>
-      <input
-        type="text"
-        name="search"
-        [(ngModel)]="searchName"
-        placeholder="Search for restaurants..."
-        (keyup.enter)="search()"
-      />
-    </form> -->
   </div>
 
   <!-- Restaurants -->

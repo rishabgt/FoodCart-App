@@ -70,6 +70,10 @@ export class DataService {
     return this.http.get(this.url + 'getRestaurantById.php?id=' + id);
   }
 
+  getRestaurantByCity(city: string) {
+    return this.http.get(this.url + 'getRestaurantByCity.php?city=' + city);
+  }
+
   getFoodsByRid(rid: number) {
     return this.http.get(this.url + 'getFoodsByRid.php?rid=' + rid);
   }
