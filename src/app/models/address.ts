@@ -9,6 +9,6 @@ export interface Address {
   zip: number;
   landmark: string;
   phone: string;
-  current: string;
+  currentAdd: string;
   uid: string;
 }

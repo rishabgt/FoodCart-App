@@ -56,6 +56,7 @@ export class AddressComponent implements OnInit {
   // The text shown when the transition is finished
   transitionButtonText = 'Save';
   aid: any[];
+  userId: number;
 
   constructor(
     private service: DataService,
@@ -174,23 +175,22 @@ export class AddressComponent implements OnInit {
   getUser() {
     this.user = this.service.getUser();
     this.firstName = this.service.getFirstName();
+    this.userId = this.service.getIdLocal();
   }
 
   getAddresses() {
     this.aid = new Array();
 
-    this.service
-      .getAddressByUid(this.service.getIdLocal())
-      .subscribe((data) => {
-        this.addresses = data as Address[];
-        this.addresses.sort((a, b) => a.id - b.id);
+    this.service.getAddressByUid(this.userId).subscribe((data) => {
+      this.addresses = data as Address[];
+      this.addresses.sort((a, b) => a.id - b.id);
 
-        this.addresses.forEach((item) => {
-          this.aid.push(item.id);
-        });
-
-        this.isSearching = false;
+      this.addresses.forEach((item) => {
+        this.aid.push(item.id);
       });
+
+      this.isSearching = false;
+    });
   }
 
   address() {
@@ -245,6 +245,8 @@ export class AddressComponent implements OnInit {
   submit() {
     console.log(this.addressForm.value);
 
+    this.isSearching = true;
+
     let newAddress = {
       firstname: this.addressForm.controls['firstName1'].value,
       lastname: this.addressForm.controls['lastName1'].value,
@@ -255,8 +257,8 @@ export class AddressComponent implements OnInit {
       zip: this.addressForm.controls['zipCode1'].value,
       landmark: this.addressForm.controls['landmark1'].value,
       phone: this.addressForm.controls['phoneNo1'].value,
-      current: 'no',
-      uid: this.user.id,
+      currentAdd: 'no',
+      uid: this.userId,
     };
 
     this.service.insertAddress(newAddress).subscribe(
@@ -324,7 +326,7 @@ export class AddressComponent implements OnInit {
         if (elem[0].id === el.id) {
           let addr = {
             id: elem[0].id,
-            current: 'yes',
+            currentAdd: 'yes',
           };
 
           this.service.updateCurrentAddress(addr).subscribe(
@@ -340,7 +342,7 @@ export class AddressComponent implements OnInit {
         } else {
           let addr = {
             id: elem[0].id,
-            current: 'no',
+            currentAdd: 'no',
           };
 
           this.service.updateCurrentAddress(addr).subscribe(

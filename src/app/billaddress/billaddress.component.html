@@ -5,18 +5,20 @@
     <div class="card-header bg-white border-0">
       <div class="row align-items-center">
         <div class="col-8">
-          <h3 class="mb-0">Shipping Address</h3>
-          <p class="h6 text-muted">Select your shipping address</p>
+          <h3>Shipping Address</h3>
+          <h6 class="text-muted mb-0 ml-2">
+            Select your shipping address to proceed
+          </h6>
         </div>
       </div>
     </div>
     <div class="card-body">
       <ul class="list-group list-group-flush">
         <li *ngIf="isEmpty === true" class="list-group-item">
-          <p class="h5">No addresses added yet.&nbsp;😞</p>
+          <p class="h5">No current addresses added or, marked yet.&nbsp;😞</p>
           <p class="h6">
             Go to 👉&nbsp;<a routerLink="/myaddress" class="h5">Addresses</a
-            >&nbsp;to save your billing address.&nbsp;😃
+            >&nbsp;to save your current address.&nbsp;😃
           </p>
         </li>
         <li
@@ -50,9 +52,11 @@
           <p class="h6">{{ address.phone }}</p>
         </li>
         <li *ngIf="isEmpty === false" class="list-group-item">
-          <button class="btn btn-primary" (click)="goToAddress()">
-            Change Current Address
-          </button>
+          <div class="float-right">
+            <button class="btn btn-primary" (click)="goToAddress()">
+              Change Current Address
+            </button>
+          </div>
         </li>
       </ul>
     </div>
