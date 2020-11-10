@@ -2051,3 +2051,8 @@ div.sbmt-btn-txt {
 button {
   outline: 0;
 }
+
+.dropdown-btn {
+  background-color: transparent;
+  border: none;
+}

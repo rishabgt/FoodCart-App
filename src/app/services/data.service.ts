@@ -134,7 +134,7 @@ export class DataService {
     return this.http.get(this.url + 'deleteAddress.php?id=' + id);
   }
 
-  updateAddres(resource) {
+  updateAddress(resource) {
     return this.http.post(
       this.url + 'updateAddress.php',
       JSON.stringify(resource)
@@ -151,5 +151,12 @@ export class DataService {
 
   getAddressById(id: number) {
     return this.http.get(this.url + 'getAddressById.php?id=' + id);
+  }
+
+  updateCurrentAddress(resource) {
+    return this.http.post(
+      this.url + 'updateCurrentAddress.php',
+      JSON.stringify(resource)
+    );
   }
 }

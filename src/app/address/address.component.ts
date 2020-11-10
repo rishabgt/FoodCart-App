@@ -1,3 +1,4 @@
+import { forkJoin } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Users } from './../models/users';
@@ -54,6 +55,7 @@ export class AddressComponent implements OnInit {
   buttonText = 'Save';
   // The text shown when the transition is finished
   transitionButtonText = 'Save';
+  aid: any[];
 
   constructor(
     private service: DataService,
@@ -175,8 +177,16 @@ export class AddressComponent implements OnInit {
   }
 
   getAddresses() {
+    this.aid = new Array();
+
     this.service.getAddressByUid(this.user.id).subscribe((data) => {
       this.addresses = data as Address[];
+      this.addresses.sort((a, b) => a.id - b.id);
+
+      this.addresses.forEach((item) => {
+        this.aid.push(item.id);
+      });
+
       this.isSearching = false;
     });
   }
@@ -243,6 +253,7 @@ export class AddressComponent implements OnInit {
       zip: this.addressForm.controls['zipCode1'].value,
       landmark: this.addressForm.controls['landmark1'].value,
       phone: this.addressForm.controls['phoneNo1'].value,
+      current: 'yes',
       uid: this.user.id,
     };
 
@@ -250,13 +261,13 @@ export class AddressComponent implements OnInit {
       () => {
         this.getAddresses();
         this.toastr.success('Address saved!' + '😃');
-        console.log('Address inserted');
+        // console.log('Address inserted');
         this.isVisible = true;
         this.enableAdd = false;
       },
       (error: any) => {
         this.toastr.error("Couldn't save address!" + '😞');
-        console.log(error);
+        // console.log(error);
       }
     );
   }
@@ -286,7 +297,7 @@ export class AddressComponent implements OnInit {
       phone: this.billForm.controls['phoneNo'].value,
     };
 
-    this.service.updateAddres(address).subscribe(
+    this.service.updateAddress(address).subscribe(
       () => {
         this.toastr.success('Address updated!');
         this.editMode[this.index] = false;
@@ -296,5 +307,69 @@ export class AddressComponent implements OnInit {
         this.toastr.error("Couldn't update address!");
       }
     );
+  }
+
+  removeCurrent() {
+    let observables = this.aid.map((addId) =>
+      this.service.getAddressById(addId)
+    );
+
+    forkJoin(observables).subscribe((data) => {
+      // console.log(data);
+      data.forEach((elem) => {
+        let addr = {
+          id: elem[0].id,
+          current: 'no',
+        };
+
+        this.service.updateCurrentAddress(addr).subscribe(
+          () => {
+            console.log('Removed current');
+          },
+          (error: any) => {
+            console.log(error);
+          }
+        );
+      });
+    });
+  }
+
+  markCurrent(el) {
+    this.isSearching = true;
+
+    this.removeCurrent();
+
+    let observables = this.aid.map((addId) =>
+      this.service.getAddressById(addId)
+    );
+
+    forkJoin(observables).subscribe((data) => {
+      let newAddr;
+      // console.log(data);
+      data.forEach((elem) => {
+        if (elem[0].id === el.id) {
+          newAddr = {
+            id: el.id,
+            current: 'yes',
+          };
+        } else {
+          newAddr = {
+            id: el.id,
+            current: 'no',
+          };
+        }
+
+        this.service.updateCurrentAddress(newAddr).subscribe(
+          () => {
+            this.toastr.info('Changed current address!');
+            this.getAddresses();
+          },
+          (error: any) => {
+            this.toastr.error("Couldn't change current address!");
+            // console.log(error);
+          }
+        );
+      });
+    });
   }
 }
