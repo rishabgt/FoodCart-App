@@ -23,6 +23,7 @@
             <small id="emailHelp" class="form-text text-light h6"
               >Username is same as your email ID.</small
             >
+            
           </div>
           <div *ngIf="username.touched">
             <div
@@ -120,10 +121,15 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
           <div class="modal-body bg-solid">
             <form [formGroup]="signupForm" (ngSubmit)="create(content)">
               <div class="form-group">
                 <label for="fname">First Name</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class='fas fa-user-alt'></i></span>
+                  </div>
                 <input
                   type="text"
                   formControlName="firstname"
@@ -131,9 +137,14 @@
                   class="form-control"
                   [class.is-invalid]="firstname.touched && firstname.invalid"
                 />
+               </div>
               </div>
               <div class="form-group">
                 <label for="lname">Last Name</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class='fas fa-user-alt'></i></span>
+                  </div>
                 <input
                   type="text"
                   formControlName="lastname"
@@ -141,9 +152,14 @@
                   class="form-control"
                   [class.is-invalid]="lastname.touched && lastname.invalid"
                 />
+                </div>
               </div>
               <div class="form-group">
                 <label for="exampleFormControlInput1">Email address</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                  </div>
                 <input
                   formControlName="usernameSignUp"
                   [class.is-invalid]="
@@ -154,6 +170,7 @@
                   id="exampleFormControlInput1"
                   placeholder="name@example.com"
                 />
+                </div>
               </div>
               <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
