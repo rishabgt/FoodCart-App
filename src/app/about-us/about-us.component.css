@@ -1,3 +1,6 @@
+.title-text, .about-foodcart{
+  font-family: "Open Sans";
+}
 .carousel-item:after {
   content: "";
   position: absolute;
@@ -7,11 +10,53 @@
   right: 0;
   background: rgba(0, 0, 0, 0.4);
 }
-
 img {
   height: 670px;
 }
+.title-block{
+  width: 100%;
+  text-align: center;
+  height: 120px;
+  background-image: url(../../assets/img/back_1.png);
+}
 
+.title-text {
+  padding-top: 30px;
+  letter-spacing: 4px;
+}
+.about-foodcart{
+  margin: 0 auto;
+  color: #fff;
+  background-color: #313439;
+  padding: 20px 0;
+}
+.title-heading{
+  letter-spacing: 5px;
+  text-align: center;
+  padding: 10px;
+}
+.foodcart{
+  padding: 20px 18%;
+  letter-spacing: 4px;
+  text-align: center;
+}
+.foodcart-motto{
+  padding: 20px 18%;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+.foodcart p{
+  font-size: 20px;
+}
+.foodcart-motto p{
+  font-size: 16px;
+}
+.seperator-image{
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: 12px;
+}
 .carousel-caption {
   position: absolute;
   bottom: 25%;
@@ -29,9 +74,6 @@ p{
   height: 500px;
   object-fit: cover;
   opacity: 0.9;
-}
-.card{
-  margin-top: 15px;
 }
 .quote {
   margin-top: 20px;
@@ -113,6 +155,9 @@ p{
   .button{
       display: flex;
       flex-direction: column;
+  }
+  .about-foodcart, .title-block{
+    display: none;
   }
 
 }
