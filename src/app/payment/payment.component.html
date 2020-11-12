@@ -7,7 +7,7 @@
 <div class="container py-5">
   <div class="row mb-4">
     <div class="col-md-8 mx-auto text-center">
-      <h1 class="display-4">Foodcart Payment</h1>
+      <h1 class="display-4 animated bounceInDown">Foodcart Payment</h1>
     </div> 
   </div>
 
@@ -55,7 +55,7 @@
           role="tabpanel"
           aria-labelledby="list-home-list"
         >
-          <form role="form" [formGroup]="creditForm">
+          <form role="form" [formGroup]="creditForm" #creditcardForm="ngForm">
             <div class="form-group">
               <label for="username"><h6>Card Owner</h6></label>
               <input
@@ -211,6 +211,7 @@
                 type="button"
                 class="subscribe btn btn-primary btn-lg"
                 (click)="proceedPayment()"
+                [disabled]="creditcardForm.invalid"
               >
                 Confirm Payment
               </button>
@@ -249,6 +250,7 @@
           </p>
         </div>
         <!--Net Banking-->
+        
         <div
           class="tab-pane fade"
           id="list-messages"
@@ -297,6 +299,5 @@
 
 
 </div>
-</div>
-
 <app-footer></app-footer>
+</div>
