@@ -1,303 +1,303 @@
 <app-navbar></app-navbar>
 
-<div class="card">
-  <img src="../../assets/img/payment-bg2.jpg" class="card-img" alt="">
-  <div class="card-img-overlay">
-
-<div class="container py-5">
-  <div class="row mb-4">
-    <div class="col-md-8 mx-auto text-center">
-      <h1 class="display-4 animated bounceInDown">Foodcart Payment</h1>
-    </div> 
-  </div>
-
-  <div class="row">
-    <div class="col-md-4">
-      <div class="list-group" id="list-tab" role="tablist">
-        <a
-          class="list-group-item list-group-item-action active"
-          id="list-home-list"
-          data-toggle="list"
-          href="#list-home"
-          role="tab"
-          aria-controls="home"
-        >
-          <i class="fa fa-credit-card-alt mr-2"></i>Credit Card</a
-        >
-        <a
-          class="list-group-item list-group-item-action"
-          id="list-profile-list"
-          data-toggle="list"
-          href="#list-profile"
-          role="tab"
-          aria-controls="profile"
-        >
-          <i class="fa fa-paypal mr-2"></i>Paypal</a
-        >
-        <a
-          class="list-group-item list-group-item-action"
-          id="list-messages-list"
-          data-toggle="list"
-          href="#list-messages"
-          role="tab"
-          aria-controls="messages"
-        >
-          <i class="fa fa-mobile mr-2"></i>Net Banking</a
-        >
+<div class="container-fluid my-5">
+  <div class="container py-5">
+    <div class="row mb-4">
+      <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4 animated bounceInDown">Foodcart Payment</h1>
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="tab-content" id="nav-tabContent">
-        <!-- Credit Card -->
-        <div
-          class="tab-pane fade show active"
-          id="list-home"
-          role="tabpanel"
-          aria-labelledby="list-home-list"
-        >
-          <form role="form" [formGroup]="creditForm" #creditcardForm="ngForm">
-            <div class="form-group">
-              <label for="username"><h6>Card Owner</h6></label>
-              <input
-                type="text"
-                name="username"
-                placeholder="Card Owner Name"
-                required
-                class="form-control"
-                formControlName="creditOwner"
-                [ngClass]="{
-                  'is-invalid': f.creditOwner.errors && f.creditOwner.touched
-                }"
-              />
-              <div
-                *ngIf="f.creditOwner.errors?.required"
-                class="invalid-feedback"
-              >
-                This field cannot be empty
-              </div>
-              <div
-                *ngIf="f.creditOwner.errors?.pattern"
-                class="invalid-feedback"
-              >
-                Please enter credit card owner name as in the card
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="cardNumber"><h6>Card number</h6></label>
-              <div class="input-group">
+
+    <div class="row">
+      <div class="col-md-4 mb-5">
+        <div class="list-group" id="list-tab" role="tablist">
+          <a
+            class="list-group-item list-group-item-action active"
+            id="list-home-list"
+            data-toggle="list"
+            href="#list-home"
+            role="tab"
+            aria-controls="home"
+          >
+            <i class="fa fa-credit-card-alt mr-2"></i>Credit Card</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            id="list-profile-list"
+            data-toggle="list"
+            href="#list-profile"
+            role="tab"
+            aria-controls="profile"
+          >
+            <i class="fa fa-paypal mr-2"></i>Paypal</a
+          >
+          <a
+            class="list-group-item list-group-item-action"
+            id="list-messages-list"
+            data-toggle="list"
+            href="#list-messages"
+            role="tab"
+            aria-controls="messages"
+          >
+            <i class="fa fa-mobile mr-2"></i>Net Banking</a
+          >
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content" id="nav-tabContent">
+          <!-- Credit Card -->
+          <div
+            class="tab-pane fade show active"
+            id="list-home"
+            role="tabpanel"
+            aria-labelledby="list-home-list"
+          >
+            <form role="form" [formGroup]="creditForm" #creditcardForm="ngForm">
+              <div class="form-group">
+                <label for="username"><h6>Card Owner</h6></label>
                 <input
                   type="text"
-                  name="cardNumber"
-                  placeholder="Valid card number"
-                  class="form-control"
-                  formControlName="creditNumber"
+                  name="username"
+                  placeholder="Card Owner Name"
                   required
+                  class="form-control"
+                  formControlName="creditOwner"
                   [ngClass]="{
-                    'is-invalid':
-                      f.creditNumber.errors && f.creditNumber.touched
+                    'is-invalid': f.creditOwner.errors && f.creditOwner.touched
                   }"
                 />
-                <div class="input-group-append">
-                  <span class="input-group-text text-muted">
-                    <i class="fa fa-cc-visa mx-1"></i>
-                    <i class="fa fa-cc-mastercard mx-1"></i>
-                    <i class="fa fa-cc-amex mx-1"></i>
-                  </span>
-                </div>
                 <div
-                  *ngIf="f.creditNumber.errors?.required"
+                  *ngIf="f.creditOwner.errors?.required"
                   class="invalid-feedback"
                 >
                   This field cannot be empty
                 </div>
                 <div
-                  *ngIf="f.creditNumber.errors?.pattern"
+                  *ngIf="f.creditOwner.errors?.pattern"
                   class="invalid-feedback"
                 >
-                  Please enter credit card number as in the card
+                  Please enter credit card owner name as in the card
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-8">
-                <div class="form-group">
-                  <label
-                    ><span class="hidden-xs"
-                      ><h6>Expiration Month & Year</h6></span
-                    ></label
+              <div class="form-group">
+                <label for="cardNumber"><h6>Card number</h6></label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    name="cardNumber"
+                    placeholder="Valid card number"
+                    class="form-control"
+                    formControlName="creditNumber"
+                    required
+                    [ngClass]="{
+                      'is-invalid':
+                        f.creditNumber.errors && f.creditNumber.touched
+                    }"
+                  />
+                  <div class="input-group-append">
+                    <span class="input-group-text text-muted">
+                      <i class="fa fa-cc-visa mx-1"></i>
+                      <i class="fa fa-cc-mastercard mx-1"></i>
+                      <i class="fa fa-cc-amex mx-1"></i>
+                    </span>
+                  </div>
+                  <div
+                    *ngIf="f.creditNumber.errors?.required"
+                    class="invalid-feedback"
                   >
-                  <div class="input-group">
-                    <input
-                      type="number"
-                      placeholder="MM"
-                      name=""
-                      class="form-control"
-                      required
-                      formControlName="expirationMonth"
-                      [ngClass]="{
-                        'is-invalid':
-                          f.expirationMonth.errors && f.expirationMonth.touched
-                      }"
-                    />
-                    <div
-                      *ngIf="f.expirationMonth.errors?.required"
-                      class="invalid-feedback"
+                    This field cannot be empty
+                  </div>
+                  <div
+                    *ngIf="f.creditNumber.errors?.pattern"
+                    class="invalid-feedback"
+                  >
+                    Please enter credit card number as in the card
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-8">
+                  <div class="form-group">
+                    <label
+                      ><span class="hidden-xs"
+                        ><h6>Expiration Month & Year</h6></span
+                      ></label
                     >
-                      This filed cannot be empty
+                    <div class="input-group">
+                      <input
+                        type="number"
+                        placeholder="MM"
+                        name=""
+                        class="form-control"
+                        required
+                        formControlName="expirationMonth"
+                        [ngClass]="{
+                          'is-invalid':
+                            f.expirationMonth.errors &&
+                            f.expirationMonth.touched
+                        }"
+                      />
+                      <div
+                        *ngIf="f.expirationMonth.errors?.required"
+                        class="invalid-feedback"
+                      >
+                        This filed cannot be empty
+                      </div>
+                      <div
+                        *ngIf="f.expirationMonth.errors?.pattern"
+                        class="invalid-feedback"
+                      >
+                        Please enter the expiration month as in the card
+                      </div>
+                      <input
+                        type="number"
+                        placeholder="YY"
+                        name=""
+                        class="form-control"
+                        required
+                        formControlName="expirationYear"
+                        [ngClass]="{
+                          'is-invalid':
+                            f.expirationYear.errors && f.expirationYear.touched
+                        }"
+                      />
+                      <div
+                        *ngIf="f.expirationYear.errors?.required"
+                        class="invalid-feedback"
+                      >
+                        This field cannot be empty
+                      </div>
+                      <div
+                        *ngIf="f.expirationYear.errors?.pattern"
+                        class="invalid-feedback"
+                      >
+                        Please enter the expiration year as in the card
+                      </div>
                     </div>
-                     <div
-              *ngIf="f.expirationMonth.errors?.pattern"
-              class="invalid-feedback"
-            >
-              Please enter the expiration month as in the card 
-            </div> 
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group mb-4">
+                    <label
+                      data-toggle="tooltip"
+                      title="Three digit CV code on the back of your card"
+                      ><h6>
+                        CVV <i class="fa fa-question-circle d-inline"></i>
+                      </h6>
+                    </label>
                     <input
-                      type="number"
-                      placeholder="YY"
-                      name=""
-                      class="form-control"
+                      type="text"
                       required
-                      formControlName="expirationYear"
+                      class="form-control"
+                      formControlName="cvv"
                       [ngClass]="{
-                        'is-invalid':
-                          f.expirationYear.errors && f.expirationYear.touched
+                        'is-invalid': f.cvv.errors && f.cvv.touched
                       }"
                     />
                     <div
-                      *ngIf="f.expirationYear.errors?.required"
+                      *ngIf="f.cvv.errors?.required"
                       class="invalid-feedback"
                     >
                       This field cannot be empty
                     </div>
-                    <div
-                      *ngIf="f.expirationYear.errors?.pattern"
-                      class="invalid-feedback"
-                    >
-                      Please enter the expiration year as in the card
+                    <div *ngIf="f.cvv.errors?.pattern" class="invalid-feedback">
+                      Please enter the cvv as in the card
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-4">
-                <div class="form-group mb-4">
-                  <label
-                    data-toggle="tooltip"
-                    title="Three digit CV code on the back of your card"
-                    ><h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    class="form-control"
-                    formControlName="cvv"
-                    [ngClass]="{
-                      'is-invalid': f.cvv.errors && f.cvv.touched
-                    }"
-                  />
-                  <div *ngIf="f.cvv.errors?.required" class="invalid-feedback">
-                    This field cannot be empty
-                  </div>
-                   <div
-                  *ngIf="f.cvv.errors?.pattern"
-                  class="invalid-feedback"
+              <div class="card-footer">
+                <button
+                  type="button"
+                  class="subscribe btn btn-primary btn-lg"
+                  (click)="proceedPayment()"
+                  [disabled]="creditcardForm.invalid"
                 >
-                  Please enter the cvv as in the card 
-                </div>
-                </div>
+                  Confirm Payment
+                </button>
               </div>
-            </div>
-            <div class="card-footer">
-              <button
-                type="button"
-                class="subscribe btn btn-primary btn-lg"
-                (click)="proceedPayment()"
-                [disabled]="creditcardForm.invalid"
-              >
-                Confirm Payment
-              </button>
-            </div>
-          </form>
-        </div>
-        <!--Paypal-->
-        <div
-          class="tab-pane fade"
-          id="list-profile"
-          role="tabpanel"
-          aria-labelledby="list-profile-list"
-        >
-          <h6 class="pb-2">Select your paypal account type</h6>
-          <div class="form-group">
-            <label class="radio-inline">
-              <input type="radio" name="optradio" checked /> Domestic
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="optradio" class="ml-5" />International
-            </label>
+            </form>
           </div>
-          <p>
-            <button
-              type="button"
-              class="btn btn-primary btn-lg"
-              (click)="proceedPayment()"
-            >
-              <i class="fa fa-paypal mr-2"></i> Log into my Paypal
-            </button>
-          </p>
-          <p class="text-muted">
-            Note: After clicking on the button, you will be directed to a secure
-            gateway for payment. After completing the payment process, you will
-            be redirected back to the website to view details of your order.
-          </p>
-        </div>
-        <!--Net Banking-->
-        
-        <div
-          class="tab-pane fade"
-          id="list-messages"
-          role="tabpanel"
-          aria-labelledby="list-messages-list"
-        >
-          <div class="form-group">
-            <label for="Select Your Bank"><h6>Select your Bank</h6></label>
-            <select class="form-control" id="ccmonth">
-              <option value="" selected disabled>
-                --Please select your Bank--
-              </option>
-              <option>Airtel Payments Bank</option>
-              <option>Axis Bank</option>
-              <option>Bank of Baroda - Corporate Banking</option>
-              <option>City Union Bank</option>
-              <option>HDFC Bank</option>
-              <option>ICICI Bank</option>
-              <option>IDBI Bank</option>
-              <option>Kotak Bank</option>
-              <option>Karur Vysya Bank</option>
-              <option>State Bank of India</option>
-            </select>
-          </div>
-          <div class="form-group">
+          <!--Paypal-->
+          <div
+            class="tab-pane fade"
+            id="list-profile"
+            role="tabpanel"
+            aria-labelledby="list-profile-list"
+          >
+            <h6 class="pb-2">Select your paypal account type</h6>
+            <div class="form-group">
+              <label class="radio-inline">
+                <input type="radio" name="optradio" checked /> Domestic
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="optradio" class="ml-5" />International
+              </label>
+            </div>
             <p>
               <button
                 type="button"
                 class="btn btn-primary btn-lg"
                 (click)="proceedPayment()"
               >
-                <i class="fa fa-mobile mr-2"></i> Proceed Pyment
+                <i class="fa fa-paypal mr-2"></i> Log into my Paypal
               </button>
             </p>
+            <p class="text-muted">
+              Note: After clicking on the button, you will be directed to a
+              secure gateway for payment. After completing the payment process,
+              you will be redirected back to the website to view details of your
+              order.
+            </p>
           </div>
-          <p class="text-muted">
-            Note: After clicking on the button, you will be directed to a secure
-            gateway for payment. After completing the payment process, you will
-            be redirected back to the website to view details of your order.
-          </p>
+          <!--Net Banking-->
+
+          <div
+            class="tab-pane fade"
+            id="list-messages"
+            role="tabpanel"
+            aria-labelledby="list-messages-list"
+          >
+            <div class="form-group">
+              <label for="Select Your Bank"><h6>Select your Bank</h6></label>
+              <select class="form-control" id="ccmonth">
+                <option value="" selected disabled>
+                  --Please select your Bank--
+                </option>
+                <option>Airtel Payments Bank</option>
+                <option>Axis Bank</option>
+                <option>Bank of Baroda - Corporate Banking</option>
+                <option>City Union Bank</option>
+                <option>HDFC Bank</option>
+                <option>ICICI Bank</option>
+                <option>IDBI Bank</option>
+                <option>Kotak Bank</option>
+                <option>Karur Vysya Bank</option>
+                <option>State Bank of India</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <p>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-lg"
+                  (click)="proceedPayment()"
+                >
+                  <i class="fa fa-mobile mr-2"></i> Proceed Pyment
+                </button>
+              </p>
+            </div>
+            <p class="text-muted">
+              Note: After clicking on the button, you will be directed to a
+              secure gateway for payment. After completing the payment process,
+              you will be redirected back to the website to view details of your
+              order.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-
-</div>
 <app-footer></app-footer>
-</div>

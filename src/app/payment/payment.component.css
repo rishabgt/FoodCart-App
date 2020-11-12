@@ -1,25 +1,23 @@
-
 .rounded {
-    border-radius: 1rem
+  border-radius: 1rem;
 }
-.display-4{
-    font-weight: 400;
+.display-4 {
+  font-weight: 400;
 }
 
 input[type="radio"] {
-    margin-right: 5px
+  margin-right: 5px;
 }
-.card-img{
-    opacity: 0.6;
-    height: 700px;
-    object-fit: cover;
+/* .card-img {
+  opacity: 0.6;
+  height: 700px;
+  object-fit: cover;
+} */
+@media only screen and (max-width: 576px) {
+  #list-home {
+    padding-bottom: 100px;
+  }
+  form {
+    padding-bottom: 50px;
+  }
 }
-@media only screen and (max-width: 576px){
-    #list-home{
-        padding-bottom: 100px;
-    }
-    form{
-        padding-bottom: 50px;
-    }
-}
-
