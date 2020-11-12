@@ -19,6 +19,7 @@ export class RestaurantsComponent implements OnInit {
   arr: any[];
   cities: any[];
   searchCity: string;
+  isEmpty: boolean;
 
   constructor(
     private service: DataService,
@@ -29,6 +30,7 @@ export class RestaurantsComponent implements OnInit {
     this.searching = true;
     this.searchName = '';
     this.searchCity = '';
+    this.isEmpty = false;
   }
 
   ngOnInit(): void {
@@ -65,6 +67,11 @@ export class RestaurantsComponent implements OnInit {
       this.service.getRestaurantByCity(this.searchCity).subscribe(
         (data) => {
           this.restaurants = data as Restaurants[];
+          if (this.restaurants.length > 0) {
+            this.isEmpty = false;
+          } else {
+            this.isEmpty = true;
+          }
           this.searching = false;
         },
         (error: any) => {
@@ -73,6 +80,12 @@ export class RestaurantsComponent implements OnInit {
         }
       );
     }
+  }
+
+  back() {
+    this.isEmpty = false;
+    this.searching = true;
+    this.getRestaurants();
   }
 
   goBack() {

@@ -74,7 +74,17 @@
       </div>
     </div>
 
-    <div>
+    <div
+      *ngIf="searching === false && isEmpty === true"
+      class="text-center py-5"
+    >
+      <p class="h6">Oops! Couldn't find any restaurants. 😞</p>
+      <button class="btn btn-outline-success btn-sm mt-3" (click)="back()">
+        Back
+      </button>
+    </div>
+
+    <div *ngIf="searching === false && isEmpty === false">
       <div *ngFor="let restaurant of restaurants | filterName: searchName">
         <div class="media text-muted pt-3">
           <img src="{{ restaurant.logo }}" alt="Resturant Logo" />
