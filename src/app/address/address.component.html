@@ -323,18 +323,13 @@
                               id="landmark1"
                               formControlName="landmark1"
                               placeholder="Landmark"
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.landmark1.errors && aF.landmark1.touched
-                              }"
-                              required
                             />
-                            <div
+                            <!-- <div
                               *ngIf="aF.landmark1.errors?.required"
                               class="invalid-feedback"
                             >
                               Enter the Landmark
-                            </div>
+                            </div> -->
                           </div>
                         </div>
 
