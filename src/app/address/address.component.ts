@@ -110,7 +110,7 @@ export class AddressComponent implements OnInit {
           Validators.pattern('^[0-9]*$'),
         ],
       ],
-      landmark1: ['', [Validators.required]],
+      landmark1: ['', ],
       phoneNo1: [
         '',
         [
@@ -159,7 +159,7 @@ export class AddressComponent implements OnInit {
           Validators.pattern('^[0-9]*$'),
         ],
       ],
-      landmark: ['', [Validators.required]],
+      landmark: [''],
       phoneNo: [
         '',
         [
