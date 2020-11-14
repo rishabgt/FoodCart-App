@@ -27,7 +27,7 @@
             class="list-group-item p-0 m-0"
           >
             <div *ngIf="searching === false" class="row no-gutters py-3">
-              <div class="col-sm-3 pl-3 m-0">
+              <div class="col-sm-3 text-center">
                 <div class="product-image">
                   <img
                     *ngIf="foods[i]"
@@ -55,10 +55,10 @@
                   </button>
                 </div>
               </div>
-              <div class="col-sm-5 p-0 m-0">
+              <div class="col-sm-5 pl-3">
                 <a
                   *ngIf="foods[i]"
-                  class="h6 mb-0 pb-1 product-name text-ellipsis"
+                  class="h5 mb-0 pb-1 product-name text-ellipsis"
                   >{{ foods[i].name }}</a
                 >
 
@@ -67,7 +67,7 @@
                     >₹{{ foods[i].price }}</span
                   >
                 </div>
-                <div class="mt-3">
+                <div class="my-3">
                   <button
                     type="button"
                     class="h6 delete-btn"
@@ -76,6 +76,22 @@
                     REMOVE
                   </button>
                 </div>
+              </div>
+              <div class="col-sm-4 px-3">
+                <p *ngIf="restaurants[i]" class="h6">
+                  {{ restaurants[i].name }}
+                </p>
+                <p
+                  *ngIf="restaurants[i]"
+                  class="text-muted"
+                  style="font-size: 14px"
+                >
+                  {{ restaurants[i].street }},&nbsp;{{
+                    restaurants[i].city
+                  }}:&nbsp;{{ restaurants[i].zip }},&nbsp;{{
+                    restaurants[i].state
+                  }}
+                </p>
               </div>
             </div>
           </li>

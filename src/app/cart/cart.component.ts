@@ -1,3 +1,4 @@
+import { Restaurants } from './../models/restaurants';
 import { ToastrService } from 'ngx-toastr';
 import { Items } from './../models/items';
 import { Users } from './../models/users';
@@ -17,12 +18,14 @@ export class CartComponent implements OnInit {
   items: Items[];
   foods: Foods[];
   food: Foods[];
+  restaurants: Restaurants[];
   fid: any[];
   rid: any[];
   searching: boolean;
   orderTotal: number;
   isEmpty: boolean;
   user: Users;
+  userId: number;
 
   constructor(
     private service: DataService,
@@ -42,15 +45,17 @@ export class CartComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
-    console.log(this.user);
+    this.userId = this.service.getIdLocal();
+    // console.log(this.user);
   }
 
   getItems() {
     this.foods = new Array<Foods>();
     this.fid = new Array();
     this.rid = new Array();
+    this.restaurants = new Array<Restaurants>();
 
-    this.service.getItemByUid(this.service.getIdLocal()).subscribe((data) => {
+    this.service.getItemByUid(this.userId).subscribe((data) => {
       this.items = data as Items[];
       this.items.sort((a, b) => a.id - b.id);
 
@@ -73,7 +78,20 @@ export class CartComponent implements OnInit {
             this.rid.push(el[0].rid);
             // console.log(this.foods);
           });
-          this.searching = false;
+
+          let obsvRes = this.rid.map((resId) =>
+            this.service.getRestaurantById(resId)
+          );
+
+          forkJoin(obsvRes).subscribe((dataRes) => {
+            // console.log(data);
+            dataRes.forEach((elem) => {
+              this.restaurants.push(elem[0]);
+            });
+
+            this.searching = false;
+          });
+
           this.service.setRid(this.rid);
         });
 
