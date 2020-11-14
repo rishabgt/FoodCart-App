@@ -1,6 +1,8 @@
 <app-navbar></app-navbar>
 
 <div class="container my-5 py-5">
+  <p class="h4 mb-5">My Past Orders</p>
+
   <div *ngIf="searching === true" class="my-5 py-5">
     <div class="text-center">
       <div class="spinner-grow" role="status">
@@ -43,8 +45,24 @@
             Quantity:&nbsp;{{ order.quantity }}
           </p>
         </div>
-        <div class="card-footer">
-          <small class="text-muted">Ordered on:&nbsp;{{ order.date }}</small>
+        <div class="card-footer text-muted">
+          <p>
+            <small>Ordered on:&nbsp;{{ order.date }}</small>
+          </p>
+          <p>
+            <small *ngIf="restaurants[i]"
+              >Ordered from:&nbsp;{{ restaurants[i].name }}</small
+            >
+          </p>
+          <p>
+            <small *ngIf="restaurants[i]"
+              >Branch:&nbsp;{{ restaurants[i].street }},&nbsp;{{
+                restaurants[i].city
+              }}:&nbsp;{{ restaurants[i].zip }},&nbsp;{{
+                restaurants[i].state
+              }}</small
+            >
+          </p>
         </div>
       </div>
     </div>

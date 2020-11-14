@@ -1,3 +1,4 @@
+import { Restaurants } from './../models/restaurants';
 import { forkJoin } from 'rxjs';
 import { Address } from './../models/address';
 import { Foods } from './../models/foods';
@@ -18,12 +19,14 @@ export class OrdersComponent implements OnInit {
   orders: Orders[];
   foods: Foods[];
   food: Foods;
+  restaurants: Restaurants[];
   searching: boolean;
   isEmpty: boolean;
   address: Address;
   addresses: Address[];
   fid: any[];
   aid: any[];
+  rid: any[];
 
   constructor(
     private service: DataService,
@@ -47,8 +50,10 @@ export class OrdersComponent implements OnInit {
   getOrders() {
     this.aid = new Array();
     this.fid = new Array();
+    this.rid = new Array();
     this.addresses = new Array<Address>();
     this.foods = new Array<Foods>();
+    this.restaurants = new Array<Restaurants>();
 
     this.service.getOrdersByUid(this.service.getIdLocal()).subscribe((data) => {
       this.orders = data as Orders[];
@@ -75,16 +80,28 @@ export class OrdersComponent implements OnInit {
             this.addresses.push(el[0]);
             // console.log(this.foods);
           });
-          this.searching = false;
         });
 
         forkJoin(observables).subscribe((data) => {
           // console.log(data);
           data.forEach((el) => {
             this.foods.push(el[0]);
+            this.rid.push(el[0].rid);
             // console.log(this.foods);
           });
-          this.searching = false;
+
+          let obsvRes = this.rid.map((resId) =>
+            this.service.getRestaurantById(resId)
+          );
+
+          forkJoin(obsvRes).subscribe((dataRes) => {
+            // console.log(dataRes);
+            dataRes.forEach((elem) => {
+              this.restaurants.push(elem[0]);
+            });
+
+            this.searching = false;
+          });
         });
       }
     });
