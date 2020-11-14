@@ -88,7 +88,7 @@
       <div *ngFor="let restaurant of restaurants | filterName: searchName">
         <div class="media text-muted pt-3">
           <img src="{{ restaurant.logo }}" alt="Resturant Logo" />
-          <p class="media-body pb-4 mb-0 lh-125 border-bottom border-gray">
+          <div class="media-body pb-4 mb-0 lh-125 border-bottom border-gray">
             <a
               routerLink="/menu/{{ restaurant.id }}"
               data-toggle="tooltip"
@@ -97,7 +97,16 @@
             >
               <strong>{{ restaurant.name }}</strong>
             </a>
-          </p>
+            <p class="mb-0">
+              <small class="text-muted"
+                >Branch:&nbsp;{{ restaurant.street }},&nbsp;{{
+                  restaurant.city
+                }}:&nbsp;{{ restaurant.zip }},&nbsp;{{
+                  restaurant.state
+                }}</small
+              >
+            </p>
+          </div>
         </div>
       </div>
     </div>

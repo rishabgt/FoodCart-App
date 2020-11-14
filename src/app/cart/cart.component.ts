@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
   foods: Foods[];
   food: Foods[];
   fid: any[];
+  rid: any[];
   searching: boolean;
   orderTotal: number;
   isEmpty: boolean;
@@ -47,6 +48,7 @@ export class CartComponent implements OnInit {
   getItems() {
     this.foods = new Array<Foods>();
     this.fid = new Array();
+    this.rid = new Array();
 
     this.service.getItemByUid(this.service.getIdLocal()).subscribe((data) => {
       this.items = data as Items[];
@@ -68,9 +70,11 @@ export class CartComponent implements OnInit {
           // console.log(data);
           data.forEach((el) => {
             this.foods.push(el[0]);
+            this.rid.push(el[0].rid);
             // console.log(this.foods);
           });
           this.searching = false;
+          this.service.setRid(this.rid);
         });
 
         this.calculateOrderTotal();

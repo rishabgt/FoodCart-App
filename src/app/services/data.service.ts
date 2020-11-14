@@ -11,6 +11,7 @@ export class DataService {
   private user: Users;
   private isLogin = JSON.parse(localStorage.getItem('login')) || false;
   private address: Address;
+  private rid: any[];
 
   constructor(private http: HttpClient) {}
 
@@ -190,5 +191,13 @@ export class DataService {
       this.url + 'updateCurrentAddress.php',
       JSON.stringify(resource)
     );
+  }
+
+  setRid(resId: any[]) {
+    this.rid = resId;
+  }
+
+  getRid() {
+    return this.rid;
   }
 }

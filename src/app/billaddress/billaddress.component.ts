@@ -1,3 +1,4 @@
+import { forkJoin } from 'rxjs';
 import { Address } from './../models/address';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from './../services/data.service';
@@ -18,6 +19,10 @@ export class BilladdressComponent implements OnInit {
   isEmpty: boolean;
   firstName: string;
   id: number;
+  rid: any[];
+  resCity: string[];
+  userId: number;
+  userCity: string;
 
   constructor(
     private service: DataService,
@@ -32,30 +37,57 @@ export class BilladdressComponent implements OnInit {
   ngOnInit(): void {
     this.getUser();
     this.getAddresses();
+    this.getRid();
   }
 
   getUser() {
     this.user = this.service.getUser();
+    this.userId = this.service.getIdLocal();
     this.firstName = this.service.getFirstName();
   }
 
   getAddresses() {
-    this.service
-      .getAddressByUidAndCurrent(this.service.getIdLocal())
-      .subscribe((data) => {
-        this.addresses = data as Address[];
-        if (this.addresses.length === 0) {
-          this.isEmpty = true;
-        } else {
-          this.isEmpty = false;
-        }
-        this.isSearching = false;
+    this.service.getAddressByUidAndCurrent(this.userId).subscribe((data) => {
+      this.addresses = data as Address[];
+      if (this.addresses.length === 0) {
+        this.isEmpty = true;
+      } else {
+        this.userCity = this.addresses[0].city;
+        this.isEmpty = false;
+      }
+      this.isSearching = false;
+    });
+  }
+
+  getRid() {
+    this.rid = new Array();
+    this.resCity = new Array<string>();
+
+    this.rid = this.service.getRid();
+
+    let observables = this.rid.map((resId) =>
+      this.service.getRestaurantById(resId)
+    );
+
+    forkJoin(observables).subscribe((data) => {
+      console.log(data);
+
+      data.forEach((el) => {
+        this.resCity.push(el[0].city);
       });
+    });
   }
 
   selectAddress(item) {
     this.service.setAddress(item);
-    this.router.navigate(['/payment']);
+
+    if (this.resCity.every((item) => item === this.userCity)) {
+      this.router.navigate(['/payment']);
+    } else {
+      this.toastr.error(
+        'Items cannot be ordered from & delivered to a different city!'
+      );
+    }
   }
 
   goToAddress() {
