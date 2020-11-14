@@ -95,7 +95,7 @@ export class PaymentComponent implements OnInit {
       );
     });
 
-    this.service.deleteItemByUid(this.service.getIdLocal()).subscribe(() => {
+    this.service.deleteItemByUid(this.userId).subscribe(() => {
       this.toastr.success('View details in Orders.');
       // console.log('Cart cleared.');
     });
