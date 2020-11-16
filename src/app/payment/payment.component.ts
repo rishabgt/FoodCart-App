@@ -72,11 +72,11 @@ export class PaymentComponent implements OnInit {
   }
 
   proceedPayment() {
-    var date = new Date();
-    let str = date.toDateString();
+    const date = new Date();
+    const str = date.toDateString();
 
     this.items.forEach((item) => {
-      let order = {
+      const order = {
         quantity: item.quantity,
         fid: item.fid,
         uid: item.uid,
@@ -90,7 +90,7 @@ export class PaymentComponent implements OnInit {
           // console.log('Item moved to Orders.');
         },
         (error: any) => {
-          this.toastr.error("Couldn't place order!" + '😞');
+          this.toastr.error('Couldn\'t place order!' + '😞');
         }
       );
     });
