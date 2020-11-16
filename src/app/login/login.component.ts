@@ -13,19 +13,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('closeButton') closeButton;
-  @ViewChild('load') load;
-  @ViewChild('closeLoad') closeLoad;
-
-  fetching: boolean;
-  valid: boolean;
-  validLoading: boolean;
-  credentials: Users;
-  user: any;
-  userExists: boolean;
-  passwordField: boolean;
-  passwordSignUpField: boolean;
-  confirmPasswordSignUpField: boolean;
 
   constructor(
     private _dataService: DataService,
@@ -38,30 +25,6 @@ export class LoginComponent implements OnInit {
     this.userExists = false;
     this.fetching = false;
   }
-
-  ngOnInit(): void {}
-
-  form = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-  });
-
-  signupForm = new FormGroup(
-    {
-      usernameSignUp: new FormControl('', [
-        Validators.required,
-        Validators.email,
-      ]),
-      passwordSignUp: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-      ]),
-      firstname: new FormControl('', Validators.required),
-      lastname: new FormControl('', Validators.required),
-      confirmPasswordSignUp: new FormControl('', [Validators.required]),
-    },
-    ConfirmPassword.confirmPassword
-  );
 
   get usernameSignUp() {
     return this.signupForm.get('usernameSignUp');
@@ -86,6 +49,43 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.form.get('password').value;
   }
+  @ViewChild('closeButton') closeButton;
+  @ViewChild('load') load;
+  @ViewChild('closeLoad') closeLoad;
+
+  fetching: boolean;
+  valid: boolean;
+  validLoading: boolean;
+  credentials: Users;
+  user: any;
+  userExists: boolean;
+  passwordField: boolean;
+  passwordSignUpField: boolean;
+  confirmPasswordSignUpField: boolean;
+
+  form = new FormGroup({
+    username: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  });
+
+  signupForm = new FormGroup(
+    {
+      usernameSignUp: new FormControl('', [
+        Validators.required,
+        Validators.email,
+      ]),
+      passwordSignUp: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      confirmPasswordSignUp: new FormControl('', [Validators.required]),
+    },
+    ConfirmPassword.confirmPassword
+  );
+
+  ngOnInit(): void {}
 
   formReset() {
     this.signupForm.reset();
@@ -161,7 +161,7 @@ export class LoginComponent implements OnInit {
         }
       },
       (error: any) => {
-        this.toastr.error("Couldn't log in!" + '👎');
+        this.toastr.error('Couldn\'t log in!' + '👎');
       }
     );
   }
