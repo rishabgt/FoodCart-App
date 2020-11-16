@@ -59,14 +59,14 @@ export class MenuComponent implements OnInit {
   }
 
   getImgUrl() {
-    return "url('" + this.currentRestaurant.image + "')";
+    return 'url(\'' + this.currentRestaurant.image + '\')';
   }
 
   addItemToCart(item) {
-    var date = new Date();
-    let str = date.toDateString();
+    const date = new Date();
+    const str = date.toDateString();
 
-    let order = {
+    const order = {
       quantity: 1,
       fid: item.id,
       uid: this.user.id,
