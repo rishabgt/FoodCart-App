@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ContactUsComponent implements OnInit {
   feedbackForm: FormGroup;
-  constructor( private formBuilder: FormBuilder,) { }
+  constructor( private formBuilder: FormBuilder, ) { }
 
   ngOnInit(): void {
     this.feedbackForm = this.formBuilder.group({
@@ -32,8 +32,8 @@ export class ContactUsComponent implements OnInit {
           Validators.maxLength(2500)
         ],
       ],
-    })
-  
+    });
+
   }
 
   get f() {
