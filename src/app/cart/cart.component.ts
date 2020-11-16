@@ -67,7 +67,7 @@ export class CartComponent implements OnInit {
           this.fid.push(item.fid);
         });
 
-        let observables = this.fid.map((foodId) =>
+        const observables = this.fid.map((foodId) =>
           this.service.getFoodById(foodId)
         );
 
@@ -79,7 +79,7 @@ export class CartComponent implements OnInit {
             // console.log(this.foods);
           });
 
-          let obsvRes = this.rid.map((resId) =>
+          const obsvRes = this.rid.map((resId) =>
             this.service.getRestaurantById(resId)
           );
 
@@ -108,7 +108,7 @@ export class CartComponent implements OnInit {
   }
 
   increaseQuantity(item) {
-    let updatedOrder = {
+    const updatedOrder = {
       id: item.id,
       quantity: ++item.quantity,
     };
@@ -121,7 +121,7 @@ export class CartComponent implements OnInit {
   }
 
   decreaseQuantity(item) {
-    let updatedOrder = {
+    const updatedOrder = {
       id: item.id,
       quantity: --item.quantity,
     };
