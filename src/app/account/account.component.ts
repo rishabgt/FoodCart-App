@@ -55,14 +55,14 @@ export class AccountComponent implements OnInit {
         null,
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"),
+          Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$'),
         ]),
       ],
       lastname: [
         null,
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"),
+          Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$'),
         ]),
       ],
     });
@@ -79,18 +79,18 @@ export class AccountComponent implements OnInit {
   submit(form) {
     console.log(form);
 
-    let updatedUser = {
+    const updatedUser = {
       id: this.id,
-      firstname: this.form.controls['firstname'].value,
-      lastname: this.form.controls['lastname'].value,
-      username: this.form.controls['username'].value,
+      firstname: this.form.controls.firstname.value,
+      lastname: this.form.controls.lastname.value,
+      username: this.form.controls.username.value,
     };
 
-    let newUser = {
+    const newUser = {
       id: this.id,
-      firstname: this.form.controls['firstname'].value,
-      lastname: this.form.controls['lastname'].value,
-      username: this.form.controls['username'].value,
+      firstname: this.form.controls.firstname.value,
+      lastname: this.form.controls.lastname.value,
+      username: this.form.controls.username.value,
       password: this.password,
     };
 
@@ -102,7 +102,7 @@ export class AccountComponent implements OnInit {
         this.form.reset();
       },
       (error: any) => {
-        this.toastr.error("Couldn't updated user details!" + '😞');
+        this.toastr.error('Couldn\'t updated user details!' + '😞');
         this.form.reset();
       }
     );
