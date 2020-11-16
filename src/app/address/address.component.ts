@@ -247,16 +247,16 @@ export class AddressComponent implements OnInit {
 
     this.isSearching = true;
 
-    let newAddress = {
-      firstname: this.addressForm.controls['firstName1'].value,
-      lastname: this.addressForm.controls['lastName1'].value,
-      building: this.addressForm.controls['buildingNo1'].value,
-      street: this.addressForm.controls['streetName1'].value,
-      city: this.addressForm.controls['city1'].value,
-      state: this.addressForm.controls['state1'].value,
-      zip: this.addressForm.controls['zipCode1'].value,
-      landmark: this.addressForm.controls['landmark1'].value,
-      phone: this.addressForm.controls['phoneNo1'].value,
+    const newAddress = {
+      firstname: this.addressForm.controls.firstName1.value,
+      lastname: this.addressForm.controls.lastName1.value,
+      building: this.addressForm.controls.buildingNo1.value,
+      street: this.addressForm.controls.streetName1.value,
+      city: this.addressForm.controls.city1.value,
+      state: this.addressForm.controls.state1.value,
+      zip: this.addressForm.controls.zipCode1.value,
+      landmark: this.addressForm.controls.landmark1.value,
+      phone: this.addressForm.controls.phoneNo1.value,
       currentAdd: 'no',
       uid: this.userId,
     };
@@ -270,7 +270,7 @@ export class AddressComponent implements OnInit {
         this.enableAdd = false;
       },
       (error: any) => {
-        this.toastr.error("Couldn't save address!" + '😞');
+        this.toastr.error('Couldn\'t save address!' + '😞');
         // console.log(error);
       }
     );
@@ -288,17 +288,17 @@ export class AddressComponent implements OnInit {
   onSubmit() {
     console.log(this.billForm.value);
 
-    let address = {
+    const address = {
       id: this.id,
-      firstname: this.billForm.controls['firstName'].value,
-      lastname: this.billForm.controls['lastName'].value,
-      building: this.billForm.controls['buildingNo'].value,
-      street: this.billForm.controls['streetName'].value,
-      city: this.billForm.controls['city'].value,
-      state: this.billForm.controls['state'].value,
-      zip: this.billForm.controls['zipCode'].value,
-      landmark: this.billForm.controls['landmark'].value,
-      phone: this.billForm.controls['phoneNo'].value,
+      firstname: this.billForm.controls.firstName.value,
+      lastname: this.billForm.controls.lastName.value,
+      building: this.billForm.controls.buildingNo.value,
+      street: this.billForm.controls.streetName.value,
+      city: this.billForm.controls.city.value,
+      state: this.billForm.controls.state.value,
+      zip: this.billForm.controls.zipCode.value,
+      landmark: this.billForm.controls.landmark.value,
+      phone: this.billForm.controls.phoneNo.value,
     };
 
     this.service.updateAddress(address).subscribe(
@@ -308,7 +308,7 @@ export class AddressComponent implements OnInit {
         this.getAddresses();
       },
       (error: any) => {
-        this.toastr.error("Couldn't update address!");
+        this.toastr.error('Couldn\'t update address!');
       }
     );
   }
@@ -316,7 +316,7 @@ export class AddressComponent implements OnInit {
   markCurrent(el) {
     this.isSearching = true;
 
-    let observables = this.aid.map((addId) =>
+    const observables = this.aid.map((addId) =>
       this.service.getAddressById(addId)
     );
 
@@ -324,7 +324,7 @@ export class AddressComponent implements OnInit {
       // console.log(data);
       data.forEach((elem) => {
         if (elem[0].id === el.id) {
-          let addr = {
+          const addr = {
             id: elem[0].id,
             currentAdd: 'yes',
           };
@@ -335,12 +335,12 @@ export class AddressComponent implements OnInit {
               // console.log('Changed current');
             },
             (error: any) => {
-              this.toastr.error("Couldn't change current address!" + '😞');
+              this.toastr.error('Couldn\'t change current address!' + '😞');
               // console.log(error);
             }
           );
         } else {
-          let addr = {
+          const addr = {
             id: elem[0].id,
             currentAdd: 'no',
           };
