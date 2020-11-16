@@ -65,7 +65,7 @@ export class BilladdressComponent implements OnInit {
 
     this.rid = this.service.getRid();
 
-    let observables = this.rid.map((resId) =>
+    const observables = this.rid.map((resId) =>
       this.service.getRestaurantById(resId)
     );
 
