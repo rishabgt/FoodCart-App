@@ -68,9 +68,9 @@ export class OrdersComponent implements OnInit {
           this.fid.push(item.fid);
         });
 
-        let addr = this.aid.map((addId) => this.service.getAddressById(addId));
+        const addr = this.aid.map((addId) => this.service.getAddressById(addId));
 
-        let observables = this.fid.map((foodId) =>
+        const observables = this.fid.map((foodId) =>
           this.service.getFoodById(foodId)
         );
 
@@ -90,7 +90,7 @@ export class OrdersComponent implements OnInit {
             // console.log(this.foods);
           });
 
-          let obsvRes = this.rid.map((resId) =>
+          const obsvRes = this.rid.map((resId) =>
             this.service.getRestaurantById(resId)
           );
 
