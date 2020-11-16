@@ -84,22 +84,22 @@ export class PasswordComponent implements OnInit {
   submit(form) {
     console.log(form);
 
-    if (this.form.controls['oldpassword'].value !== this.password) {
+    if (this.form.controls.oldpassword.value !== this.password) {
       this.isMatching = false;
     } else {
       this.isMatching = true;
 
-      let updatedPassword = {
+      const updatedPassword = {
         id: this.id,
-        password: this.form.controls['confirmPassword'].value,
+        password: this.form.controls.confirmPassword.value,
       };
 
-      let newUser = {
+      const newUser = {
         id: this.id,
         firstname: this.firstName,
         lastname: this.lastName,
         username: this.userName,
-        password: this.form.controls['confirmPassword'].value,
+        password: this.form.controls.confirmPassword.value,
       };
 
       this.service.updatePassword(updatedPassword).subscribe(
@@ -110,7 +110,7 @@ export class PasswordComponent implements OnInit {
           this.form.reset();
         },
         (error: any) => {
-          this.toastr.error("Couldn't change password!" + '😞');
+          this.toastr.error('Couldn\'t change password!' + '😞');
           this.form.reset();
         }
       );
