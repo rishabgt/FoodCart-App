@@ -81,7 +81,11 @@ export class BilladdressComponent implements OnInit {
   selectAddress(item) {
     this.service.setAddress(item);
 
-    if (this.resCity.every((item) => item === this.userCity)) {
+    if (
+      this.resCity.every(
+        (item) => item.toLowerCase() === this.userCity.toLowerCase()
+      )
+    ) {
       this.router.navigate(['/payment']);
     } else {
       this.toastr.error(
