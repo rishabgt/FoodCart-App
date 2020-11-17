@@ -21,7 +21,7 @@
         [formGroup]="feedbackForm"
         class="needs-validation"
         novalidate
-        (ngSubmit)="onSubmit()"
+        #messageForm="ngForm"
       >
         <div class="mb-3">
           <label for="name">Name <span>*</span></label>
@@ -86,7 +86,14 @@
             }}] characters.
           </div>
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button
+          type="submit"
+          class="btn btn-success"
+          (click)="onSubmit()"
+          [disabled]="messageForm.invalid"
+        >
+          Submit
+        </button>
       </form>
     </div>
 
