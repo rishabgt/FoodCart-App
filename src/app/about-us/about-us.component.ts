@@ -1,6 +1,7 @@
 import { Users } from './../models/users';
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-about-us',
@@ -10,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class AboutUsComponent implements OnInit {
   user: Users;
 
-  constructor(private service: DataService) {}
+  constructor(private service: DataService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.getUser();
@@ -20,5 +21,7 @@ export class AboutUsComponent implements OnInit {
     this.user = this.service.getUser();
   }
 
-  onSubscribe() {}
+  onSubscribe() {
+    this.toastr.success('Subscribed successfully!' + '👍');
+  }
 }
