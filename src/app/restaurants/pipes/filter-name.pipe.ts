@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'filterName',
 })
 export class FilterNamePipe implements PipeTransform {
-  transform(value: Restaurants[], query: String): Restaurants[] {
+  transform(value: Restaurants[], query: string): Restaurants[] {
     if (query === '') {
       return value;
     } else {
