@@ -444,11 +444,19 @@
                         </div>
                       </div>
                       <p>
-                        {{ address.building }},&nbsp;{{
-                          address.street
-                        }},&nbsp;Landmark:&nbsp;{{ address.landmark }},&nbsp;{{
-                          address.city
-                        }}:&nbsp;{{ address.zip }},&nbsp;{{ address.state }}
+                        <span
+                          >{{ address.building }},&nbsp;{{
+                            address.street
+                          }},&nbsp;</span
+                        >
+                        <span *ngIf="address.landmark"
+                          >Landmark:&nbsp;{{ address.landmark }},&nbsp;</span
+                        >
+                        <span
+                          >{{ address.city }}:&nbsp;{{ address.zip }},&nbsp;{{
+                            address.state
+                          }}</span
+                        >
                       </p>
                       <p class="h4">{{ address.phone }}</p>
                     </div>
