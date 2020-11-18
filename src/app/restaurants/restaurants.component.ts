@@ -1,3 +1,4 @@
+import { Address } from './../models/address';
 import { ToastrService } from 'ngx-toastr';
 import { Users } from './../models/users';
 import { Restaurants } from './../models/restaurants';
@@ -20,6 +21,9 @@ export class RestaurantsComponent implements OnInit {
   cities: any[];
   searchCity: string;
   isEmpty: boolean;
+  userId: number;
+  address: Address[];
+  currentCity: string;
 
   constructor(
     private service: DataService,
@@ -34,16 +38,50 @@ export class RestaurantsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.toastr.info("Current city's restaurants are here!" + '😀');
     this.getUser();
-    this.getRestaurants();
+    this.getCurrentAddress();
+    this.getCities();
   }
 
   getUser() {
     this.user = this.service.getUser();
+    this.userId = this.service.getIdLocal();
     // console.log(this.user);
   }
 
+  getCurrentAddress() {
+    this.service.getAddressByUidAndCurrent(this.userId).subscribe((data) => {
+      this.address = data as Address[];
+      this.getRestaurants();
+    });
+  }
+
   getRestaurants() {
+    if (this.address.length === 0) {
+      this.service.getRestaurants().subscribe((data) => {
+        this.restaurants = data as Restaurants[];
+        this.searching = false;
+      });
+    } else {
+      this.currentCity = this.address[0].city;
+      this.searchCity = 'Current City: ' + this.address[0].city;
+
+      this.service.getRestaurantByCity(this.currentCity).subscribe((data) => {
+        this.restaurants = data as Restaurants[];
+
+        if (this.restaurants.length > 0) {
+          this.isEmpty = false;
+        } else {
+          this.isEmpty = true;
+        }
+
+        this.searching = false;
+      });
+    }
+  }
+
+  getCities() {
     this.arr = new Array();
     this.cities = new Array();
 
