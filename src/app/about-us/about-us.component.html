@@ -81,14 +81,15 @@
 <!--End-->
 
 <!--Title-->
-<div class="title-block text-center">
+<div class="title-block text-center my-5">
   <div class="title-innertext">
     <h1 class="title-text my-auto">ABOUT US</h1>
   </div>
 </div>
 <!--End-->
+
 <!--Food Cart Description-->
-<div class="about-foodcart">
+<div class="about-foodcart my-5">
   <div class="title-description">
     <div class="title-heading">
       <h1>FOOD CART</h1>
@@ -100,11 +101,7 @@
         EVERYTHING WE DO.
       </p>
     </div>
-      <img
-        src="../../assets/img/separator_light.png"
-        alt=""
-        class="seperator-image"
-      />
+    <img src="assets/img/separator_light.png" alt="" class="seperator-image" />
     <div class="foodcart-motto">
       <p>
         We understand how to best serve our customers through tried and true
@@ -118,7 +115,7 @@
 </div>
 
 <div class="container-fluid">
-  <div class="card mb-3">
+  <div class="card my-5">
     <div class="row no-gutters">
       <div class="col-md-4 card-quote">
         <h4 class="quote text-center">
@@ -186,10 +183,17 @@
       />
     </div>
     <div class="col-md-2">
-      <button type="button" class="btn btn-primary mx-auto" (click)="onSubscribe()">Subscribe</button>
+      <button
+        type="button"
+        class="btn btn-primary mx-auto"
+        (click)="onSubscribe()"
+      >
+        Subscribe
+      </button>
     </div>
   </div>
 </div>
 
 <app-team-details></app-team-details>
+
 <app-footer></app-footer>
