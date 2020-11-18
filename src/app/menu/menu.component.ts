@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
   rid: number;
   searching: boolean;
   user: Users;
+  userId: number;
 
   constructor(
     private service: DataService,
@@ -37,6 +38,7 @@ export class MenuComponent implements OnInit {
 
   getUser() {
     this.user = this.service.getUser();
+    this.userId = this.service.getIdLocal();
     // console.log(this.user);
   }
 
@@ -69,7 +71,7 @@ export class MenuComponent implements OnInit {
     const order = {
       quantity: 1,
       fid: item.id,
-      uid: this.user.id,
+      uid: this.userId,
       price: item.price,
       date: str,
     };

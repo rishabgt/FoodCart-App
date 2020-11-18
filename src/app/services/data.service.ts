@@ -118,6 +118,10 @@ export class DataService {
     return this.http.get(this.url + 'getItemByUid.php?uid=' + uid);
   }
 
+  getItemById(id: number) {
+    return this.http.get(this.url + 'getItemById.php?id=' + id);
+  }
+
   getFoodById(id: number) {
     return this.http.get(this.url + 'getFoodById.php?id=' + id);
   }

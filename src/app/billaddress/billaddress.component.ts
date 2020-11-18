@@ -70,7 +70,7 @@ export class BilladdressComponent implements OnInit {
     );
 
     forkJoin(observables).subscribe((data) => {
-      console.log(data);
+      // console.log(data);
 
       data.forEach((el) => {
         this.resCity.push(el[0].city);

@@ -90,7 +90,7 @@ export class PaymentComponent implements OnInit {
           // console.log('Item moved to Orders.');
         },
         (error: any) => {
-          this.toastr.error('Couldn\'t place order!' + '😞');
+          this.toastr.error("Couldn't place order!" + '😞');
         }
       );
     });
