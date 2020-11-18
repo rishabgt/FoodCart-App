@@ -14,7 +14,7 @@
       name="resCities"
       placeholder="Select a city..."
       [(ngModel)]="searchCity"
-      (keyup.enter)="setCity()"
+      (change)="setCity()"
     />
     <datalist id="citiesName" name="citiesName">
       <option *ngFor="let city of cities" [ngValue]="city" value="{{ city }}">
