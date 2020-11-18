@@ -27,6 +27,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { CommonModule } from '@angular/common';
 import { PaymentComponent } from './payment/payment.component';
 import { AddressComponent } from './address/address.component';
+import { TeamDetailsComponent } from './team-details/team-details.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AddressComponent } from './address/address.component';
     PaymentComponent,
     AddressComponent,
     AboutUsComponent,
+    TeamDetailsComponent,
   ],
   imports: [
     BrowserModule,
