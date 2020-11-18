@@ -59,7 +59,7 @@ export class MenuComponent implements OnInit {
   }
 
   getImgUrl() {
-    return 'url(\'' + this.currentRestaurant.image + '\')';
+    return "url('" + this.currentRestaurant.image + "')";
   }
 
   addItemToCart(item) {
