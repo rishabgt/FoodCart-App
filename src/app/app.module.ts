@@ -64,6 +64,7 @@ import { TeamDetailsComponent } from './team-details/team-details.component';
       progressBar: true,
       progressAnimation: 'increasing',
       preventDuplicates: true,
+      positionClass: 'toast-bottom-right',
     }),
   ],
   providers: [DataService, Authguard],
