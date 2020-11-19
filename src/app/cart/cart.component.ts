@@ -115,8 +115,9 @@ export class CartComponent implements OnInit {
 
     this.service.updateQuantity(updatedOrder).subscribe(() => {
       // console.log('Order quantity increased');
-      this.searching = true;
-      this.getItems();
+      // this.searching = true;
+      // this.getItems();
+      this.calculateOrderTotal();
     });
   }
 
@@ -128,8 +129,9 @@ export class CartComponent implements OnInit {
 
     this.service.updateQuantity(updatedOrder).subscribe(() => {
       // console.log('Order quantity decreased');
-      this.searching = true;
-      this.getItems();
+      // this.searching = true;
+      // this.getItems();
+      this.calculateOrderTotal();
     });
   }
 
