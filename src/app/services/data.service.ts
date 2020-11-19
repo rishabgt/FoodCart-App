@@ -152,6 +152,10 @@ export class DataService {
     return this.http.get(this.url + 'getOrdersByUid.php?uid=' + uid);
   }
 
+  getLastOrder() {
+    return this.http.get(this.url + 'getLastOrder.php');
+  }
+
   insertAddress(resource) {
     return this.http.post(
       this.url + 'insertAddress.php',
