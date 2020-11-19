@@ -1,10 +1,12 @@
 .sidebar {
   margin: 0;
   padding: 0;
+  width: 200px;
   background-color: #f1f1f1;
-  position: relative;
+  position: fixed;
   height: 100%;
-  overflow: hidden;
+  overflow: auto;
+  z-index: 10;
 }
 
 .sidebar a {
@@ -25,27 +27,35 @@
   cursor: pointer;
 }
 
-div.content {
+/* div.content {
   margin-left: 200px;
   padding: 1px 16px;
   height: 1000px;
-}
+} */
 
 @media only screen and (max-width: 768px) {
   .sidebar {
     width: 100%;
     height: auto;
-    position: relative;
+    position: fixed;
+    bottom: 0;
   }
   .sidebar a {
     float: left;
   }
-  div.content {
+
+  /* div.content {
     margin-left: 0;
-  }
+  } */
 }
 
 @media only screen and (max-width: 576px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+  }
   .sidebar a {
     text-align: center;
     float: none;

@@ -1,810 +1,793 @@
+<app-navbar></app-navbar>
+
+<app-dashboard></app-dashboard>
+
 <div class="main-content">
-  <app-navbar></app-navbar>
-
-  <div class="row no-gutters main-row">
-    <div class="col-lg-2">
-      <app-dashboard></app-dashboard>
+  <!-- Top navbar -->
+  <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+    <div class="container-fluid">
+      <!-- Brand -->
+      <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
+        >User profile</a
+      >
     </div>
-    <div class="col-lg-10 mb-5">
-      <!-- Top navbar -->
-      <nav
-        class="navbar navbar-top navbar-expand-md navbar-dark"
-        id="navbar-main"
-      >
-        <div class="container-fluid">
-          <!-- Brand -->
-          <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
-            >User profile</a
-          >
-        </div>
-      </nav>
+  </nav>
 
-      <!-- Header -->
-      <div
-        class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
-        style="
-          min-height: 600px;
-          background-image: url(https://images.unsplash.com/photo-1597898141667-03038de0f217?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
-          background-size: cover;
-          background-position: center top;
-        "
-      >
-        <!-- Mask -->
-        <span class="mask bg-gradient-default opacity-8"></span>
-        <!-- Header container -->
-        <div class="container-fluid d-flex align-items-center">
-          <div class="row">
-            <div class="col-lg-7 col-md-10">
-              <h1 class="display-2 text-white">Hello {{ firstName }}</h1>
-              <p class="text-white mt-0 mb-5">
-                This is your address page. You can add or, remove addresses.
-              </p>
-            </div>
-          </div>
+  <!-- Header -->
+  <div
+    class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
+    style="
+      min-height: 600px;
+      background-image: url(https://images.unsplash.com/photo-1597898141667-03038de0f217?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+      background-size: cover;
+      background-position: center top;
+    "
+  >
+    <!-- Mask -->
+    <span class="mask bg-gradient-default opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h1 class="display-2 text-white">Hello {{ firstName }}</h1>
+          <p class="text-white mt-0 mb-5">
+            This is your address page. You can add or, remove addresses.
+          </p>
         </div>
       </div>
-      <!-- Page content -->
-      <div class="container-fluid mt--7">
-        <div class="row">
-          <div class="col-xl-12 order-xl-1">
-            <div class="card bg-secondary shadow">
-              <div class="card-header bg-white border-0">
-                <div class="row align-items-center">
-                  <div class="col-8">
-                    <h3 class="mb-0">My Addresses</h3>
-                  </div>
-                </div>
+    </div>
+  </div>
+
+  <!-- Page content -->
+  <div class="container-fluid mt--7 mb-5">
+    <div class="row">
+      <div class="col-xl-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">My Addresses</h3>
               </div>
-              <div class="card-body">
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">
-                    <div *ngIf="isVisible === true">
-                      <button class="btn btn-info" (click)="address()">
-                        Add Address
-                      </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div *ngIf="isVisible === true">
+                  <button class="btn btn-info" (click)="address()">
+                    Add Address
+                  </button>
+                </div>
+
+                <div *ngIf="enableAdd === true && isVisible === false">
+                  <p class="h4">Add new Address</p>
+                  <form
+                    [formGroup]="addressForm"
+                    class="needs-validation"
+                    novalidate
+                    (ngSubmit)="submit()"
+                  >
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="firstName1"
+                          formControlName="firstName1"
+                          placeholder="First Name"
+                          [ngClass]="{
+                            'is-invalid':
+                              aF.firstName1.errors && aF.firstName1.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="aF.firstName1.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the First Name
+                        </div>
+                        <div
+                          *ngIf="aF.firstName1.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            aF.firstName1.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                        <div
+                          *ngIf="aF.firstName1.errors?.pattern"
+                          class="invalid-feedback"
+                        >
+                          This field accepts only Alphabetical characters and
+                          spaces only.
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lastName1"
+                          formControlName="lastName1"
+                          placeholder="Last Name"
+                          [ngClass]="{
+                            'is-invalid':
+                              aF.lastName1.errors && aF.lastName1.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="aF.lastName1.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Last Name
+                        </div>
+                        <div
+                          *ngIf="aF.lastName1.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            aF.lastName1.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                        <div
+                          *ngIf="aF.lastName1.errors?.pattern"
+                          class="invalid-feedback"
+                        >
+                          This field accepts only Alphabetical characters and
+                          spaces only.
+                        </div>
+                      </div>
                     </div>
 
-                    <div *ngIf="enableAdd === true && isVisible === false">
-                      <p class="h4">Add new Address</p>
-                      <form
-                        [formGroup]="addressForm"
-                        class="needs-validation"
-                        novalidate
-                        (ngSubmit)="submit()"
-                      >
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="firstName1"
-                              formControlName="firstName1"
-                              placeholder="First Name"
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.firstName1.errors && aF.firstName1.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="aF.firstName1.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the First Name
-                            </div>
-                            <div
-                              *ngIf="aF.firstName1.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                aF.firstName1.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                            <div
-                              *ngIf="aF.firstName1.errors?.pattern"
-                              class="invalid-feedback"
-                            >
-                              This field accepts only Alphabetical characters
-                              and spaces only.
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="lastName1"
-                              formControlName="lastName1"
-                              placeholder="Last Name"
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.lastName1.errors && aF.lastName1.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="aF.lastName1.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Last Name
-                            </div>
-                            <div
-                              *ngIf="aF.lastName1.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                aF.lastName1.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                            <div
-                              *ngIf="aF.lastName1.errors?.pattern"
-                              class="invalid-feedback"
-                            >
-                              This field accepts only Alphabetical characters
-                              and spaces only.
-                            </div>
-                          </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="buildingNo1"
+                          formControlName="buildingNo1"
+                          placeholder="Building No., Apartment Name"
+                          [ngClass]="{
+                            'is-invalid':
+                              aF.buildingNo1.errors && aF.buildingNo1.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="aF.buildingNo1.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Building No., Apartment Name
                         </div>
-
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="buildingNo1"
-                              formControlName="buildingNo1"
-                              placeholder="Building No., Apartment Name"
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.buildingNo1.errors &&
-                                  aF.buildingNo1.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="aF.buildingNo1.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Building No., Apartment Name
-                            </div>
-                            <div
-                              *ngIf="aF.buildingNo1.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                aF.buildingNo1.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="streetName1"
-                              formControlName="streetName1"
-                              placeholder="Street Name"
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.streetName1.errors &&
-                                  aF.streetName1.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="aF.streetName1.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Street Name
-                            </div>
-                            <div
-                              *ngIf="aF.streetName1.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                aF.streetName1.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                          </div>
+                        <div
+                          *ngIf="aF.buildingNo1.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            aF.buildingNo1.errors?.maxlength.requiredLength
+                          }}] characters.
                         </div>
-
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="city1"
-                              formControlName="city1"
-                              placeholder="City"
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.city1.errors && aF.city1.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="aF.city1.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the City Name
-                            </div>
-                            <div
-                              *ngIf="aF.city1.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                aF.city1.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="state1"
-                              formControlName="state1"
-                              placeholder="State"
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.state1.errors && aF.state1.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="aF.state1.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the State Name
-                            </div>
-                            <div
-                              *ngIf="aF.state1.errors?.minlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a min of [{{
-                                aF.state1.errors?.minlength.requiredLength
-                              }}] characters.
-                            </div>
-                            <div
-                              *ngIf="aF.state1.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                aF.state1.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                          </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="streetName1"
+                          formControlName="streetName1"
+                          placeholder="Street Name"
+                          [ngClass]="{
+                            'is-invalid':
+                              aF.streetName1.errors && aF.streetName1.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="aF.streetName1.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Street Name
                         </div>
+                        <div
+                          *ngIf="aF.streetName1.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            aF.streetName1.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                      </div>
+                    </div>
 
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="zipCode1"
-                              formControlName="zipCode1"
-                              placeholder="Zip Code"
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.zipCode1.errors && aF.zipCode1.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="aF.zipCode1.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Zip Code
-                            </div>
-                            <div
-                              *ngIf="aF.zipCode1.errors?.pattern"
-                              class="invalid-feedback"
-                            >
-                              Please enter only valid Zip Code
-                            </div>
-                            <div
-                              *ngIf="aF.zipCode1.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter only valid [{{
-                                aF.zipCode1.errors?.maxlength.requiredLength
-                              }}] digited Zip Code
-                            </div>
-                            <div
-                              *ngIf="aF.zipCode1.errors?.minlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter only valid [{{
-                                aF.zipCode1.errors?.minlength.requiredLength
-                              }}] digited Zip Code
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="landmark1"
-                              formControlName="landmark1"
-                              placeholder="Landmark"
-                            />
-                            <!-- <div
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="city1"
+                          formControlName="city1"
+                          placeholder="City"
+                          [ngClass]="{
+                            'is-invalid': aF.city1.errors && aF.city1.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="aF.city1.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the City Name
+                        </div>
+                        <div
+                          *ngIf="aF.city1.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            aF.city1.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="state1"
+                          formControlName="state1"
+                          placeholder="State"
+                          [ngClass]="{
+                            'is-invalid': aF.state1.errors && aF.state1.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="aF.state1.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the State Name
+                        </div>
+                        <div
+                          *ngIf="aF.state1.errors?.minlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a min of [{{
+                            aF.state1.errors?.minlength.requiredLength
+                          }}] characters.
+                        </div>
+                        <div
+                          *ngIf="aF.state1.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            aF.state1.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="zipCode1"
+                          formControlName="zipCode1"
+                          placeholder="Zip Code"
+                          [ngClass]="{
+                            'is-invalid':
+                              aF.zipCode1.errors && aF.zipCode1.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="aF.zipCode1.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Zip Code
+                        </div>
+                        <div
+                          *ngIf="aF.zipCode1.errors?.pattern"
+                          class="invalid-feedback"
+                        >
+                          Please enter only valid Zip Code
+                        </div>
+                        <div
+                          *ngIf="aF.zipCode1.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter only valid [{{
+                            aF.zipCode1.errors?.maxlength.requiredLength
+                          }}] digited Zip Code
+                        </div>
+                        <div
+                          *ngIf="aF.zipCode1.errors?.minlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter only valid [{{
+                            aF.zipCode1.errors?.minlength.requiredLength
+                          }}] digited Zip Code
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="landmark1"
+                          formControlName="landmark1"
+                          placeholder="Landmark"
+                        />
+                        <!-- <div
                               *ngIf="aF.landmark1.errors?.required"
                               class="invalid-feedback"
                             >
                               Enter the Landmark
                             </div> -->
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="phoneNo1"
-                              formControlName="phoneNo1"
-                              placeholder="Phone No."
-                              [ngClass]="{
-                                'is-invalid':
-                                  aF.phoneNo1.errors && aF.phoneNo1.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="aF.phoneNo1.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Phone Number
-                            </div>
-                            <div
-                              *ngIf="
-                                aF.phoneNo1.errors?.maxlength ||
-                                aF.phoneNo1.errors?.minlength ||
-                                aF.phoneNo1.errors?.pattern
-                              "
-                              class="invalid-feedback"
-                            >
-                              Please enter only valid [10] digit Phone Number
-                            </div>
-                          </div>
-                        </div>
-
-                        <hr />
-                        <div class="container button">
-                          <div
-                            class="snippet-content"
-                            fxLayout="column"
-                            fxLayoutAlign="space-around center"
-                          >
-                            <button
-                              class="btn btn-warning text-white"
-                              [disabled]="addressForm.invalid"
-                            >
-                              Save
-                            </button>
-                            <button
-                              class="btn btn-outline-warning"
-                              (click)="cancel()"
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </li>
-                  <li class="list-group-item" *ngIf="isSearching === true">
-                    <div class="text-center py-5">
-                      <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
                       </div>
                     </div>
-                  </li>
-                  <li
-                    *ngFor="let address of addresses; let i = index"
-                    class="list-group-item"
-                  >
-                    <div *ngIf="!editMode[i] && isSearching === false">
-                      <div class="h3">
-                        {{ address.firstname }}&nbsp;{{ address.lastname }}
-                        <span
-                          *ngIf="address.currentAdd === 'yes'"
-                          class="badge badge-pill badge-secondary ml-3 h5 text-white"
-                          >Current</span
-                        >
 
-                        <div class="dropdown float-right">
-                          <button
-                            class="dropdown-toggle dropdown-btn"
-                            id="dropdownMenuButton"
-                            data-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <i
-                              class="fas fa-ellipsis-v"
-                              style="font-size: 20px"
-                            ></i>
-                          </button>
-                          <div
-                            class="dropdown-menu dropdown-menu-right"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <a
-                              class="dropdown-item"
-                              (click)="edit(address.id, i)"
-                              >Edit</a
-                            >
-                            <a class="dropdown-item" (click)="remove(address)"
-                              >Remove</a
-                            >
-                            <a
-                              class="dropdown-item"
-                              (click)="markCurrent(address)"
-                              >Mark as Current</a
-                            >
-                          </div>
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="phoneNo1"
+                          formControlName="phoneNo1"
+                          placeholder="Phone No."
+                          [ngClass]="{
+                            'is-invalid':
+                              aF.phoneNo1.errors && aF.phoneNo1.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="aF.phoneNo1.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Phone Number
+                        </div>
+                        <div
+                          *ngIf="
+                            aF.phoneNo1.errors?.maxlength ||
+                            aF.phoneNo1.errors?.minlength ||
+                            aF.phoneNo1.errors?.pattern
+                          "
+                          class="invalid-feedback"
+                        >
+                          Please enter only valid [10] digit Phone Number
                         </div>
                       </div>
-                      <p>
-                        <span
-                          >{{ address.building }},&nbsp;{{
-                            address.street
-                          }},&nbsp;</span
-                        >
-                        <span *ngIf="address.landmark"
-                          >Landmark:&nbsp;{{ address.landmark }},&nbsp;</span
-                        >
-                        <span
-                          >{{ address.city }}:&nbsp;{{ address.zip }},&nbsp;{{
-                            address.state
-                          }}</span
-                        >
-                      </p>
-                      <p class="h4">{{ address.phone }}</p>
                     </div>
 
-                    <div *ngIf="editMode[i] && isSearching === false">
-                      <p class="h4">Edit Address</p>
-                      <form
-                        [formGroup]="billForm"
-                        #billingForm="ngForm"
-                        class="needs-validation"
-                        novalidate
-                        (ngSubmit)="onSubmit()"
+                    <hr />
+                    <div class="container button">
+                      <div
+                        class="snippet-content"
+                        fxLayout="column"
+                        fxLayoutAlign="space-around center"
                       >
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="firstName"
-                              formControlName="firstName"
-                              placeholder="First Name"
-                              [(ngModel)]="address.firstname"
-                              [ngClass]="{
-                                'is-invalid':
-                                  f.firstName.errors && f.firstName.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="f.firstName.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the First Name
-                            </div>
-                            <div
-                              *ngIf="f.firstName.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                f.firstName.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                            <div
-                              *ngIf="f.firstName.errors?.pattern"
-                              class="invalid-feedback"
-                            >
-                              This field accepts only Alphabetical characters
-                              and spaces only.
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="lastName"
-                              formControlName="lastName"
-                              placeholder="Last Name"
-                              [(ngModel)]="address.lastname"
-                              [ngClass]="{
-                                'is-invalid':
-                                  f.lastName.errors && f.lastName.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="f.lastName.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Last Name
-                            </div>
-                            <div
-                              *ngIf="f.lastName.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                f.lastName.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                            <div
-                              *ngIf="f.lastName.errors?.pattern"
-                              class="invalid-feedback"
-                            >
-                              This field accepts only Alphabetical characters
-                              and spaces only.
-                            </div>
-                          </div>
-                        </div>
+                        <button
+                          class="btn btn-warning text-white"
+                          [disabled]="addressForm.invalid"
+                        >
+                          Save
+                        </button>
+                        <button
+                          class="btn btn-outline-warning"
+                          (click)="cancel()"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <li class="list-group-item" *ngIf="isSearching === true">
+                <div class="text-center py-5">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </li>
+              <li
+                *ngFor="let address of addresses; let i = index"
+                class="list-group-item"
+              >
+                <div *ngIf="!editMode[i] && isSearching === false">
+                  <div class="h3">
+                    {{ address.firstname }}&nbsp;{{ address.lastname }}
+                    <span
+                      *ngIf="address.currentAdd === 'yes'"
+                      class="badge badge-pill badge-secondary ml-3 h5 text-white"
+                      >Current</span
+                    >
 
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="buildingNo"
-                              formControlName="buildingNo"
-                              placeholder="Building No., Apartment Name"
-                              [(ngModel)]="address.building"
-                              [ngClass]="{
-                                'is-invalid':
-                                  f.buildingNo.errors && f.buildingNo.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="f.buildingNo.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Building No., Apartment Name
-                            </div>
-                            <div
-                              *ngIf="f.buildingNo.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                f.buildingNo.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="streetName"
-                              formControlName="streetName"
-                              placeholder="Street Name"
-                              [(ngModel)]="address.street"
-                              [ngClass]="{
-                                'is-invalid':
-                                  f.streetName.errors && f.streetName.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="f.streetName.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Street Name
-                            </div>
-                            <div
-                              *ngIf="f.streetName.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                f.streetName.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                          </div>
-                        </div>
+                    <div class="dropdown float-right">
+                      <button
+                        class="dropdown-toggle dropdown-btn"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        <i
+                          class="fas fa-ellipsis-v"
+                          style="font-size: 20px"
+                        ></i>
+                      </button>
+                      <div
+                        class="dropdown-menu dropdown-menu-right"
+                        aria-labelledby="dropdownMenuButton"
+                      >
+                        <a class="dropdown-item" (click)="edit(address.id, i)"
+                          >Edit</a
+                        >
+                        <a class="dropdown-item" (click)="remove(address)"
+                          >Remove</a
+                        >
+                        <a class="dropdown-item" (click)="markCurrent(address)"
+                          >Mark as Current</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <p>
+                    <span
+                      >{{ address.building }},&nbsp;{{
+                        address.street
+                      }},&nbsp;</span
+                    >
+                    <span *ngIf="address.landmark"
+                      >Landmark:&nbsp;{{ address.landmark }},&nbsp;</span
+                    >
+                    <span
+                      >{{ address.city }}:&nbsp;{{ address.zip }},&nbsp;{{
+                        address.state
+                      }}</span
+                    >
+                  </p>
+                  <p class="h4">{{ address.phone }}</p>
+                </div>
 
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="city"
-                              formControlName="city"
-                              placeholder="City"
-                              [(ngModel)]="address.city"
-                              [ngClass]="{
-                                'is-invalid': f.city.errors && f.city.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="f.city.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the City Name
-                            </div>
-                            <div
-                              *ngIf="f.city.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                f.city.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="state"
-                              formControlName="state"
-                              placeholder="State"
-                              [(ngModel)]="address.state"
-                              [ngClass]="{
-                                'is-invalid': f.state.errors && f.state.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="f.state.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the State Name
-                            </div>
-                            <div
-                              *ngIf="f.state.errors?.minlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a min of [{{
-                                f.state.errors?.minlength.requiredLength
-                              }}] characters.
-                            </div>
-                            <div
-                              *ngIf="f.state.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter a max of [{{
-                                f.state.errors?.maxlength.requiredLength
-                              }}] characters.
-                            </div>
-                          </div>
+                <div *ngIf="editMode[i] && isSearching === false">
+                  <p class="h4">Edit Address</p>
+                  <form
+                    [formGroup]="billForm"
+                    #billingForm="ngForm"
+                    class="needs-validation"
+                    novalidate
+                    (ngSubmit)="onSubmit()"
+                  >
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="firstName"
+                          formControlName="firstName"
+                          placeholder="First Name"
+                          [(ngModel)]="address.firstname"
+                          [ngClass]="{
+                            'is-invalid':
+                              f.firstName.errors && f.firstName.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="f.firstName.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the First Name
                         </div>
+                        <div
+                          *ngIf="f.firstName.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            f.firstName.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                        <div
+                          *ngIf="f.firstName.errors?.pattern"
+                          class="invalid-feedback"
+                        >
+                          This field accepts only Alphabetical characters and
+                          spaces only.
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="lastName"
+                          formControlName="lastName"
+                          placeholder="Last Name"
+                          [(ngModel)]="address.lastname"
+                          [ngClass]="{
+                            'is-invalid':
+                              f.lastName.errors && f.lastName.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="f.lastName.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Last Name
+                        </div>
+                        <div
+                          *ngIf="f.lastName.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            f.lastName.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                        <div
+                          *ngIf="f.lastName.errors?.pattern"
+                          class="invalid-feedback"
+                        >
+                          This field accepts only Alphabetical characters and
+                          spaces only.
+                        </div>
+                      </div>
+                    </div>
 
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="zipCode"
-                              formControlName="zipCode"
-                              placeholder="Zip Code"
-                              [(ngModel)]="address.zip"
-                              [ngClass]="{
-                                'is-invalid':
-                                  f.zipCode.errors && f.zipCode.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="f.zipCode.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Zip Code
-                            </div>
-                            <div
-                              *ngIf="f.zipCode.errors?.pattern"
-                              class="invalid-feedback"
-                            >
-                              Please enter only valid Zip Code
-                            </div>
-                            <div
-                              *ngIf="f.zipCode.errors?.maxlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter only valid [{{
-                                f.zipCode.errors?.maxlength.requiredLength
-                              }}] digited Zip Code
-                            </div>
-                            <div
-                              *ngIf="f.zipCode.errors?.minlength"
-                              class="invalid-feedback"
-                            >
-                              Please enter only valid [{{
-                                f.zipCode.errors?.minlength.requiredLength
-                              }}] digited Zip Code
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="landmark"
-                              formControlName="landmark"
-                              placeholder="Landmark"
-                              [(ngModel)]="address.landmark"
-                            />
-                            <!-- <div
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="buildingNo"
+                          formControlName="buildingNo"
+                          placeholder="Building No., Apartment Name"
+                          [(ngModel)]="address.building"
+                          [ngClass]="{
+                            'is-invalid':
+                              f.buildingNo.errors && f.buildingNo.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="f.buildingNo.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Building No., Apartment Name
+                        </div>
+                        <div
+                          *ngIf="f.buildingNo.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            f.buildingNo.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="streetName"
+                          formControlName="streetName"
+                          placeholder="Street Name"
+                          [(ngModel)]="address.street"
+                          [ngClass]="{
+                            'is-invalid':
+                              f.streetName.errors && f.streetName.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="f.streetName.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Street Name
+                        </div>
+                        <div
+                          *ngIf="f.streetName.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            f.streetName.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="city"
+                          formControlName="city"
+                          placeholder="City"
+                          [(ngModel)]="address.city"
+                          [ngClass]="{
+                            'is-invalid': f.city.errors && f.city.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="f.city.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the City Name
+                        </div>
+                        <div
+                          *ngIf="f.city.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            f.city.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="state"
+                          formControlName="state"
+                          placeholder="State"
+                          [(ngModel)]="address.state"
+                          [ngClass]="{
+                            'is-invalid': f.state.errors && f.state.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="f.state.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the State Name
+                        </div>
+                        <div
+                          *ngIf="f.state.errors?.minlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a min of [{{
+                            f.state.errors?.minlength.requiredLength
+                          }}] characters.
+                        </div>
+                        <div
+                          *ngIf="f.state.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter a max of [{{
+                            f.state.errors?.maxlength.requiredLength
+                          }}] characters.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="zipCode"
+                          formControlName="zipCode"
+                          placeholder="Zip Code"
+                          [(ngModel)]="address.zip"
+                          [ngClass]="{
+                            'is-invalid': f.zipCode.errors && f.zipCode.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="f.zipCode.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Zip Code
+                        </div>
+                        <div
+                          *ngIf="f.zipCode.errors?.pattern"
+                          class="invalid-feedback"
+                        >
+                          Please enter only valid Zip Code
+                        </div>
+                        <div
+                          *ngIf="f.zipCode.errors?.maxlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter only valid [{{
+                            f.zipCode.errors?.maxlength.requiredLength
+                          }}] digited Zip Code
+                        </div>
+                        <div
+                          *ngIf="f.zipCode.errors?.minlength"
+                          class="invalid-feedback"
+                        >
+                          Please enter only valid [{{
+                            f.zipCode.errors?.minlength.requiredLength
+                          }}] digited Zip Code
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="landmark"
+                          formControlName="landmark"
+                          placeholder="Landmark"
+                          [(ngModel)]="address.landmark"
+                        />
+                        <!-- <div
                               *ngIf="f.landmark.errors?.required"
                               class="invalid-feedback"
                             >
                               Enter the Landmark
                             </div> -->
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-md-6 mb-3">
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="phoneNo"
-                              formControlName="phoneNo"
-                              placeholder="Phone No."
-                              [(ngModel)]="address.phone"
-                              [ngClass]="{
-                                'is-invalid':
-                                  f.phoneNo.errors && f.phoneNo.touched
-                              }"
-                              required
-                            />
-                            <div
-                              *ngIf="f.phoneNo.errors?.required"
-                              class="invalid-feedback"
-                            >
-                              Please enter the Phone Number
-                            </div>
-                            <div
-                              *ngIf="
-                                f.phoneNo.errors?.maxlength ||
-                                f.phoneNo.errors?.minlength ||
-                                f.phoneNo.errors?.pattern
-                              "
-                              class="invalid-feedback"
-                            >
-                              Please enter only valid [10] digit Phone Number
-                            </div>
-                          </div>
-                        </div>
-
-                        <hr />
-                        <div class="container button">
-                          <div
-                            class="snippet-content"
-                            fxLayout="column"
-                            fxLayoutAlign="space-around center"
-                          >
-                            <button
-                              class="sbmt-btn"
-                              [disabled]="billingForm.invalid"
-                              (click)="onCheckOut()"
-                            >
-                              <div
-                                class="sbmt-btn-txt"
-                                [@buttonTextStateTrigger]="buttonTextState"
-                                (@buttonTextStateTrigger.done)="
-                                  buttonTextTransitioned($event)
-                                "
-                              >
-                                {{ buttonText }}
-                              </div>
-                            </button>
-                            <button
-                              class="btn btn-lg btn-outline-warning ml-2"
-                              (click)="cancelEdit(i)"
-                            >
-                              Cancel
-                            </button>
-                          </div>
-                        </div>
-                      </form>
+                      </div>
                     </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-3">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="phoneNo"
+                          formControlName="phoneNo"
+                          placeholder="Phone No."
+                          [(ngModel)]="address.phone"
+                          [ngClass]="{
+                            'is-invalid': f.phoneNo.errors && f.phoneNo.touched
+                          }"
+                          required
+                        />
+                        <div
+                          *ngIf="f.phoneNo.errors?.required"
+                          class="invalid-feedback"
+                        >
+                          Please enter the Phone Number
+                        </div>
+                        <div
+                          *ngIf="
+                            f.phoneNo.errors?.maxlength ||
+                            f.phoneNo.errors?.minlength ||
+                            f.phoneNo.errors?.pattern
+                          "
+                          class="invalid-feedback"
+                        >
+                          Please enter only valid [10] digit Phone Number
+                        </div>
+                      </div>
+                    </div>
+
+                    <hr />
+                    <div class="container button">
+                      <div
+                        class="snippet-content"
+                        fxLayout="column"
+                        fxLayoutAlign="space-around center"
+                      >
+                        <button
+                          class="sbmt-btn"
+                          [disabled]="billingForm.invalid"
+                          (click)="onCheckOut()"
+                        >
+                          <div
+                            class="sbmt-btn-txt"
+                            [@buttonTextStateTrigger]="buttonTextState"
+                            (@buttonTextStateTrigger.done)="
+                              buttonTextTransitioned($event)
+                            "
+                          >
+                            {{ buttonText }}
+                          </div>
+                        </button>
+                        <button
+                          class="btn btn-lg btn-outline-warning ml-2"
+                          (click)="cancelEdit(i)"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
