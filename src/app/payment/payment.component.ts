@@ -18,6 +18,8 @@ export class PaymentComponent implements OnInit {
   items: Items[];
   address: Address;
   userId: number;
+  lastOrderId: any[];
+  lastId: number;
 
   constructor(
     private service: DataService,
@@ -30,6 +32,7 @@ export class PaymentComponent implements OnInit {
     this.getUser();
     this.getAddress();
     this.getItems();
+    this.getLastOrder();
 
     this.creditForm = this.formBuilder.group({
       creditOwner: [
@@ -71,12 +74,27 @@ export class PaymentComponent implements OnInit {
     });
   }
 
+  getLastOrder() {
+    this.service.getLastOrder().subscribe((data) => {
+      this.lastOrderId = data as any[];
+
+      if (this.lastOrderId.length > 0) {
+        this.lastId = this.lastOrderId[0].id;
+      } else {
+        this.lastId = 0;
+      }
+    });
+  }
+
   proceedPayment() {
     const date = new Date();
     const str = date.toDateString();
 
-    this.items.forEach((item) => {
-      const order = {
+    this.items.map((item) => {
+      this.lastId = this.lastId + 1;
+
+      let order = {
+        id: this.lastId,
         quantity: item.quantity,
         fid: item.fid,
         uid: item.uid,
@@ -84,20 +102,24 @@ export class PaymentComponent implements OnInit {
         date: str,
         aid: this.address.id,
       };
+
       this.service.addItemToOrders(order).subscribe(
         () => {
           this.toastr.success('Order placed!.' + '😃');
-          // console.log('Item moved to Orders.');
+          // console.log(order);
         },
         (error: any) => {
           this.toastr.error("Couldn't place order!" + '😞');
+          // console.log(error);
+        },
+        () => {
+          this.service.deleteItem(item.id).subscribe(() => {
+            this.toastr.info('View details in Orders.');
+            // console.log('Item removed from Cart');
+          });
+          // console.log('Item moved to Orders.');
         }
       );
-    });
-
-    this.service.deleteItemByUid(this.userId).subscribe(() => {
-      this.toastr.success('View details in Orders.');
-      // console.log('Cart cleared.');
     });
 
     this.route.navigate(['/thanks']);
